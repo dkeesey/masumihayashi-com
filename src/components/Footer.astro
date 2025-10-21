@@ -96,55 +96,101 @@ const organizationSchema = generateOrganizationSchema();
           </div>
         </div>
 
-        <!-- Navigation Links in 3 columns -->
+        <!-- Navigation Links - Full Page Inventory -->
         <div class="lg:col-span-6">
-          <div class="columns-1 sm:columns-2 md:columns-3 gap-8 [&>*]:break-inside-avoid-column">
+          <div class="columns-1 sm:columns-2 md:columns-4 gap-6 [&>*]:break-inside-avoid-column text-sm">
+
+            <!-- About & Foundation -->
             <div class="mb-6">
-              <h3 class="font-medium text-white mb-4 uppercase">Japanese American Internment</h3>
-              <ul class="space-y-2">
-                <li><a href="/artwork/japanese-american-internment-camps/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Gallery</a></li>
-                <li><a href="/interviews" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Oral History Interviews</a></li>
+              <h3 class="font-medium text-white mb-3 uppercase text-xs">About</h3>
+              <ul class="space-y-1.5">
+                <li><a href="/about/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Biography</a></li>
                 <li><a href="/artist-statement/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Artist Statement</a></li>
+                <li><a href="/contact/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Contact</a></li>
               </ul>
             </div>
 
+            <!-- Artwork Galleries (1-4) -->
             <div class="mb-6">
-              <h3 class="font-medium text-white mb-4 uppercase">Family Album Project</h3>
-              <ul class="space-y-2">
-                <li><a href="/family-album-project" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Project Overview</a></li>
-                <li><a href="/family-album/professional" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Professional Photography</a></li>
+              <h3 class="font-medium text-white mb-3 uppercase text-xs">Artwork Series</h3>
+              <ul class="space-y-1.5">
+                <li><a href="/artwork/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors font-medium">All Artworks</a></li>
+                <li><a href="/artwork/japanese-american-internment-camps/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Internment Camps</a></li>
+                <li><a href="/artwork/sacred-architectures/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Sacred Architectures</a></li>
+                <li><a href="/artwork/post-industrial/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Post-Industrial</a></li>
+                <li><a href="/artwork/prisons/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Prisons</a></li>
               </ul>
             </div>
 
+            <!-- Artwork Galleries (5-8) -->
             <div class="mb-6">
-              <h3 class="font-medium text-white mb-4 uppercase">Family Album Photographers</h3>
-              <ul class="space-y-2">
-                <li><a href="/family-album/akiya" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Grace Akiya</a></li>
-                <li><a href="/family-album/ayukawa" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Midge Ayukawa</a></li>
-                <li><a href="/family-album/fukuyama" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Hideharu Fukuyama</a></li>
-                <li><a href="/family-album/miyatake" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Toyo Miyatake</a></li>
-                <li><a href="/family-album/morioka" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">June Morioka</a></li>
-                <li><a href="/family-album/nomura" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Takeko Nomura</a></li>
-                <li><a href="/family-album/professional" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Professional Photographers</a></li>
-                <li><a href="/family-album/tsuyuki" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Irene Tsuyuki</a></li>
+              <h3 class="font-medium text-white mb-3 uppercase text-xs">More Series</h3>
+              <ul class="space-y-1.5">
+                <li><a href="/artwork/war-military/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">War & Military</a></li>
+                <li><a href="/artwork/epa-superfund/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">EPA Superfund</a></li>
+                <li><a href="/artwork/city-works/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">City Works</a></li>
+                <li><a href="/artwork/commissions/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Public Commissions</a></li>
               </ul>
             </div>
 
+            <!-- Exhibitions & Media -->
             <div class="mb-6">
-              <h3 class="font-medium text-white mb-4 uppercase">Support Our Work</h3>
-              <ul class="space-y-2">
+              <h3 class="font-medium text-white mb-3 uppercase text-xs">Exhibitions & Media</h3>
+              <ul class="space-y-1.5">
+                <li><a href="/exhibitions/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Current Exhibitions</a></li>
+                <li><a href="/exhibitions/past/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Exhibition History</a></li>
+                <li><a href="/videos/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Video Interviews</a></li>
+              </ul>
+            </div>
+
+            <!-- Resources -->
+            <div class="mb-6">
+              <h3 class="font-medium text-white mb-3 uppercase text-xs">Resources</h3>
+              <ul class="space-y-1.5">
+                <li><a href="/resources/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">All Resources</a></li>
+                <li><a href="/resources/bibliography/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Bibliography</a></li>
+                <li><a href="/resources/historical-context/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Historical Context</a></li>
+                <li><a href="/resources/essays/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Essays</a></li>
+              </ul>
+            </div>
+
+            <!-- Family Album -->
+            <div class="mb-6">
+              <h3 class="font-medium text-white mb-3 uppercase text-xs">Family Album</h3>
+              <ul class="space-y-1.5">
+                <li><a href="/family-album-project/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Project Overview</a></li>
+                <li><a href="/family-album/akiya/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Grace Akiya</a></li>
+                <li><a href="/family-album/ayukawa/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Midge Ayukawa</a></li>
+                <li><a href="/family-album/fukuyama/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Hideharu Fukuyama</a></li>
+                <li><a href="/family-album/miyatake/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Toyo Miyatake</a></li>
+              </ul>
+            </div>
+
+            <!-- More Family Album -->
+            <div class="mb-6">
+              <h3 class="font-medium text-white mb-3 uppercase text-xs">More Photographers</h3>
+              <ul class="space-y-1.5">
+                <li><a href="/family-album/morioka/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">June Morioka</a></li>
+                <li><a href="/family-album/nomura/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Takeko Nomura</a></li>
+                <li><a href="/family-album/tsuyuki/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Irene Tsuyuki</a></li>
+                <li><a href="/family-album/professional/" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Professional Photos</a></li>
+              </ul>
+            </div>
+
+            <!-- Support -->
+            <div class="mb-6">
+              <h3 class="font-medium text-white mb-3 uppercase text-xs">Support Our Mission</h3>
+              <ul class="space-y-1.5">
                 <li>
-                  <a href="/donate" class="text-amber-400 hover:text-amber-300 transition-colors font-medium">
+                  <a href="/donate/" class="text-amber-400 hover:text-amber-300 transition-colors font-medium">
                     Make a Donation
                   </a>
                 </li>
-                <li>
-                  <a href="/about" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">
-                    Our Mission
-                  </a>
-                </li>
+                <li><a href="/about/#mission" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Our Mission</a></li>
+                <li><a href="/about/#acknowledgements" class="text-primary-interactive-link hover:text-primary-interactive-hover transition-colors">Acknowledgements</a></li>
               </ul>
             </div>
+
           </div>
         </div>
       </div>
