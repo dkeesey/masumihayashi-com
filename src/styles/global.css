@@ -29,6 +29,32 @@ p {
   margin-bottom: 0;
 }
 
+/* Typography Hierarchy - Stronger Headings */
+.prose h2 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.2;
+}
+
+.prose h3 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-top: 1.6em;
+  margin-bottom: 0.8em;
+  line-height: 1.3;
+}
+
+/* Research Sections - Monospace Font for Archival Feel */
+.research-section,
+.artwork-research,
+[data-research="true"] {
+  font-family: 'Courier Prime', 'Courier', monospace;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
 /* WCAG AA Compliance: Ensure custom color classes are generated */
 @layer utilities {
   .text-primary-interactive-link {
