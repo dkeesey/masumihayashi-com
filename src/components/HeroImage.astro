@@ -1,0 +1,38 @@
+---
+/**
+ * Simple Hero Image Component
+ * Displays clean panoramic images without gallery metadata
+ */
+interface Props {
+  cloudinaryId: string;
+  alt: string;
+  className?: string;
+}
+
+const { cloudinaryId, alt, className = "" } = Astro.props;
+
+const baseURL = "https://res.cloudinary.com/masumi-hayashi-foundation/image/upload";
+
+// Clean transformations for hero display
+// Only quality optimization, no borders or text overlays
+const transformations = "f_auto,q_auto:best";
+
+// Responsive sizes for hero image
+const sizes = [640, 768, 1024, 1280, 1536, 1920];
+
+const srcset = sizes
+  .map(width => `${baseURL}/${transformations},w_${width}/${cloudinaryId} ${width}w`)
+  .join(", ");
+
+const src = `${baseURL}/${transformations},w_1536/${cloudinaryId}`;
+---
+
+<img
+  src={src}
+  srcset={srcset}
+  sizes="100vw"
+  alt={alt}
+  class={`w-full h-auto object-contain ${className}`}
+  loading="eager"
+  fetchpriority="high"
+/>

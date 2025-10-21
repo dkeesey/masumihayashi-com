@@ -1,0 +1,14 @@
+---
+import { TableOfContents } from './ui/TableOfContentsReact';
+
+interface Props {
+  sections: {
+    id: string;
+    title: string;
+  }[];
+}
+
+const { sections } = Astro.props;
+---
+
+<TableOfContents client:load sections={sections} />

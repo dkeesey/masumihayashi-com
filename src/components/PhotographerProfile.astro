@@ -1,0 +1,24 @@
+---
+export interface Props {
+  name: string;
+  birth: string;
+  death?: string;
+  location: string;
+  details: string[];
+  resettled?: string;
+  currentStatus?: string;
+}
+---
+
+<div class="photographer-profile">
+  <h2>
+    {Astro.props.name} ({Astro.props.birth} - {Astro.props.death || "Present"})
+  </h2>
+  <p>Location: {Astro.props.location}</p>
+  <ul>
+    {Astro.props.details.map((detail) => <li>{detail}</li>)}
+  </ul>
+  {Astro.props.resettled && <p>Resettled: {Astro.props.resettled}</p>}
+  {Astro.props.currentStatus && <p>Status: {Astro.props.currentStatus}</p>}
+</div>
+

@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import ContentSection from "@components/ContentSection.astro";
+import Typography from "./Typography.astro";
+import motherImage from '@images/family-album/mother.jpg';
+---
+
+<ContentSection>
+  <h2 class="text-3xl font-light mb-8">
+    Visitors with Cameras
+  </h2>
+
+  <div class="space-y-12">
+    <!-- Minidoka Section -->
+    <div>
+      <div class="flex items-start gap-6 mb-6">
+        <Image 
+          src={motherImage}
+          alt="Shigeyo Yamamoto on the doorstep of the barracks"
+          class="rounded-lg shadow-md"
+        />
+        <div>
+          <h3 class="text-2xl font-medium mb-4">
+            Minidoka Relocation Camp
+          </h3>
+          <div class="space-y-4">
+            <h4 class="text-xl font-medium mb-4">
+              Shigeyo Yamamoto
+            </h4>
+            <Typography variant="body">
+              This photograph of Shim Yamamoto's mother, Shigeyo Yamamoto, was taken on the doorstep of the barracks by a visitor to the camps who had a camera. Shim's sister, Mary Nakanishi, said it was a soldier visiting his parents who took this snapshot and she does not remember who it was.
+            </Typography>
+            <Typography variant="body">
+              Visitors were allowed to bring cameras in but for the internees still in the camps it was considered contraband at Minidoka.
+            </Typography>
+            <Typography variant="body">
+              Shim Yamamoto resettled in Cleveland, Ohio, in 1943, on a work release program. His mother and sister joined him in Cleveland in 1945. Shim Yamamoto moved to Seattle in 1995 and writes articles for the Cleveland JACL newsletter.
+            </Typography>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amache Section -->
+    <div>
+      <h3 class="text-2xl font-medium mb-4">
+        Amache Relocation Camp (Granada)
+      </h3>
+      <div class="space-y-4">
+        <h3 class="text-2xl font-medium mb-4">
+          <a href="/family-album/nomura" class="hover:text-blue-600 transition-colors">
+            Tayeko Nomura
+          </a>
+        </h3>
+        <Typography variant="body">
+          Was interned at Granada Relocation Camp in Colorado. She married Tayeko Nomura in camp and they resettled nearby Las Cantinas in Colorado as farmers.
+        </Typography>
+        <Typography variant="body">
+          She showed me these camp snapshoots that she kept in a shoebox with other small keepsakes of that time. Mrs. Tayeko Nomura does not remember who took the photos nor many of the internees in the photos. Mr. Emery Nomura was in the hospital at time of the interview and visit.
+        </Typography>
+        <Typography variant="body">
+          The Granada high school history teacher, John Hooper, referred me to Mr. and Mrs. Nomura. He has a Granada high school class on the history of the Amache Internment camp where the students study the archeology/history of the site and the stories of the internees (met during reunions). They will have a website soon.
+        </Typography>
+      </div>
+    </div>
+  </div>
+</ContentSection>

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* WCAG AA Compliance: Line Height Overrides */
+.text-sm {
+  line-height: 1.6;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* WCAG AA Compliance: Ensure custom color classes are generated */
+@layer utilities {
+  .text-primary-interactive-link {
+    color: #60a5fa;
+  }
+
+  .text-primary-interactive-hover {
+    color: #93c5fd;
+  }
+
+  .hover\:text-primary-interactive-hover:hover {
+    color: #93c5fd;
+  }
+}

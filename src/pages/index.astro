@@ -1,16 +1,97 @@
 ---
+import HeroLayout from "@layouts/HeroLayout.astro";
+import SchemaScript from "@components/SchemaScript.astro";
+import {
+  generatePersonSchema,
+  generateOrganizationSchema,
+  generateWebSiteSchema
+} from "@lib/schema";
 
+const { classNames } = Astro.props;
+
+const manzanarMonument = {
+  cloudinaryId: "internment-camps/manzanar-internment-camp-monument_gue2hh",
+  title: "Manzanar Concentration Camp, Monument",
+  media: "Panoramic photo collage with Fuji Crystal Archive prints",
+  year: "1995",
+  city: "Inyo County",
+  state: "California",
+  country: "USA",
+  size: '20" x 40"',
+};
+
+const seoConfig: {
+  title: string;
+  description: string;
+  keywords: string[];
+  type: 'website' | 'article';
+  image: string;
+} = {
+  title: "Masumi Hayashi - Panoramic Photography and Social Documentary",
+  description: "Discover the panoramic photo collages of Masumi Hayashi, a pioneering photographer who documented Japanese American internment camps through panoramic photo collage.",
+  keywords: ["panoramic photography", "photo collages", "Japanese American history", "social documentary"],
+  type: "website",
+  image: `https://res.cloudinary.com/masumi-hayashi-foundation/image/upload/${manzanarMonument.cloudinaryId}.jpg`
+};
+
+// Generate structured data for AI SEO
+const schemas = [
+  generatePersonSchema(),
+  generateOrganizationSchema(),
+  generateWebSiteSchema()
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<HeroLayout
+  title={seoConfig.title}
+  description={seoConfig.description}
+  heroImage={manzanarMonument}
+  classes={classNames}
+>
+  <SchemaScript schema={schemas} slot="head" />
+  <div class="prose px-6 py-24 sm:px-8 max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold my-6">American Concentration Camps: A Photographic Legacy</h1>
+    <p>
+      In 1942, the U.S. government forcibly imprisoned over 120,000 Japanese Americans in concentration camps across America. Professor Masumi Hayashi (1945-2006), born in one such camp, returned decades later with her camera to document these sites of historical trauma.
+    </p>
+    <p>
+      Through her innovative panoramic photo collages—each assembled from hundreds of individual exposures—Hayashi transformed these landscapes of confinement into powerful visual testimonies. Her work preserves not just the physical spaces, but the human experiences within them: stories captured through audio interviews with survivors and family photographs taken in defiance of camp regulations.
+    </p>
+    <p>
+      This archive presents three interconnected perspectives on the Japanese American internment:
+    </p>
+    <ul>
+      <li>Hayashi's panoramic photographs of the ten major concentration camps</li>
+      <li>The Family Album Project, featuring forbidden snapshots taken by internees and visitors</li>
+      <li>Oral histories recorded with camp survivors in 1992-1993</li>
+    </ul> 
+
+
+    <h2>American Concentration Camps</h2>
+    <p>
+      The <a href="/artwork/japanese-american-internment-camps/" class="hover:underline">American Concentration Camps</a> page exhibits artist/Professor
+      Hayashi's panoramic photo collages of the 10 Japanese American relocation
+      camps. These photographs only cover the relocation centers/camps. They do
+      not address the assembly centers, the U.S. Justice Dept. camps or the
+      prison and other WRA facilities.
+    </p>
+    <h2>The Family Album Project</h2>
+    <p>
+      <a href="/family-album-project/" class="hover:underline">"The Family Album Project"</a> was an exhibition curated by Professor Hayashi for the Cleveland State University Art Gallery and the Ohio Arts Council.
+      Even though cameras were contraband, family album snapshots were taken by
+      internees and visitors to the camps. This part of the camp project defines
+      the use of photography in terms of the Japanese American and Japanese
+      Canadian internment.
+    </p>
+
+    <h2>Internee audio interviews</h2>
+    <p>
+      <a href="/interviews/" class="hover:underline">This is a 9 minute edited interview</a> with Japanese American internees
+      recalling evacuation and the heated climate during internment. Memories,
+      survivors of the U.S. Concentration Camps for the Japanese Americans
+      (Nikei) during WW II, from interviews by Masumi Hayashi, in 1992 and 1993.
+      Audio mastered by James Abbott, produced by Masumi Hayashi, 1994,
+      Cleveland, Ohio.
+    </p>
+  </div>
+</HeroLayout>

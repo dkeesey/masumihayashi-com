@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import cameraIcon from '@images/family-album/camera.gif';
+import oacLogo from '@images/family-album/oac.gif';
+---
+
+<section class="max-w-4xl mx-auto px-4 py-12">
+  <div class="prose prose-lg mx-auto">
+    <div class="flex items-center justify-center mb-8">
+      <a href="#top" class="no-underline">
+        <Image
+          src={cameraIcon}
+          alt="Illustration of a pinhole camera used in internment camps"
+          width={96}
+          height={96}
+          class="hover:opacity-80 transition-opacity"
+          title="Illustration of a pinhole box camera used by internees in the camps"
+        />
+      </a>
+    </div>
+
+    <h2 class="text-2xl font-inter font-semibold mb-6 text-center">
+      About the Exhibition
+    </h2>
+
+    <div class="text-fa-text-secondary space-y-6">
+      <p class="flex flex-wrap items-center gap-4">
+        This exhibition was curated by Professor Masumi Hayashi and exhibited at the Cleveland State University Art Gallery in Cleveland, Ohio, in March/April 1996. Special thanks for support and advice of the Cleveland Japanese American Citizens' League and Hank Tanaka and all the gracious people who participated with their family photographs.
+      </p>
+
+      <p class="font-medium">
+        All photographs are copyrighted. Reuse is subject to copyright laws and permission of the collectors and their families.
+      </p>
+
+      <div class="flex items-center gap-4">
+        <Image
+          src={oacLogo}
+          alt="Ohio Arts Council Logo"
+          width={50}
+          height={50}
+        />
+        <p class="m-0">
+          This exhibition was funded by the Ohio Arts Council and the artist. These web pages and web site are supported by Cleveland State University, the Civil Liberties Educational Fund, Ohio Arts Council, and the artist.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

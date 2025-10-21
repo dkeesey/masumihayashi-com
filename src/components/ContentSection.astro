@@ -1,0 +1,32 @@
+---
+import Typography from './Typography.astro';
+
+interface Props {
+  id?: string;
+  title?: string;
+  class?: string;
+}
+
+const { id, title, class: className } = Astro.props;
+---
+
+<section id={id} class:list={[
+  'max-w-4xl mx-auto py-16 scroll-mt-16 bg-fa-bg-primary text-fa-text-primary',
+  className
+]}>
+  {title && (
+    <Typography as="h2" variant="section-title">
+      {title}
+    </Typography>
+  )}
+  <div class="prose prose-lg max-w-none prose-invert prose-headings:text-fa-text-primary prose-p:text-fa-text-secondary prose-a:text-fa-interactive-link hover:prose-a:text-fa-interactive-hover">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .prose :global(strong),
+  .prose :global(em) {
+    color: var(--fa-text-accent);
+  }
+</style>

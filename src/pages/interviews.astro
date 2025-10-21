@@ -1,0 +1,57 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Layout from "@layouts/Layout.astro";
+import { interviewAudioFiles } from "../data/interview-audio";
+import BasicPlayer from "@components/basic-player";
+---
+
+<Layout title="Oral History Project Interviews">
+  <div class="container mx-auto px-4 py-8 bg-gray-300">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-4 text-gray-900">Internee Audio Interviews</h1>
+      
+      <p class="text-gray-700 text-lg mb-8">
+        This is a 9 minute edited interview with Japanese American internees recalling evacuation and the heated climate during internment. 
+        Memories, survivors of the U.S. Concentration Camps for the Japanese Americans (Nikei) during WW II, from interviews by Masumi Hayashi, 
+        in 1992 and 1993. Audio mastered by James Abbott, produced by Masumi Hayashi, 1994, Cleveland, Ohio.
+      </p>
+
+      <div class="bg-gray-800/80 backdrop-blur rounded-lg p-6 shadow-lg mb-8">
+        <BasicPlayer client:load audioFiles={interviewAudioFiles} />
+      </div>
+
+      <div class="text-sm text-gray-600 mt-4">
+        <p>All audio recordings are part of the Japanese American Concentration Camps Oral History Project.</p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .audio-player-container {
+    --primary: #3b82f6;
+    --foreground: #ffffff;
+    color: var(--foreground);
+  }
+
+  .audio-player-container :global(button) {
+    color: var(--foreground);
+  }
+
+  .audio-player-container :global(.bg-primary) {
+    background-color: var(--primary);
+  }
+
+  .audio-player-container :global(input[type="range"]) {
+    accent-color: var(--primary);
+  }
+
+  #audio-player {
+    min-height: 400px;
+    display: flex;
+  }
+
+  #audio-player :global(> div) {
+    flex: 1;
+  }
+</style>

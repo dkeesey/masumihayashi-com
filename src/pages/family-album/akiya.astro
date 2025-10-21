@@ -1,0 +1,87 @@
+---
+import FamilyAlbumLayout from '@layouts/FamilyAlbumLayout.astro';
+import AlbumTitle from '@components/AlbumTitle.astro';
+import PhotoGallery from '@components/PhotoGallery.astro';
+import PhotographersGrid from '@components/PhotographersGrid.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+
+// Import images
+import akiyaPortraits from '@images/family-album/photographers/akiya/akiya-two-portraits-1938.gif';
+import akiyaGraceEd from '@images/family-album/photographers/akiya/akiya-grace-and-ed.gif';
+import akiyaWomanDust from '@images/family-album/photographers/akiya/akiya-woman-in-dust-camp-in-background.gif';
+
+const title = "Family Album";
+const description = "Family Album from Heart Mountain Relocation Camp by Mrs. Grace Akiya";
+
+const photos = [
+  {
+    src: akiyaPortraits,
+    alt: "Two portraits from 1938",
+    title: "Two portraits from 1938",
+    description: "Mrs. Grace Akiya had already purchased her box camera when she returned to the United States from Japan around 1938. Her parents had moved back to Japan when she was a child and she returned after high school to the country of her birth, the U.S., alone and without parents. She lived and worked for a concerned woman in Los Angeles. At the first warning signs of incarceration she was encouraged to move to areas of the midwest by her employer but she had a hard time beliving she would be incarcerated."
+  },
+  {
+    src: akiyaGraceEd,
+    alt: "Grace and Ed Akiya",
+    title: "Grace and Ed Akiya Wedding Photo",
+    description: "Mrs. Grace Akiya photographed extensively in the camp, recording her friends and brothers. She married Ed Akiya when Heart Mountain first opened up as a camp and they had to be married by the justice of the peace in Cody, Wyoming, the nearest town. They went to town under guard in a guard truck for their wedding and stopped at a 5 & 10 store to pick up presents for some of their friends in the camp. Friends made the paper flowers she had on her dress. She made her wedding dress. This portrait was taken by James Yonemura, one of Heart Mountain's official camp photographers, who created a makeshift studio using a crate as a seat, the bare wooden floor of the barracks, and a sheet hung as a backdrop. The photograph represents a unique intersection between official camp documentation and personal family history - while taken by the camp's official photographer, it became a treasured part of the Akiyas' family album, demonstrating how formal photography helped internees maintain dignity and preserve important life moments despite their circumstances."
+  },
+  {
+    src: akiyaWomanDust,
+    alt: "Woman in dust with camp in background",
+    title: "Photography in the Camp",
+    description: "Mrs. Grace Akiya was encouraged to continue photographing in the camp by her friend and former employer. She would send the film to her on the outside and it would be sent back developed and printed. The camera passed inspection when entering the camp because she did not know she had it in her duffle bag. The guards did not see on the bottom of the bag.\n\nMr. and Mrs. Akiya resettled in Cleveland, Ohio. They both took up judo and opened their dojo a few years after they arrived. Judo was also considered contraband while incarcerated in the camps. Mrs. Grace Akiya is currently active teaching judo at the Midwest Judo Academy in Cleveland and is a fourth degree black belt and is in her 80's."
+  }
+];
+
+---
+
+<FamilyAlbumLayout title={title} description={description}>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <Breadcrumb
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Family Album Project", href: "/family-album-project" },
+      { label: "Akiya", href: "/family-album/akiya", current: true }
+    ]}
+    />
+    
+    <div class="mb-16">
+      <PhotographersGrid />
+    </div>
+
+    <AlbumTitle
+      subtitle="Heart Mountain Relocation Camp, Wyoming"
+      collection="Mrs. Grace Akiya Collection"
+      photographer="Mrs. Grace Akiya"
+      date="1938-1945"
+    />
+    
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">About</h2>
+      <div class="prose prose-invert max-w-none">
+        <p>
+          Mrs. Grace Akiya's photographs provide a remarkable window into life at Heart Mountain Relocation Camp. Having returned 
+          to the United States from Japan in 1938, she brought with her a box camera that would later become contraband in the camps. 
+          Despite initial warnings about incarceration, she found herself at Heart Mountain where she continued to document camp life, 
+          secretly developing her photos through a friend on the outside. Her collection includes intimate moments like her own wedding 
+          to Ed Akiya—a ceremony conducted under guard in Cody, Wyoming—and daily life in the camp. After the war, the Akiyas built 
+          a new life in Cleveland, Ohio, where they established a dojo and became pillars of the judo community, with Mrs. Akiya 
+          achieving the rank of fourth degree black belt.
+        </p>
+        <p>
+          These photographs, many showing people in formal dress and careful poses, represent more than mere documentation - they are acts of quiet resistance and dignity preservation. When Grace Akiya accidentally brought her Kodak box camera into Heart Mountain, she became not just a photographer but a keeper of dignity for her community. Her wedding photos are particularly poignant: despite having to marry under guard and create her own wedding dress, the formal poses and careful attention to appearance - including handmade paper flowers - show how internees maintained their humanity through ritual and celebration even while imprisoned. The fact that she had to secretly develop her photos through an outside friend underscores how even the simple act of documenting one's life had become an act of resistance. Each photograph in her collection, from portraits to daily life scenes, captures both the visible effort to maintain dignity and the invisible weight of incarceration.
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Photographs</h2>
+      <PhotoGallery photos={photos} />
+    </section>
+
+    <div class="mt-16">
+      <PhotographersGrid />
+    </div>
+  </main>
+</FamilyAlbumLayout>

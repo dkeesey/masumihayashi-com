@@ -1,0 +1,27 @@
+---
+const currentPath = Astro.url.pathname;
+const showButton = currentPath !== "/" && currentPath !== "/home";
+---
+
+{showButton && (
+    <a href="/donate" class="fixed bottom-6 right-6 bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105 z-50 flex items-center gap-2" aria-label="Donate to support the Masumi Hayashi Foundation">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+        </svg>
+        <span class="font-medium">Donate</span>
+    </a>
+)}
+
+<style>
+    @media (max-width: 640px) {
+        a {
+            bottom: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+        }
+        
+        span {
+            display: none;
+        }
+    }
+</style>

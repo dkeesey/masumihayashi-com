@@ -1,0 +1,71 @@
+---
+// The JavaScript part (place this in the script section at the top of your Astro file)
+const baseURL =
+  "https://res.cloudinary.com/masumi-hayashi-foundation/image/upload";
+
+const transformations = ["bo_30px_solid_black", "b_black", "c_scale"];
+
+const currentYear = new Date().getFullYear();
+// const copySm = ``; // consolidate copyright to image details for small screens
+
+const copyMd = `© ${currentYear} Dean Keesey%0Awww.masumihayashi.com`;
+const copyLg = `© ${currentYear} Dean Keesey. All rights reserved.%0Awww.masumihayashi.com`;
+
+const imageDetailsSm = `Manzanar Concentration Camp, Monument%0AArtist:Dr. Masumi Hayashi%0A© ${currentYear} Dean Keesey`;
+const imageDetailsMd =
+  "Manzanar Concentration Camp, Monument%0AInyo County, California, 1995%0AArtist:Dr. Masumi Hayashi";
+const imageDetailsLg =
+  "Manzanar Concentration Camp, Monument%0A Inyo County, California, 1995%0AArtist: Dr. Masumi Hayashi%0APanoramic photo collage with Fuji Crystal Archive prints";
+
+// const encodedCopySm = encodeURIComponent(copySm);
+const encodedCopyMd = encodeURIComponent(copyMd);
+const encodedCopyLg = encodeURIComponent(copyLg);
+
+// const copySmParam = `l_text:futura_16_line_spacing_12:${encodedCopySm},co_white,g_south_east,x_30,y_-20`;
+const copyMdParam = `l_text:futura_16_line_spacing_12:${encodedCopyMd},co_white,g_south_west,x_30,y_-60`;
+const copyLgParam = `l_text:futura_16_line_spacing_12:${encodedCopyLg},co_white,g_south_west,x_30,y_-60`;
+
+const encodeImageDetails = (details: string) => {
+  return details
+    .replace(/,/g, "%2C")
+    .split("%0A")
+    .map((part) => encodeURIComponent(part))
+    .join("%0A");
+};
+
+const encodedImageDetailsSm = encodeImageDetails(imageDetailsSm);
+const encodedImageDetailsMd = encodeImageDetails(imageDetailsMd);
+const encodedImageDetailsLg = encodeImageDetails(imageDetailsLg);
+
+const imageDetailsSmParam = `l_text:futura_20_line_spacing_2:${encodedImageDetailsSm},co_white,g_south_west,x_30,y_-70`;
+const imageDetailsMdParam = `l_text:futura_20_line_spacing_12:${encodedImageDetailsMd},co_white,g_south_east,x_30,y_-40`;
+const imageDetailsLgParam = `l_text:futura_22_line_spacing_12:${encodedImageDetailsLg},co_white,g_south_east,x_30,y_-100`;
+
+const imageID = "Manzanar_Concentration_Camp_Monument_so2g5c.jpg";
+
+const imageURL640 = `${baseURL}/${transformations.join(",")},w_640/${imageDetailsSmParam}/${imageID}`;
+const imageURL768 = `${baseURL}/${transformations.join(",")},w_768/${copyMdParam}/${imageDetailsMdParam}/${imageID}`;
+const imageURL1024 = `${baseURL}/${transformations.join(",")},w_1024/${copyMdParam}/${imageDetailsMdParam}/${imageID}`;
+const imageURL1280 = `${baseURL}/${transformations.join(",")},w_1280/${copyLgParam}/${imageDetailsLgParam}/${imageID}`;
+const imageURL1536 = `${baseURL}/${transformations.join(",")},w_1536/${copyLgParam}/${imageDetailsLgParam}/${imageID}`;
+const imageURL1920 = `${baseURL}/${transformations.join(",")},w_1920/${copyLgParam}/${imageDetailsLgParam}/${imageID}`;
+
+const srcsetValue = `${imageURL640} 640w, ${imageURL768} 768w, ${imageURL1024} 1024w, ${imageURL1280} 1280w, ${imageURL1536} 1536w, ${imageURL1920} 1920w`;
+---
+
+<img
+  src={imageURL1536}
+  srcset={srcsetValue}
+  class="rounded-md md:max-w-[80vw] md:max-h-[80vh] lg:max-w-[80vw] lg:max-h-[80vh] xl:max-w-[75vw] xl:max-h-[75vh] pt-24 pb-8"
+  style="max-width: 90vw; max-height: 100vh;"
+/>
+
+<style>
+  img {
+    display: block;
+    margin: 0 auto;
+
+    max-width: 100%;
+    height: auto;
+  }
+</style>

@@ -1,0 +1,25 @@
+---
+import HeroLayout from '@layouts/HeroLayout.astro';
+import ArtistStatementComponent from '@components/pages/ArtistStatement';
+
+const heartMountainData = {
+  cloudinaryId: "internment-camps/heart-mountain-internment-camp-blue-room_mtzpdt",
+  title: "Heart Mountain Relocation Camp, Wyoming",
+  media: "Panoramic Photo Collage",
+  year: "1992",
+  city: "Powell",
+  state: "Wyoming",
+  country: "USA",
+  size: '30" x 40"',
+};
+---
+
+<HeroLayout 
+  title="Artist Statement" 
+  description="Artist Statement by Masumi Hayashi"
+  heroImage={heartMountainData}
+>
+  <div class="container mx-auto px-4 py-8">
+    <ArtistStatementComponent client:load />
+  </div>
+</HeroLayout>

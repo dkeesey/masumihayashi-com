@@ -1,0 +1,12 @@
+---
+import Navigation from "./Navigation.astro";
+const { classes } = Astro.props;
+---
+
+<header
+  class={`bg-white shadow-md z-10 w-full font-robotoCondensed ${classes}`}
+>
+  <div class="[&_a]:text-gray-900 [&_span]:text-gray-900">
+    <Navigation />
+  </div>
+</header>

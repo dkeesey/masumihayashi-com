@@ -1,0 +1,83 @@
+---
+import { Image } from 'astro:assets';
+import ContentSection from "@components/ContentSection.astro";
+import Typography from "./Typography.astro";
+import fukuyamaImage from '@images/family-album/photographers/fukuyama/fukuyama-family-and-water-tank.gif';
+---
+
+<ContentSection>
+  <h2 class="text-3xl font-light mb-8 text-fa-text-primary">
+    The Internee as Official Camp Photographer
+  </h2>
+
+  <section class="my-12">
+    <div class="space-y-8">
+      <Typography variant="body" class="text-fa-text-secondary">
+        The official camp photographers were internees who were amateur or professional photographers previous to being interned. Official camp photographers became more common around 1943, about a year after the camps were started. They functioned as school photographers, official government photographers, and portrait photographers in the camps. Many camps only had camp photographers.
+      </Typography>
+
+      <div class="space-y-12">
+        <!-- Toyo Miyatake -->
+        <div>
+          <h3 class="text-2xl font-medium mb-4 text-fa-text-primary">
+            <a href="/family-album/miyatake" class="hover:text-fa-link-hover transition-colors">
+              Toyo Miyatake
+            </a>
+          </h3>
+          <Typography variant="body" class="text-fa-text-secondary">
+            Born 1895, Japan; died 1979, Los Angeles. Interned at Manzanar Relocation Camp.
+          </Typography>
+          <Typography variant="body" class="mt-4 text-fa-text-secondary">
+            Before the war, Miyatake had a commercial photo studio in Little Tokyo in Los Angeles. He had studied with Edward Westin and won many photography awards. Miyatake realized that cameras were contraband but was able to get his camera lens pass the guards and inspections. While in Manzanar, he had the carpenter build a light tight box for his lens and sent his negatives to photography friends on the outside to get developed. Edward Weston was a friend whose photographs he helped sell to the Japanese American community before the war. Westin's recommendation to the camp director helped gain his confidence and he became the camp photographer. He was eventually able to practice his craft more openly.
+          </Typography>
+          <Typography variant="caption" class="text-fa-text-secondary">
+            Information and photographs are from his son, Archie Miyatake.
+          </Typography>
+        </div>
+
+        <!-- Hideharu Fukuyama -->
+        <div>
+          <div class="flex items-start gap-6 mb-6">
+            <div class="transition-transform duration-300 hover:scale-105">
+              <Image 
+                src={fukuyamaImage}
+                alt="Hideharu Fukuyama photograph"
+                title="Hideharu Fukuyama - Award-winning photographer interned at Gila River Relocation Camp"
+                class="rounded-lg shadow-md"
+              />
+            </div>
+            <div>
+              <h3 class="text-2xl font-medium mb-4 text-fa-text-primary">
+                <a href="/family-album/fukuyama" class="hover:text-fa-link-hover transition-colors">
+                  Hideharu Fukuyama
+                </a>
+              </h3>
+              <Typography variant="body" class="text-fa-text-secondary">
+                Born 1905, Japan, died 1978, Los Angeles. Interned at Gila River Relocation Camp.
+              </Typography>
+            </div>
+          </div>
+          <Typography variant="body" class="text-fa-text-secondary">
+            Fukuyama was a serious amateur photographer before the war and had won a Kodak award in photography in 1932. There is little information about his life as a photographer in the camps. How he got his cameras into the camps, how he got his film developed and printed before he became camp photographer is not known. He originally lived in Los Angeles and returned to L.A. after the camps.
+          </Typography>
+        </div>
+
+        <!-- James Yonemura -->
+        <div>
+          <h3 class="text-2xl font-medium mb-4 text-fa-text-primary">
+            James Yonemura
+          </h3>
+          <Typography variant="body" class="text-fa-text-secondary">
+            Interned at Heart Mountain Relocation Camp.
+          </Typography>
+          <Typography variant="body" class="mt-4 text-fa-text-secondary">
+            James Yonemura served as one of Heart Mountain's official camp photographers. While little personal information about him has been preserved, his work as camp photographer was significant in documenting important community moments, including weddings and other ceremonies. One such photograph appears in Grace Akiya's collection - her wedding portrait, which represents both the formal documentation of camp life through an official photographer and the personal preservation of family memories by internees themselves.
+          </Typography>
+          <Typography variant="caption" class="text-fa-text-secondary">
+            Information and photograph (the wedding) are from Grace and Ed Akiya.
+          </Typography>
+        </div>
+      </div>
+    </div>
+  </section>
+</ContentSection>

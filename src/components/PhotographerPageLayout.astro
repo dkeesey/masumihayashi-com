@@ -1,0 +1,64 @@
+---
+import FamilyAlbumLayout from '@layouts/FamilyAlbumLayout.astro';
+import AlbumTitle from '@components/AlbumTitle.astro';
+import PhotographersGrid from '@components/PhotographersGrid.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  photographerName: string;
+  subtitle: string;
+  collection: string;
+  photographer: string;
+  date: string;
+  about: string;
+}
+
+const { 
+  title, 
+  description, 
+  photographerName,
+  subtitle, 
+  collection, 
+  photographer, 
+  date,
+  about
+} = Astro.props;
+---
+
+<FamilyAlbumLayout {title} {description}>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <Breadcrumb
+      items={[
+        { label: "Home", href: "/" },
+        { label: "Family Album Project", href: "/family-album-project" },
+        { label: photographerName, href: `/family-album/${photographerName.toLowerCase()}`, current: true }
+      ]}
+    />
+
+    <div class="mb-16">
+      <PhotographersGrid />
+    </div>
+
+    <AlbumTitle
+      {subtitle}
+      {collection}
+      {photographer}
+      {date}
+    />
+    
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">About</h2>
+      <div class="prose prose-invert max-w-none">
+        <Fragment set:html={about} />
+      </div>
+    </section>
+
+    <slot />
+
+    <div class="mt-16">
+      <PhotographersGrid />
+    </div>
+  </main>
+</FamilyAlbumLayout>

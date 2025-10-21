@@ -1,0 +1,126 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import CloudinaryImage from "../../components/CloudinaryImage.astro";
+
+export async function getStaticPaths() {
+  const campEntries = await getCollection("camps");
+  return campEntries.map((entry: CollectionEntry<"camps">) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"camps">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Get related artwork
+const artworkEntries = await getCollection("artwork");
+const relatedArtwork = artworkEntries.filter((artwork: CollectionEntry<"artwork">) => 
+  entry.data.artworkSlugs.includes(artwork.slug)
+);
+
+// Format dates
+const openDate = new Date(entry.data.dateOpened).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+const closeDate = new Date(entry.data.dateClosed).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<Layout title={`${entry.data.name} - Japanese American Concentration Camp`}>
+  <main class="bg-museum-white">
+    <!-- Hero Section -->
+    <div class="bg-black w-full">
+      <div class="max-w-[90vw] mx-auto py-8 sm:py-12 md:py-16">
+        {entry.data.featuredImageId && (
+          <CloudinaryImage
+            cloudinaryId={entry.data.featuredImageId}
+            altTag={`${entry.data.name} concentration camp`}
+            classNames="w-full h-auto"
+          />
+        )}
+      </div>
+    </div>
+
+    <!-- Camp Information -->
+    <div class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-2">{entry.data.name}</h1>
+        {entry.data.formalName && (
+          <h2 class="text-xl text-gray-600 mb-4">{entry.data.formalName}</h2>
+        )}
+        <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+          <p>Location: {entry.data.city}, {entry.data.state}</p>
+          <p>Operated: {openDate} - {closeDate}</p>
+          <p>Peak Population: {entry.data.maxPopulation.toLocaleString()}</p>
+        </div>
+      </header>
+
+      <!-- Description -->
+      <div class="prose max-w-none mb-12">
+        <Content />
+      </div>
+
+      <!-- Photo Gallery -->
+      {relatedArtwork.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold mb-6">Gallery</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {relatedArtwork.map((artwork: CollectionEntry<"artwork">) => (
+              <div class="relative">
+                <a href={`/artwork/japanese-american-internment-camps/${artwork.slug}`}>
+                  <CloudinaryImage
+                    cloudinaryId={artwork.data.cloudinaryId}
+                    altTag={artwork.data.title}
+                    classNames="w-full h-auto"
+                  />
+                  <div class="mt-2">
+                    <h3 class="text-lg font-medium">{artwork.data.title}</h3>
+                    {artwork.data.year && (
+                      <p class="text-sm text-gray-600">{artwork.data.year}</p>
+                    )}
+                  </div>
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- External Resources -->
+      {entry.data.externalLinks && entry.data.externalLinks.length > 0 && (
+        <section>
+          <h2 class="text-2xl font-bold mb-6">Additional Resources</h2>
+          <ul class="space-y-4">
+            {entry.data.externalLinks.map((link: { url: string; title: string; description?: string }) => (
+              <li>
+                <a
+                  href={link.url}
+                  class="text-primary-interactive-link hover:text-primary-interactive-hover"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.title}
+                </a>
+                {link.description && (
+                  <p class="text-sm text-gray-600 mt-1">{link.description}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  </main>
+</Layout>

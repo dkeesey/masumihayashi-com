@@ -1,0 +1,85 @@
+---
+import FamilyAlbumLayout from '@layouts/FamilyAlbumLayout.astro';
+import AlbumTitle from '@components/AlbumTitle.astro';
+import PhotoGallery from '@components/PhotoGallery.astro';
+import PhotographersGrid from '@components/PhotographersGrid.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+import NarrativeText from '@components/NarrativeText.astro';
+
+// Import images
+import fukuyama1 from '@images/family-album/photographers/fukuyama/fukuyama-family-and-water-tank.gif';
+import fukuyama2 from '@images/family-album/photographers/fukuyama/fukuyama-gila-river-panorama.gif';
+import fukuyama3 from '@images/family-album/photographers/fukuyama/fukuyama-mother-and-children-dressed-for-photo.gif';
+import fukuyama4 from '@images/family-album/photographers/fukuyama/fukuyama-outside-the-guard-tower.gif';
+
+const title = "Family Album";
+const description = "Family Album from Gila River Relocation Camp by Hideharu Fukuyama";
+
+const photos = [
+  {
+    src: fukuyama1,
+    alt: "Family by water tank",
+    description: "The Fukuyama family standing near a water tank at Gila River. Water tanks were essential infrastructure in the desert camp environment. This image captures the duality of camp life - while the water tank symbolizes the harsh desert conditions and institutional control, the family's formal dress and composed stance assert their dignity in the face of imprisonment."
+  },
+  {
+    src: fukuyama2,
+    alt: "Panoramic view of Gila River",
+    description: "A panoramic view of the Gila River camp, showing the vast desert landscape and camp buildings stretching into the distance."
+  },
+  {
+    src: fukuyama3,
+    alt: "Mother and children dressed for photo",
+    description: "A mother and her children dressed up for a formal photograph, maintaining dignity and family traditions despite camp conditions. The careful arrangement of this portrait - the formal dress, posed stance, and dignified expressions - represents more than just a family photo. It documents both the internees' determination to maintain normal family rituals and their resistance against the dehumanizing conditions of their confinement."
+  },
+  {
+    src: fukuyama4,
+    alt: "View outside the guard tower",
+    description: "A view from outside one of the guard towers that surrounded the camp, a stark reminder of their confinement. While most of Fukuyama's photographs show internees maintaining dignity through formal portraits and family gatherings, this stark image of the guard tower serves as a reminder of the true nature of their situation - a community imprisoned solely due to their Japanese ancestry."
+  }
+];
+
+---
+
+<FamilyAlbumLayout title={title} description={description}>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <Breadcrumb
+      items={[
+        { label: "Home", href: "/" },
+        { label: "Family Album Project", href: "/family-album-project" },
+        { label: "Fukuyama", href: "/family-album/fukuyama", current: true }
+      ]}
+    />
+
+    <div class="mb-16">
+      <PhotographersGrid />
+    </div>
+
+    <AlbumTitle
+      subtitle="Gila River Relocation Camp, Arizona"
+      collection="The Fukuyama Family"
+      photographer="Hideharu Fukuyama"
+      date="1942-1945"
+    />
+    
+    <NarrativeText title="About">
+      <p>
+        Hideharu Fukuyama was an accomplished photographer before his internment, having won a Kodak award. 
+        During his time at Gila River Relocation Camp, he continued his photographic work, experimenting with 
+        various techniques including panoramic photo collages and hand-colored landscapes. While serving as the 
+        camp photographer, he documented both official events like high school activities and intimate family 
+        moments, creating a comprehensive visual record of life within the internment camp.
+      </p>
+      <p>
+        As a Kodak award-winning photographer, Fukuyama brought a unique perspective to documenting life in Gila River. His role as camp photographer placed him in a complex position - officially sanctioned to take photos while himself imprisoned. Through his lens, we see both the overt signs of incarceration (guard towers, water tanks) and the subtle acts of resistance through dignity preservation. His formal portraits of families in their best clothes, posed carefully despite the harsh desert backdrop, should not be misread as signs of contentment. Rather, these images represent calculated decisions to document both the reality of imprisonment and the internees' determination to maintain their humanity. Fukuyama's technical expertise - evident in his panoramas and hand-colored photos - transformed institutional documentation into artistic resistance.
+      </p>
+    </NarrativeText>
+
+    <NarrativeText title="Photographs">
+      <PhotoGallery photos={photos} />
+    </NarrativeText>
+
+    <div class="mt-16">
+      <PhotographersGrid />
+    </div>
+  </main>
+</FamilyAlbumLayout>

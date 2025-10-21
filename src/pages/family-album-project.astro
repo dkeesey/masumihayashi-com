@@ -1,0 +1,222 @@
+---
+import FamilyAlbumLayout from "@layouts/FamilyAlbumLayout.astro";
+import { Image } from 'astro:assets';
+import FamilyAlbumIntro from "@components/FamilyAlbumIntro.astro";
+import PhotographersGrid from "@components/PhotographersGrid.astro";
+import ContrabandSection from "@components/ContrabandSection.astro";
+import InterneePhotographerSection from "@components/InterneePhotographerSection.astro";
+import AmateurPhotographerSection from "@components/AmateurPhotographerSection.astro";
+import VisitorsSection from "@components/VisitorsSection.astro";
+import CanadianIncarcerationSection from "@components/CanadianIncarcerationSection.astro";
+import Breadcrumb from '@components/Breadcrumb.astro';
+import ExhibitionInfo from '@components/ExhibitionInfo.astro';
+import TableOfContents from '@components/TableOfContents.tsx';
+import HoverImage from "@components/HoverImage.astro";
+import installPic1 from '@images/family-album/installation/install-pic1.jpg';
+import installPic3 from '@images/family-album/installation/install-pic3.jpg';
+
+const sections = [
+  { 
+    id: 'introduction', 
+    title: 'Introduction',
+    description: 'Overview of the Family Album Project and its significance'
+  },
+  { 
+    id: 'digital-provenance', 
+    title: 'About These Digital Images',
+    description: 'The historical layers and digital preservation of these photographs'
+  },
+  { 
+    id: 'exhibition-views', 
+    title: 'Exhibition Views',
+    description: 'Visual documentation of the original exhibition'
+  },
+  { 
+    id: 'contraband', 
+    title: 'Contraband',
+    description: 'How cameras became contraband items in the camps'
+  },
+  { 
+    id: 'internee-photographers', 
+    title: 'Internee Photographers',
+    description: 'Stories of photographers within the camps'
+  },
+  { 
+    id: 'amateur-photographers', 
+    title: 'Amateur Photographers',
+    description: 'Family photographs taken by internees'
+  },
+  { 
+    id: 'visitors', 
+    title: 'Visitors',
+    description: 'Photographs taken by camp visitors'
+  },
+  { 
+    id: 'canadian-incarceration', 
+    title: 'Canadian Incarceration',
+    description: 'The parallel experience in Canadian internment camps'
+  },
+  { 
+    id: 'about', 
+    title: 'About the Exhibition',
+    description: 'Details about the original exhibition and its curation'
+  }
+];
+
+---
+
+<FamilyAlbumLayout title="Family Album Project" description="A collection of photographs and stories from Japanese American internment camps">
+  <div class="relative">
+    <main class="relative max-w-[100rem] mx-auto px-4 py-8">
+      <div class="mb-8">
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Family Album Project", href: "/family-album-project", current: true }
+          ]}
+        />
+        
+        <div class="mt-8">
+          <PhotographersGrid />
+        </div>
+      </div>
+
+      <div class="lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+        <div class="space-y-16">
+          <!-- Introduction -->
+          <section id="introduction">
+            <FamilyAlbumIntro />
+          </section>
+
+          <section class="mt-16 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-light mb-8">Critical Context</h2>
+            <div class="prose prose-invert max-w-none font-inter">
+              <p class="text-lg text-fa-text-secondary">
+                These photographs require careful viewing. While many images show internees in formal dress and composed expressions, these should not be misinterpreted as signs of comfort or contentment. When forced into the camps, internees could bring only what they could carry in their suitcases. Their nice clothes - among their few preserved possessions - became powerful tools for maintaining dignity in the face of imprisonment. The act of dressing well and photographing themselves was a form of resistance against dehumanization, not evidence of "happy camps" as some mischaracterized them. These images document both the visible effort to preserve humanity and the invisible weight of dispossession and confinement.
+              </p>
+            </div>
+          </section>
+
+          <section id="digital-provenance" class="mt-16 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-light mb-8">About These Digital Images</h2>
+            <div class="prose prose-invert max-w-none font-inter">
+              <p class="text-lg text-fa-text-secondary">
+                The photographs you see on these pages exist in multiple historical layers. Originally taken in the 1940s, often with contraband cameras or through official camp photographers, they were preserved as small physical prints in family albums and collections. In 1998, as part of Masumi Hayashi's pioneering effort to create one of the first digital archives of internment camp photography, these images were digitized for early web presentation.
+              </p>
+              <p class="text-lg text-fa-text-secondary mt-4">
+                The image quality and size you see today reflects both the original constraints of camp photography and the technical limitations of 1998-era web technology. While the original snapshots may have been similarly small in size, the digital versions you see here were specifically optimized for late-1990s computer screens and web browsers. We have chosen to preserve these digital artifacts in their 1998 form rather than artificially enhance them, as they represent not only historical documentation of the camps but also an early moment in the digital preservation of Japanese American history.
+              </p>
+              <p class="text-lg text-fa-text-secondary mt-4">
+                This layered existence - from contraband camp photos to early digital archive - mirrors key themes in the project: how historical memory is preserved, transformed, and transmitted across generations and technologies.
+              </p>
+            </div>
+          </section>
+
+          <!-- Exhibition Images -->
+          <section id="exhibition-views" class="mt-16 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-light mb-8">Exhibition Views</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+              <HoverImage 
+                src={installPic1}
+                alt="Installation view of the Family Album exhibition"
+                title="Family Album exhibition at Cleveland State University Art Gallery, 1996 - View showing the layout of photographs and their presentation"
+                class="w-full h-auto"
+              />
+              <HoverImage 
+                src={installPic3}
+                alt="Installation view showing visitor interaction"
+                title="Visitors engaging with the Family Album exhibition at Cleveland State University Art Gallery, 1996 - Note the careful arrangement of photographs to tell the story of internment camp life"
+                class="w-full h-auto"
+              />
+            </div>
+          </section>
+
+          <!-- Content Sections -->
+          <section id="contraband" class="mt-16">
+            <ContrabandSection />
+          </section>
+          <section id="internee-photographers" class="mt-16">
+            <InterneePhotographerSection />
+          </section>
+          <section id="amateur-photographers" class="mt-16">
+            <AmateurPhotographerSection />
+          </section>
+          <section id="visitors" class="mt-16">
+            <VisitorsSection />
+          </section>
+          <section id="canadian-incarceration" class="mt-16">
+            <CanadianIncarcerationSection />
+          </section>
+
+          <div class="mt-16">
+            <PhotographersGrid />
+          </div>
+
+          <section id="about" class="mt-16">
+            <ExhibitionInfo />
+          </section>
+        </div>
+
+        <div class="hidden lg:block space-y-8">
+          <div class="sticky top-24">
+            <TableOfContents sections={sections} client:load />
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    {/* Back to Top Button */}
+    <button
+      id="backToTop"
+      class="fixed bottom-4 right-4 bg-gray-800 text-white p-3 rounded-full shadow-lg opacity-0 transition-opacity duration-300 hover:bg-gray-700 z-50"
+      aria-label="Back to top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+  </div>
+</FamilyAlbumLayout>
+
+<script>
+  // Back to Top Button Functionality
+  const backToTopButton = document.getElementById('backToTop');
+  
+  if (backToTopButton) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTopButton.style.opacity = '1';
+      } else {
+        backToTopButton.style.opacity = '0';
+      }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // Add smooth scrolling to all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+      if (!href || href === '#') return;
+      
+      const target = document.querySelector<HTMLElement>(href);
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        // Update URL without jumping
+        history.pushState(null, '', href);
+      }
+    });
+  });
+</script>

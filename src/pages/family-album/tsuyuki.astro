@@ -1,0 +1,76 @@
+---
+import PhotographerPageLayout from '@components/PhotographerPageLayout.astro';
+import PhotoGallery from '@components/PhotoGallery.astro';
+
+// Import images
+import tsuyukiFarmers from '@images/family-album/photographers/tsuyuki/tsuyuki-farmers.jpg';
+import tsuyukiTomatoes from '@images/family-album/photographers/tsuyuki/tsuyuki-farmers-tomatoes-cantaloupe.jpg';
+import tsuyukiNeighborFuneral from '@images/family-album/photographers/tsuyuki/tsuyuki-neighbor-funeral.jpg';
+import tsuyukiBuddhistFuneral from '@images/family-album/photographers/tsuyuki/tsuyuki-funeral-buddhist.jpg';
+import tsuyukiHuntFish from '@images/family-album/photographers/tsuyuki/tsuyuki-pre-war-free-to-hunt-and-fish.jpg';
+import tsuyukiMassage from '@images/family-album/photographers/tsuyuki/tsuyuki-massage.gif';
+
+const title = "Family Album";
+const description = "Family Album from Tsuyuki Collection";
+const photographerName = "Norman Tsuyuki";
+const subtitle = "Life in Lillooet";
+const collection = "Tsuyuki Collection";
+const photographer = "Norman Tsuyuki";
+const date = "1942-1946";
+const about = `
+  <p>
+    Norman Tsuyuki was a teenager in the camps and was an avid photographer. He was able to record all aspects of their life during this internment time. The Tsuyuki family evacuated to a farm in Lillooet that was part of the "self-supporting" camps.
+  </p>
+  
+  <p class="mt-4">
+    Norman Tsuyuki's photographs from Lillooet offer a distinct perspective on internment life through the lens of a "self-supporting" camp. While these camps offered slightly more freedom than traditional internment facilities, they were still sites of forced displacement and confinement. Tsuyuki's careful documentation of both agricultural success and cultural practices like Buddhist funerals represents a sophisticated form of resistance through record-keeping. His images of well-dressed farmers proudly displaying their harvest and community members maintaining formal ritual practices should not be read as signs of contentment with displacement, but rather as evidence of how Japanese Canadians preserved their dignity and cultural identity even while labeled as "enemy aliens." The fact that he was able to photograph more openly than those in traditional camps makes these images particularly valuable as documentation of both the visible achievements and invisible struggles of displaced communities.
+  </p>
+`;
+
+const photos = [
+  {
+    src: tsuyukiFarmers,
+    alt: "Farmers at work in Lillooet",
+    description: "The Tsuyuki family evacuated to a farm in Lillooet that was part of the \"self-supporting\" camps. Norman Tsuyuki was a teenager in the camps and was an avid photographer. He was able to record all aspects of their life during this internment time. These images of successful farming do more than document agricultural achievement - they show how Japanese Canadians maintained dignity through productive work even while displaced. The formal poses and proud displays of harvest speak to both practical success and spiritual resilience in the face of forced relocation. Photo by Norman Tsuyuki."
+  },
+  {
+    src: tsuyukiTomatoes,
+    alt: "Farmers with tomatoes and cantaloupe harvest",
+    description: "Tomatoes and cantaloupe were among the successful crops grown by Japanese Canadian farmers in Lillooet. Despite the challenging circumstances, they managed to maintain productive farms. These harvests represented not just physical sustenance, but also the community's resilience and determination to thrive even under displacement. Photo by Norman Tsuyuki."
+  },
+  {
+    src: tsuyukiNeighborFuneral,
+    alt: "Community gathering for a neighbor's funeral",
+    description: "The documentation of funeral services represents more than just event photography - it shows how the community insisted on maintaining cultural dignity through proper ceremony even in exile. The formal dress and careful composition of these images preserve both the ritual itself and the community's determination to uphold their traditions despite displacement. Photo by Norman Tsuyuki."
+  },
+  {
+    src: tsuyukiBuddhistFuneral,
+    alt: "Traditional Buddhist funeral service",
+    description: "Although many internees were Christian, Buddhist funeral services and cremation remained important cultural practices. These rituals were vital for maintaining connections to Japanese cultural traditions and ancestral worship. The meticulous documentation of these ceremonies demonstrates the community's commitment to preserving their cultural heritage even in times of adversity. Photo by Norman Tsuyuki."
+  },
+  {
+    src: tsuyukiHuntFish,
+    alt: "Pre-war hunting and fishing activities",
+    description: "This pre-war image takes on deeper meaning in the context of internment - it serves as documentary evidence of the freedoms and normal life that were stripped away when Japanese Canadians were categorized as \"enemy aliens.\" The contrast between this image and the internment photos provides powerful testimony to the impact of wartime policies on Canadian citizens. Photo by Norman Tsuyuki."
+  },
+  {
+    src: tsuyukiMassage,
+    alt: "Traditional massage therapy practice",
+    description: "Traditional Japanese therapeutic practices, including massage, continued within the community during internment. These practices helped maintain both physical and cultural well-being, representing another way in which the community preserved their cultural traditions and supported each other through difficult times. Photo by Norman Tsuyuki."
+  }
+];
+
+---
+
+<PhotographerPageLayout
+  title={title}
+  description={description}
+  photographerName={photographerName}
+  subtitle={subtitle}
+  collection={collection}
+  photographer={photographer}
+  date={date}
+  about={about}
+>
+  <PhotoGallery photos={photos} />
+</PhotographerPageLayout>

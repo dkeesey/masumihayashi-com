@@ -1,0 +1,45 @@
+---
+interface CampEntry {
+  slug: string;
+  name: string;
+  series: string;
+}
+
+interface Props {
+  entries: CampEntry[];
+}
+
+const { entries: propsEntries } = Astro.props as Props;
+
+---
+
+<div>
+  <h2 class="text-xl py-8">Japanese-American Internment Camps</h2>
+  <ul class="flex flex-col items-center">
+    {
+      propsEntries
+        .filter(
+          (entry) => entry.series === "Japanese-American Internment Camps"
+        )
+        .map((entry) => (
+          <li class="self-start ml-8">
+            <a href={`/artwork/japanese-american-internment-camps/${entry.slug}`}>{entry.name}</a>
+          </li>
+        ))
+    }
+  </ul>
+  <h2 class="text-xl py-8">Japanese-Canadian Internment Camps</h2>
+  <ul class="flex flex-col justify-center pb-8">
+    {
+      propsEntries
+        .filter(
+          (entry) => entry.series === "Japanese-Canadian Internment Camps"
+        )
+        .map((entry) => (
+          <li class="px-2">
+            <a href={`/artwork/japanese-canadian-internment-camps/${entry.slug}`}>{entry.name}</a>
+          </li>
+        ))
+    }
+  </ul>
+</div>

@@ -1,0 +1,70 @@
+---
+import PhotographerPageLayout from '@components/PhotographerPageLayout.astro';
+import PhotoGallery from '@components/PhotoGallery.astro';
+
+// Import images
+import moriokaSoldier from '@images/family-album/photographers/morioka/morioka-soldier-friend.jpg';
+import moriokaFatherDaughter from '@images/family-album/photographers/morioka/morioka-father-daughter.jpg';
+import moriokaGrandfather from '@images/family-album/photographers/morioka/morioka-grandfather-daughter.jpg';
+import moriokaShowers from '@images/family-album/photographers/morioka/morioka-lani-dressed-up-for-group-showers.jpg';
+
+const title = "Family Album";
+const description = "Family Album from Heart Mountain by June Utako Morioka";
+
+const photos = [
+  {
+    src: moriokaSoldier,
+    alt: "UCLA student and 442nd soldier - A story of sacrifice and complex patriotism",
+    description: "A young friend of Mrs. Morioka had enlisted in the Army and returned to camp after training to say goodbye to friends and family. He had been an 'A' student and president of many organizations at UCLA before the evacuation. He was going overseas to join the 442nd to serve his country. He felt he could make a difference. He was one of the many casualties that the 442nd and the 100th battalions suffered during the war. Many of the Hawaiian Japanese of the 100th battalion found it difficult to believe that the Japanese Americans on the mainland were in concentration camps and with them fighting for the same country that incarcerated them."
+  },
+  {
+    src: moriokaFatherDaughter,
+    alt: "Father and daughter portrait with guard tower - A powerful symbol of family life under surveillance",
+    description: "When Lani Sanjek showed me this family album photo it made me realize that families saved photos of this time period and shared them with their children. Although most of the photographs are of family and friends, there seem to be some that create exceptional irony. This is the father/daughter portrait in front of the guard tower of the camp. Many other photographers show the barbed wire fence or the guard tower as part of the portrait."
+  },
+  {
+    src: moriokaGrandfather,
+    alt: "Grandfather with daughter - Preserving family bonds in Heart Mountain camp",
+    description: "A tender moment between grandfather and daughter, captured despite the harsh circumstances of their internment."
+  },
+  {
+    src: moriokaShowers,
+    alt: "Little Lani Morioka - Daily life and dignity in the camp's communal facilities",
+    description: "This is little Lani Morioka dressed for the walk to the group showers."
+  }
+];
+
+const about = `
+  <p>
+    The photographs of June Utako Morioka from Heart Mountain Relocation Camp offer a deeply personal perspective 
+    of life during internment, preserved and shared through her daughter Lani Sanjek. Her images capture poignant 
+    moments that illustrate both the everyday realities of camp life and its profound ironies.
+  </p>
+  <p class="mt-4">
+    Among her most moving photographs is that of a young UCLA student who, despite his internment, chose to serve 
+    in the legendary 442nd Regimental Combat Team. This image represents the complex patriotism of Japanese Americans 
+    who fought for a country that had imprisoned their families. Tragically, he would become one of the many casualties 
+    suffered by the highly decorated unit.
+  </p>
+  <p class="mt-4">
+    Morioka's photography also captured the stark juxtaposition of family life against the camp's prison-like 
+    setting, exemplified in the powerful father-daughter portrait deliberately composed with a guard tower in the 
+    background. These images, preserved and shared through generations, serve as both family mementos and powerful 
+    historical documents of this period in American history.
+  </p>
+`;
+
+---
+
+<PhotographerPageLayout
+  title={title}
+  description={description}
+  photographerName="Morioka"
+  subtitle="Heart Mountain Relocation Camp, Wyoming"
+  collection="From the collection of Lani Sanjek, daughter"
+  photographer="Photography by internee Mrs. June Utako Morioka"
+  date="circa 1942-1945"
+  about={about}
+>
+  <PhotoGallery photos={photos} />
+</PhotographerPageLayout>

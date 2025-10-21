@@ -1,0 +1,33 @@
+---
+interface Props {
+  subtitle?: string;
+  collection?: string;
+  photographer?: string;
+  date?: string;
+}
+
+const { subtitle, collection, photographer, date } = Astro.props;
+---
+
+<div class="my-8 max-w-3xl mx-auto text-center space-y-4 font-serif">
+  {photographer && (
+    <h1 class="text-5xl md:text-6xl font-bold text-amber-500">
+      {photographer}
+    </h1>
+  )}
+  {subtitle && (
+    <h2 class="text-3xl md:text-4xl text-amber-400 font-semibold">
+      {subtitle}
+    </h2>
+  )}
+  {collection && (
+    <p class="text-xl text-amber-300">
+      From the collection of {collection}
+    </p>
+  )}
+  {date && (
+    <p class="text-lg text-amber-300/80 italic">
+      circa {date}
+    </p>
+  )}
+</div>

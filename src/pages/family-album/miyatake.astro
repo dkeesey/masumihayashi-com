@@ -1,0 +1,65 @@
+---
+import PhotographerPageLayout from '@components/PhotographerPageLayout.astro';
+import PhotoGallery from '@components/PhotoGallery.astro';
+
+// Import images
+import miyatakeSoldier from '@images/family-album/photographers/miyatake/miyatake-soldier-mom-and-dad.jpg';
+import miyatakeBoys from '@images/family-album/photographers/miyatake/miyatake-3-boys-barbed-wire-fence.jpg';
+import miyatakeFisherman from '@images/family-album/photographers/miyatake/miyatake-fisherman-with-fish.jpg';
+import miyatakeBirthday from '@images/family-album/photographers/miyatake/miyatake-young-girl-birthday.jpg';
+
+const title = "Family Album";
+const description = "Family Album from Manzanar by Toyo Miyatake";
+
+const photos = [
+  {
+    src: miyatakeSoldier,
+    alt: "442nd Soldier Visiting Parents - A poignant moment of family reunion in Manzanar",
+    description: "A son and soldier of the 442nd visiting his parents at Manzanar. Many Japanese Americans served in the highly decorated 442nd Regimental Combat Team while their families remained in the camps. This image captures a profound irony of the internment - families separated by barbed wire, with sons fighting for American democracy while their parents remained imprisoned by it. The formal pose and military uniform stand in stark contrast to the camp setting, embodying both patriotic service and systemic injustice."
+  },
+  {
+    src: miyatakeBoys,
+    alt: "Three Boys at Barbed Wire - Childhood against the backdrop of confinement",
+    description: "Three young boys near the barbed wire fence at Manzanar. The fence and guard towers were constant reminders of their confinement. The juxtaposition in this image is powerful - young boys in their everyday clothes against the barbed wire that confined them. While many camp photographs show people in formal dress maintaining dignity, this image reminds us of the underlying reality of imprisonment that shaped every aspect of daily life."
+  },
+  {
+    src: miyatakeFisherman,
+    alt: "Fisherman at Manzanar - Finding sustenance and purpose beyond camp boundaries",
+    description: "A man displaying fish he caught. Despite the restrictions, some internees would fish outside the camp boundaries to supplement their meals."
+  },
+  {
+    src: miyatakeBirthday,
+    alt: "Birthday Celebration - Maintaining childhood joy and family traditions in camp",
+    description: "A young girl celebrating her birthday. Even in difficult circumstances, families tried to maintain normalcy by celebrating special occasions. Celebrations like this birthday represent more than just maintaining normalcy - they were acts of resistance against dehumanization. The careful documentation of these moments, with participants in their best clothes despite imprisonment, demonstrates how internees used ritual and celebration to preserve their dignity and humanity."
+  }
+];
+
+const about = `
+  <p>
+    Toyo Miyatake was a professional photographer in Los Angeles' Little Tokyo district before World War II. 
+    When he was incarcerated at Manzanar, he smuggled in a lens and film holder, later building a camera 
+    from wood. Initially taking photos in secret, he was eventually allowed to be the camp's official photographer.
+  </p>
+  <p class="mt-4">
+    His photographs document daily life, special events, and the stark reality of incarceration at Manzanar. 
+    His work provides both historical documentation and artistic interpretation of the Japanese American 
+    internment experience.
+  </p>
+  <p class="mt-4">
+    Miyatake's decision to smuggle camera parts into Manzanar was an act of resistance that transcended mere documentation. As a professional photographer from Little Tokyo, he understood deeply how the formal portrait could preserve human dignity. His transition from taking secret photographs to becoming the camp's official photographer represents both compromise and resistance - working within the system while maintaining his commitment to document the reality of incarceration. When we look at his carefully composed images of people in their best clothes, we must understand these not as signs of contentment but as deliberate assertions of humanity. Miyatake's lens captured both the visible efforts to maintain dignity and the invisible weight of imprisonment, creating a body of work that serves as both art and testimony.
+  </p>
+`;
+---
+
+<PhotographerPageLayout
+  title={title}
+  description={description}
+  photographerName="Miyatake"
+  subtitle="Manzanar Relocation Camp, California"
+  collection="Mr. Toyo Miyatake"
+  photographer="Mr. Toyo Miyatake"
+  date="1942-1945"
+  about={about}
+>
+  <PhotoGallery photos={photos} />
+</PhotographerPageLayout>

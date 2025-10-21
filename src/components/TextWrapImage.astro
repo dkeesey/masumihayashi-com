@@ -1,0 +1,112 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  position?: 'left' | 'right';
+  gap?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  width, 
+  height, 
+  position = 'left',
+  gap = '1.5rem'
+} = Astro.props;
+---
+
+<div class={`text-wrap-container ${position}`} style={`--gap: ${gap}`}>
+  <div class="image-wrapper">
+    <img 
+      src={src} 
+      alt={alt}
+      width={width}
+      height={height}
+      class="image"
+    />
+  </div>
+  <div class="content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .text-wrap-container {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: var(--gap);
+    margin: 2rem 0;
+  }
+
+  .text-wrap-container.right {
+    grid-template-columns: 1fr min-content;
+  }
+
+  .image-wrapper {
+    grid-row: span var(--rows, 1);
+    align-self: start;
+  }
+
+  .right .image-wrapper {
+    grid-column: 2;
+  }
+
+  .right .content {
+    grid-column: 1;
+  }
+
+  .image {
+    display: block;
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Responsive layout for mobile */
+  @media (max-width: 640px) {
+    .text-wrap-container,
+    .text-wrap-container.right {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .right .image-wrapper {
+      grid-column: 1;
+    }
+
+    .right .content {
+      grid-column: 1;
+    }
+
+    .image-wrapper {
+      margin-bottom: var(--gap);
+    }
+  }
+</style>
+
+<script>
+  // Calculate and set the number of grid rows the image should span
+  // based on its height and the line height of the text
+  function updateImageSpan() {
+    document.querySelectorAll('.text-wrap-container').forEach(container => {
+      const imageWrapper = container.querySelector('.image-wrapper') as HTMLElement;
+      const image = container.querySelector('.image') as HTMLImageElement;
+      const content = container.querySelector('.content');
+      
+      if (image && content && imageWrapper && window.innerWidth > 640) {
+        const imageHeight = image.offsetHeight;
+        const lineHeight = parseInt(window.getComputedStyle(content).lineHeight);
+        const rows = Math.ceil(imageHeight / lineHeight);
+        imageWrapper.style.setProperty('--rows', rows.toString());
+      }
+    });
+  }
+
+  // Update on load and resize
+  window.addEventListener('load', updateImageSpan);
+  window.addEventListener('resize', updateImageSpan);
+</script>

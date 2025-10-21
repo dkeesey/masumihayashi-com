@@ -1,0 +1,46 @@
+---
+interface Props {
+  name: string;
+  camp: string;
+  category: 'official' | 'amateur' | 'visitor' | 'canadian';
+}
+
+const { name, camp, category } = Astro.props;
+
+// Get appropriate subtitle based on category
+const getSubtitle = (category: string) => {
+  switch (category) {
+    case 'official':
+      return 'Official Camp Photographer';
+    case 'amateur':
+      return 'Amateur Photographer';
+    case 'visitor':
+      return 'Visitor Photos';
+    case 'canadian':
+      return 'Canadian Internment';
+    default:
+      return '';
+  }
+};
+
+const subtitle = getSubtitle(category);
+---
+
+<div class="relative bg-gray-900 text-white p-6 rounded-t-lg overflow-hidden min-h-[120px] flex flex-col justify-center">
+  {/* Decorative background pattern */}
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+    <div class="grid grid-cols-8 gap-1 h-full w-full">
+      {Array(32).fill(null).map(() => (
+        <div class="bg-white/10 h-2 w-full transform -rotate-45"></div>
+      ))}
+    </div>
+  </div>
+  
+  {/* Content */}
+  <div class="relative z-10">
+    <h3 class="text-3xl font-bold leading-tight mb-2">{name}</h3>
+    <p class="text-xl font-medium text-gray-200 mb-1">{camp}</p>
+    <p class="text-sm text-gray-300">{subtitle}</p>
+  </div>
+</div>

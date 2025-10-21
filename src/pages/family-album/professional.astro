@@ -1,0 +1,95 @@
+---
+import FamilyAlbumLayout from '@layouts/FamilyAlbumLayout.astro';
+import AlbumTitle from '@components/AlbumTitle.astro';
+import PhotoGallery from '@components/PhotoGallery.astro';
+import PhotographersGrid from '@components/PhotographersGrid.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+
+// Import images
+import guardsman from '@images/family-album/guardsman.gif';
+import profess3 from '@images/family-album/profess3.jpg';
+import profess2 from '@images/family-album/profess2.jpg';
+import amache1 from '@images/family-album/camps/amache1.gif';
+import profess1 from '@images/family-album/profess1.jpg';
+
+const title = "Family Album";
+const description = "Professional and Media Photography of Japanese American Internment Camps";
+
+const photos = [
+  {
+    src: guardsman,
+    alt: "Camp Tule Lake Guardsman Magazine",
+    description: "Publications like this one, Camp Tule Lake Guardsman Magazine, May 1945 issue, would have articles about the life of the families who were guards in the camp, including curious articles about how to understand the Japanese Americans. This issue is from the Tule Lake Museum on the fair grounds."
+  },
+  {
+    src: profess3,
+    alt: "Panoramic view of internees arriving at camp",
+    description: "Professional photographers took panoramic photographs of special occurances such as this scene of the arrival of a second or third group of internees fresh off the trains from assembly centers (race tracks). Transience and dislocation was part of the everyday life of the internees. Families were separated and moved to other camps several times."
+  },
+  {
+    src: profess2,
+    alt: "Life Magazine photo of Mr. Ed Akiya and family",
+    description: "Sometimes Life Magazine would send their photographers into the internment camps to show life in the camps trying to show the government as a 'caretaker' institution. This is Mr. Ed Akiya playing the guitar and his family in their section of the typical barrack and the family that had to live there. This photograph of Mr. Ed Akiya and his family exemplifies how professional media coverage attempted to normalize internment. While the image shows a family in their living space, it carefully avoids documenting the crowded conditions, lack of privacy, and poor construction that characterized these barracks. The guitar and family grouping suggest domesticity while masking the reality of imprisonment."
+  },
+  {
+    src: amache1,
+    alt: "Guard tower view of Granada (Amache) Relocation Camp",
+    description: "View of Granada (Amache) Relocation Camp from the guard tower and fense surrounding the camp. Notice the continuation of the fense on the left picture. While internee photographers often included guard towers in their images to document their imprisonment, official photographs like this one presented them as neutral security features. This sanitized presentation stands in stark contrast to how these same towers were experienced by the imprisoned community - as constant reminders of their loss of freedom."
+  },
+  {
+    src: profess1,
+    alt: "Aerial view postcard of camp",
+    description: "Post cards were made of each camp, even the camps in Canada had aerial views like this made into post cards. These were sold in the camps to the internees of this very coveted veiw from the outside looking in. The practice of selling aerial view postcards to internees represents a particularly complex aspect of camp photography. These images simultaneously document the prison-like layout of the camps while commercializing the internees' own incarceration. That internees purchased these postcards speaks to their desire to comprehend and document the full scope of their imprisonment, even through the lens of official photography."
+  }
+];
+---
+
+<FamilyAlbumLayout title={title} description={description}>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <div class="mb-16">
+      <PhotographersGrid />
+    </div>
+
+    <AlbumTitle
+      subtitle="Miscellaneous photography, including professional, media, and propaganda"
+      collection="Japanese American and Japanese Canadian experience"
+      photographer="Various professional photographers"
+      date="1942-1945"
+    />
+    
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">About</h2>
+      <div class="prose prose-invert max-w-none">
+        <p>
+          Professional photography of the internment camps served multiple purposes, from propaganda to documentation. 
+          These images provide a unique perspective - the view from the outside looking in - and often reflected the 
+          government's attempt to control the narrative around internment.
+        </p>
+        <p>
+          These professional photographs require particularly careful viewing, as they often served to normalize or minimize the reality of mass incarceration. While internee photographers used formal portraits and careful composition to preserve dignity while documenting imprisonment, professional photographers often created images that obscured the true nature of the camps. The stark contrast between government-approved photographs showing "normal" life and the reality of armed guards and barbed wire fences reveals how photography became a tool for shaping public perception. Even seemingly straightforward documentation, like panoramic arrival photos or aerial postcards, took on complex meanings when sold back to the imprisoned community as souvenirs of their own incarceration.
+        </p>
+        <p>
+          Media outlets like Life Magazine portrayed a carefully curated version of camp life, emphasizing the 
+          government's role as a "caretaker" while glossing over the harsh realities of imprisonment. Meanwhile, 
+          camp publications like the Tule Lake Guardsman Magazine offered glimpses into the complex relationship 
+          between guards and internees.
+        </p>
+        <p>
+          The commercial aspect of internment photography is particularly striking in the production of camp postcards, 
+          including aerial views that were sold to internees themselves. These images, along with panoramic photographs 
+          of arrivals and departures, document the scale of displacement while simultaneously serving as artifacts of 
+          how the camps were presented to the wider public.
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Photographs</h2>
+      <PhotoGallery photos={photos} />
+    </section>
+
+    <div class="mt-16">
+      <PhotographersGrid />
+    </div>
+  </main>
+</FamilyAlbumLayout>

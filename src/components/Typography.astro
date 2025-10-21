@@ -1,0 +1,39 @@
+---
+const styles = {
+  'exhibition-title': 
+    'text-5xl font-light tracking-widest uppercase text-center text-fa-text-primary font-robotoCondensed',
+  
+  'section-title':
+    'text-3xl font-light tracking-wider uppercase text-center text-fa-text-primary font-robotoCondensed',
+  
+  'section-subtitle':
+    'text-2xl font-medium tracking-wide text-fa-text-primary font-robotoCondensed',
+  
+  'photographer-name':
+    'text-xl font-medium tracking-wide uppercase text-fa-text-accent font-robotoCondensed',
+  
+  'body':
+    'text-lg leading-relaxed text-fa-text-secondary font-inter font-normal',
+  
+  'caption':
+    'text-sm italic mt-2 text-fa-text-secondary opacity-80 font-inter',
+  
+  'link':
+    'text-fa-link-default hover:text-fa-link-hover transition-colors underline',
+  
+  'quote':
+    'text-xl italic leading-relaxed tracking-normal text-fa-text-secondary pl-6 border-l-4 border-fa-text-accent font-inter'
+} as const;
+
+const { level = "p", variant, className = "", ...props } = Astro.props;
+
+// Use type assertion to tell TypeScript this is a valid key
+const styleClass = styles[variant as keyof typeof styles];
+const combinedClass = `${styleClass} ${className}`.trim();
+
+const Tag = level;
+---
+
+<Tag class={combinedClass} {...props}>
+  <slot />
+</Tag>

@@ -1,0 +1,45 @@
+---
+// The JavaScript part (place this in the script section at the top of your Astro file)
+const baseURL =
+  "https://res.cloudinary.com/masumi-hayashi-foundation/image/upload";
+
+const transformations = [
+  "bo_30px_solid_black",
+  "b_black",
+  "h_1200",
+  "c_fill",
+  // "bo_100px_solid_black_bottom"
+];
+
+const copyrightText =
+  "© 2024 Dean Keesey. All rights reserved.%0Awww.masumihayashi.com";
+const encodedCopyrightText = encodeURIComponent(copyrightText);
+
+const imageTitleDetails =
+  'Manzanar Concentration Camp, Monument, Inyo County, California, 1995%0AArtist: Dr. Masumi Hayashi%0APanoramic photo collage with Fuji Crystal Archive prints, 20" x 40"'; //use %0A as a line break
+
+const encodedImageTitleDetails = imageTitleDetails.replace(/,/g, "%252C"); // Double-escape the comma
+
+console.log(encodedImageTitleDetails);
+
+const copyrightTextParam = `l_text:Helvetica_24_line_spacing_12:${encodedCopyrightText},co_white,g_south_west,x_30,y_-60`;
+const imageTitleDetailsParam = `l_text:Helvetica_24_line_spacing_12:${encodedImageTitleDetails},co_white,g_south_east,x_30,y_-40`;
+
+const imageID = "v1683239294/Manzanar_Concentration_Camp_Monument_so2g5c.jpg";
+const imageURL = `${baseURL}/${transformations.join(",")},w_1920/${copyrightTextParam}/${imageTitleDetailsParam}/${imageID}`;
+---
+
+<img
+  src={imageURL}
+  srcset={imageURL}
+  alt=`${imageTitleDetails}, ${copyrightText}`
+/>
+
+<style>
+  img {
+    display: block;
+    margin: 0 auto;
+    border-bottom: 30px solid black;
+    border-radius: 20px;
+  }
+</style>

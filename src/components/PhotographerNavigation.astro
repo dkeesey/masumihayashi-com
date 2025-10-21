@@ -1,0 +1,23 @@
+---
+const photographers = [
+  { name: 'Toyo Miyatake', path: '/family-album/miyatake' },
+  { name: 'Hideharu Fukuyama', path: '/family-album/fukuyama' },
+  { name: 'Grace Akiya', path: '/family-album/akiya' },
+  { name: 'June Morioka', path: '/family-album/morioka' },
+  { name: 'Midge Ayukawa', path: '/family-album/ayukawa' },
+  { name: 'Irene Tsuyuki', path: '/family-album/tsuyuki' },
+];
+---
+
+<nav class="w-full py-4">
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4 font-robotoCondensed">
+    {photographers.map((photographer) => (
+      <a
+        href={photographer.path}
+        class="text-fa-text-primary hover:text-fa-link-hover transition-colors text-lg"
+      >
+        {photographer.name}
+      </a>
+    ))}
+  </div>
+</nav>

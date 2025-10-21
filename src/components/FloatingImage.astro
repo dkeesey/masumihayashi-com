@@ -1,0 +1,45 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  float: 'left' | 'right';
+  width?: number;  // Optional native width
+  height?: number; // Optional native height
+}
+
+const { src, alt, float, width, height } = Astro.props;
+---
+
+<img 
+  src={src} 
+  alt={alt} 
+  class={`float-${float} mr-4 mb-4 inline-block`}
+  {...width && { width }}
+  {...height && { height }}
+/>
+
+<style>
+  img {
+    display: inline-block;
+    object-fit: contain;
+    width: auto !important; /* Prevent image from being stretched */
+    height: auto !important; /* Maintain aspect ratio */
+  }
+  
+  .float-left {
+    float: left;
+    margin-right: 1rem;
+  }
+  
+  .float-right {
+    float: right;
+    margin-left: 1rem;
+  }
+  
+  /* Clear floats after the image */
+  img::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+</style>

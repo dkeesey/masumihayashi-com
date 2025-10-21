@@ -1,0 +1,85 @@
+---
+import PhotographerPageLayout from '@components/PhotographerPageLayout.astro';
+import PhotoGallery from '@components/PhotoGallery.astro';
+
+// Import images
+import ayukawaPreCamp from '@images/family-album/photographers/ayukawa/ayukawa-mother-brother-vancouver.jpg';
+import ayukawaPorch from '@images/family-album/photographers/ayukawa/ayukawa-mother-on-porch-lemon-creek.jpg';
+import ayukawaNeighbors from '@images/family-album/photographers/ayukawa/ayukawa-mother-and-neighbors-fence.jpg';
+import ayukawaChildren from '@images/family-album/photographers/ayukawa/ayukawa-children-dressed-up-for-portrait.jpg';
+import ayukawaWinter from '@images/family-album/photographers/ayukawa/ayukawa-snowy-winter.jpg';
+import ayukawaBoys from '@images/family-album/photographers/ayukawa/ayukawa-neighborhood-boys.jpg';
+import ayukawaGardens from '@images/family-album/photographers/ayukawa/ayukawa-rock-gardens.jpg';
+import ayukawaCamp from '@images/family-album/photographers/ayukawa/ayukawa-hillside-camp-in-background.jpg';
+
+const photos = [
+  {
+    src: ayukawaPreCamp,
+    alt: "Pre-camp photo in downtown Vancouver",
+    description: "This is a pre-camp photo of Ms. Ayukawa's mother and brother in downtown Vancouver. Photographers used to set up on the street, take pictures, and offer the photos a week later for sale."
+  },
+  {
+    src: ayukawaPorch,
+    alt: "Mother sitting on porch at Lemon Creek",
+    description: "This is Midge Ayukawa's mother sitting on the porch in the Lemon Creek Internment Camp hut. There was isolation in the internment camps, and the hardships without their husbands made these camps a difficult place and time. Mrs. Ayukawa's mother is now in her 90's. This photograph captures the tension between dignity and dispossession - the careful pose and dress of Dr. Ayukawa's mother contrasts sharply with the crude camp structure behind her, symbolizing both resistance and the reality of imprisonment."
+  },
+  {
+    src: ayukawaNeighbors,
+    alt: "Mother and neighbors on fence",
+    description: "Ms. Midge Ayukawa's mother and neighbors sitting on the fence, photographed with a borrowed box camera."
+  },
+  {
+    src: ayukawaChildren,
+    alt: "Children dressed up for photograph",
+    description: "Children getting dressed up for the photograph. The act of dressing up children for photographs was more than a simple family ritual - it was a way for families to maintain cultural traditions and assert their dignity despite their confinement. These formal portraits served as both documentation and defiance."
+  },
+  {
+    src: ayukawaWinter,
+    alt: "Winter scene at Lemon Creek",
+    description: "Weather was bitter cold in the winter with the snow and the wind."
+  },
+  {
+    src: ayukawaBoys,
+    alt: "Neighborhood boys before leaving",
+    description: "Before leaving Lemon Creek, Ms. Ayukawa took these photos of neighborhood boys with a borrowed box camera."
+  },
+  {
+    src: ayukawaGardens,
+    alt: "Rock gardens at Lemon Creek",
+    description: "Rock gardens were common in Lemon Creek Internment Camp. The rock gardens have remained over 50 years later. This camp was located on farm land rented by the government from farmers. The creation of rock gardens in the camp represents another form of dignity preservation - transforming the prison-like environment into something beautiful. That these gardens survived for over 50 years stands as a lasting testament to the internees' determination to maintain their cultural practices and humanity even in confinement."
+  },
+  {
+    src: ayukawaCamp,
+    alt: "Another view of Lemon Creek camp",
+    description: "Other internment sites were located in isolated ghost towns."
+  }
+];
+
+const about = `
+  <p>
+    Dr. Midge Ayukawa's family album provides an intimate look at life in the Lemon Creek Internment Camp during World War II. 
+    These photographs, many taken with a borrowed box camera, document both the hardships and the resilience of Japanese-Canadian 
+    families during their internment. The collection spans from pre-camp life in Vancouver to the daily experiences within 
+    the camp, capturing moments of family life despite the difficult circumstances.
+  </p>
+  <p>
+    The photographs in this collection reveal the complex layers of dignity maintenance during internment. When Japanese-Canadians were forcibly removed from their Vancouver homes to isolated camps like Lemon Creek, they lost most of their possessions but not their determination to preserve their humanity. The formal poses, careful dress, and attention to appearance visible in these images should not be misinterpreted as signs of comfort - they were acts of resistance against the dehumanizing conditions of imprisonment. Particularly poignant are the images of Dr. Ayukawa's mother, whose composed dignity in front of the crude camp structures highlights the contrast between the internees' inner resilience and their harsh circumstances. Even the simple act of borrowing a camera to document these moments was an act of defiance and preservation.
+  </p>
+`;
+---
+
+<PhotographerPageLayout
+  title="Family Album"
+  description="Family Album from Lemon Creek Internment Camp by Dr. Midge Ayukawa"
+  photographerName="Ayukawa"
+  subtitle="Lemon Creek Internment Camp, Slocan, British Columbia, Canada"
+  collection="Dr. Midge Ayukawa Collection"
+  photographer="Dr. Midge Ayukawa and other internees"
+  date="1942-1948"
+  about={about}
+>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Photographs</h2>
+    <PhotoGallery photos={photos} />
+  </section>
+</PhotographerPageLayout>

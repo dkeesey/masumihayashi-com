@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import ContentSection from "@components/ContentSection.astro";
+import Typography from "./Typography.astro";
+import ayukawaImage from '@images/family-album/photographers/ayukawa/ayukawa-mother-on-porch-lemon-creek.jpg';
+import tsuyukiImage from '@images/family-album/photographers/tsuyuki/tsuyuki-farmers.jpg';
+---
+
+<ContentSection>
+  <h2 class="text-3xl font-light mb-8">
+    Canadian Incarceration
+  </h2>
+  <div class="space-y-8">
+    <Typography variant="body">
+      The Canadian government also incarcerated their citizens with Japanese ancestry during WWII. They were incarcerated in wider range of camps, "self supporting camps", labor camps, "road camp projects", and "prisoners-of-war" camps. 21,460 Canadians of Japanese ancestry were incarcerated and not allowed to return to the west coast until 1949. Some were forced to relocate to a Japan they never knew (repatriates) and others were forced to relocate inland and eastern Canada.
+    </Typography>
+
+    <Typography variant="body">
+      The need to record and document the family and their riturals was evident in these times of dislocation and transition. These photos were kept in family albums. The following are family album pages from the Japanese Canadian story, photographs taken by the Japanese Canadians interned with contraband caneras.
+    </Typography>
+
+    <div class="space-y-12">
+      <!-- Midge Ayukawa -->
+      <div>
+        <div class="flex items-start gap-6 mb-6">
+          <div class="flex-grow">
+            <h3 class="text-2xl font-medium mb-4">
+              <a href="/family-album/ayukawa" class="hover:text-fa-link-hover transition-colors">
+                Midge Ayukawa
+              </a>
+            </h3>
+            <Typography variant="body">
+              Born in Vancouver, B.C., Canada. Interned at Lemon Creek Internment Camp in the Slocan Valley, resettled to Hamilton, Ontario, Canada, where she went to high school. She now lives on Victoria Island, B.C., Canada. Mrs. Ayukawa has completed a doctorate in history (1997) and has a doctorate in chemistry and writes articles for "The Bulletin" in Vancouver.
+            </Typography>
+          </div>
+          <Image 
+            src={ayukawaImage}
+            alt="Midge Ayukawa photograph"
+            width={318}
+            height={230}
+            class="rounded-lg"
+          />
+        </div>
+        <Typography variant="body">
+          Mrs. Midge Ayukawa borrowed a friend's box camera to photograph her family in Lemon Creek Internment Camp before they left. Some of these other photographs were bought from the camp photographer to remember the experiences and memories. One of her girlfriends' father was an amatuer photographer in camp and recorded a number of activities of the growing children's camp life.
+        </Typography>
+      </div>
+
+      <!-- Irene Tsuyuki -->
+      <div>
+        <div class="flex items-start gap-6 mb-6">
+          <div class="flex-grow">
+            <h3 class="text-2xl font-medium mb-4">
+              <a href="/family-album/tsuyuki" class="hover:text-fa-link-hover transition-colors">
+                Irene Tsuyuki
+              </a>
+            </h3>
+            <Typography variant="body">
+              Born in Vancouver, B.C., Canada. Interned at Tashme Internment Camp, British Columbia, Canada. Resettled in Richmond, near Vancouver.
+            </Typography>
+          </div>
+          <Image 
+            src={tsuyukiImage}
+            alt="Irene Tsuyuki photograph"
+            width={318}
+            height={230}
+            class="rounded-lg"
+          />
+        </div>
+        <Typography variant="body" class="space-y-4">
+          <p>
+            At the end of the internment in 1946, Ms. Tsuyuki's adopted parents were repatriated to Japan. The Tsuyuki family sponsored her return to Canada where she married her husband, Norman Tsuyuki, the son, and raised her family on a Richmond farm in B.C. Her parents died in Japan as she was processing their re-entry back to Vancouver. Because of the separation by repatriation she never saw her parents again.
+          </p>
+          <p>
+            The family album photographs are by her husband, Norman Tsuyuki, who is an avid photographer and was interned on a farm with his family in Lillooet, a "self-supporting camp." There were less restrictions in the self-supporting camps but they were still isolated in the interior mountains of British Columbia.
+          </p>
+        </Typography>
+      </div>
+    </div>
+  </div>
+</ContentSection>

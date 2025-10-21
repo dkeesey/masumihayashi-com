@@ -1,0 +1,41 @@
+---
+interface Props {
+  images: {
+    src: string;
+    alt: string;
+    caption?: string;
+  }[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="mt-12 space-y-8">
+  {
+    images.map((image) => (
+      <figure class="relative">
+        <img
+          src={image.src}
+          alt={image.alt}
+          class="w-full rounded-lg shadow-lg"
+          loading="lazy"
+        />
+        {image.caption && (
+          <figcaption class="mt-2 text-sm text-gray-600 text-center italic">
+            {image.caption}
+          </figcaption>
+        )}
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  figure img {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  figure:hover img {
+    transform: scale(1.01);
+  }
+</style>

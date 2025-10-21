@@ -1,0 +1,33 @@
+---
+/**
+ * SchemaScript Component
+ *
+ * Renders JSON-LD structured data as a script tag.
+ * Used for AI SEO optimization - helps AI assistants cite content accurately.
+ *
+ * Usage:
+ * ```astro
+ * import SchemaScript from '@components/SchemaScript.astro';
+ * import { generatePersonSchema } from '@lib/schema';
+ *
+ * const schema = generatePersonSchema();
+ * ---
+ * <SchemaScript schema={schema} />
+ * ```
+ *
+ * @see /Users/deankeesey/.claude/docs/ai-seo-schema-guide.md
+ */
+
+interface Props {
+  schema: object | object[];
+}
+
+const { schema } = Astro.props;
+
+// Support multiple schemas
+const schemas = Array.isArray(schema) ? schema : [schema];
+---
+
+{schemas.map((s) => (
+  <script type="application/ld+json" set:html={JSON.stringify(s)} />
+))}

@@ -1,0 +1,76 @@
+---
+import CloudinaryImage from "./CloudinaryImage.astro";
+
+const { classNames } = Astro.props;
+
+const rameswaramData = {
+  cloudinaryId: "sacred-architectures/rameswaram-1_baqkjr",
+  title: "Rameswaram Temple, No.1",
+  media: "Panoramic photo collage with Fuji Crystal archive prints",
+  year: "2004",
+  city: "Rameswaram",
+  state: "Tamil Nadu",
+  country: "India",
+  size: '41" x 23"',
+};
+---
+
+<article class=`${classNames} flex flex-col justify-center items-center`>
+
+  <section class="w-full h-full bg-black" >
+    <CloudinaryImage
+    name={rameswaramData.title}
+    city={rameswaramData.city}
+    state={rameswaramData.state}
+    year={rameswaramData.year}
+    cloudinaryId={rameswaramData.cloudinaryId}
+    media={rameswaramData.media}
+    classNames={classNames}
+    size={rameswaramData.size}
+  />
+  </section>
+  <section class="prose px-6 py-24 sm:px-8">
+    <h1 class="text-2xl font-bold my-6">Welcome to MasumiHayashi.com</h1>
+    <p>
+      Welcome to masumihayashi.com, the official archive celebrating the legacy
+      of Professor Masumi Hayashi (1945-2006). An esteemed artist whose works
+      are collected by major museums worldwide, Hayashi is renowned for her
+      intricate panoramic photo collages—meticulously crafted narratives
+      composed of hundreds of individual film exposures. Each piece displays a
+      mastery of the lost art of analog photography, and reflects her profound
+      engagement with landscapes embedded in cultural memory.
+    </p>
+    <p>
+      Masumi Hayashi’s journey as an artist was deeply intertwined with her
+      exploration of historical memory. Her most poignant project involved
+      traversing the remnants of Japanese American internment camps across the
+      United States and Canada. Born in one such camp, Hayashi’s search for
+      collective memory was both a personal pilgrimage and an artistic endeavor.
+      By interviewing survivors and collecting contraband photographs taken by
+      them, she wove together voices and visions from the past into powerful
+      installations that resonate deeply with contemporary audiences.
+    </p>
+    <p>
+      Her artistic process was a feat of patience and precision. Using
+      completely manual film cameras, Hayashi controlled every aspect of the
+      exposure—from focus to aperture—without any digital feedback. It was only
+      weeks or months after the initial exposure that she would see the results,
+      yet she composed her images with a visionary’s foresight, layering
+      foreground, midground, and background into a cohesive whole. This
+      painstaking effort stands in stark contrast to today’s digital immediacy,
+      highlighting her exceptional skill and dedication.
+    </p>
+    <p>
+      As you explore this site, be prepared to engage with works that not only
+      challenge the conventions of photography but also invite you to ponder
+      profound questions about history, memory, and the visual expression of
+      cultural identity.
+    </p>
+  </section>
+</article>
+
+<style>
+  article {
+    scroll-margin-top: 3rem;
+  }
+</style>

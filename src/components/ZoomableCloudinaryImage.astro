@@ -1,0 +1,204 @@
+---
+/**
+ * ZoomableCloudinaryImage Component
+ *
+ * Extends CloudinaryImage with PhotoSwipe zoom functionality.
+ * Allows users to click/tap images and zoom in to examine artwork details.
+ *
+ * Features:
+ * - Full-screen lightbox with PhotoSwipe
+ * - Pinch-to-zoom on mobile (up to 4x)
+ * - Progressive loading of ultra-high-res images (3840w)
+ * - Keyboard navigation (ESC to close, arrows for gallery)
+ * - Maintains all Cloudinary transformations (text overlays, etc.)
+ */
+
+interface Props {
+  cloudinaryId: string;
+  name?: string;
+  year?: string | number;
+  media?: string;
+  size?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  classNames?: string;
+  figcaptionClasses?: string;
+  altTag?: string;
+  width?: number;
+  height?: number;
+}
+
+const {
+  name,
+  cloudinaryId,
+  year,
+  media,
+  size,
+  city,
+  state,
+  country,
+  classNames = "",
+  figcaptionClasses = "",
+  altTag = "",
+  width = 1536,
+  height = 1024,
+} = Astro.props as Props;
+
+// Base Cloudinary configuration
+const baseURL = "https://res.cloudinary.com/masumi-hayashi-foundation/image/upload";
+
+// ========================================
+// IMAGE OPTIMIZATION TOGGLE
+// ========================================
+// Set to true to enable f_auto and q_auto:best optimizations (40-60% smaller files)
+// Set to false to revert to original quality settings
+const USE_OPTIMIZED_DELIVERY = true;
+
+// ORIGINAL transformations (no optimization)
+// const transformations = ["bo_30px_solid_black", "b_black", "c_scale"];
+
+// OPTIMIZED transformations (f_auto + q_auto:best)
+// - f_auto: Automatic format selection (AVIF → WebP → JPG based on browser)
+// - q_auto:best: Smart quality optimization (95%+ SSIM, museum-quality)
+const transformations = USE_OPTIMIZED_DELIVERY
+  ? ["bo_30px_solid_black", "b_black", "c_scale", "f_auto", "q_auto:best"]
+  : ["bo_30px_solid_black", "b_black", "c_scale"];
+
+const currentYear = new Date().getFullYear();
+const altText = altTag || `${name} by Dr. Masumi Hayashi`;
+
+// Copyright text variations by breakpoint
+const mdCopy = `${"www.masumihayashi.com"}%0Awww.MasumiHayashiFoundation.org%0A${currentYear} Dean Keesey`;
+const lgCopy = `%0A${"www.masumihayashi.com"}%0Awww.MasumiHayashiFoundation.org%0A${currentYear} Dean Keesey. All rights reserved.`;
+
+const encodedmdCopy = encodeURIComponent(mdCopy);
+const encodedlgCopy = encodeURIComponent(lgCopy);
+
+const mdCopyParam = `l_text:futura_16_line_spacing_12:${encodedmdCopy},co_white,g_south_east,x_50,y_-100`;
+const lgCopyParam = `l_text:futura_16_line_spacing_12:${encodedlgCopy},co_white,g_south_east,x_50,y_-100`;
+
+// Image details encoding helper
+const encodeImageDetails = (details: string) => {
+  return details
+    .replace(/,/g, "%2C")
+    .split("%0A")
+    .map((part) => encodeURIComponent(part))
+    .join("%0A");
+};
+
+// Image title variations by breakpoint
+const imageTitle = `${name}`;
+const encodedImageTitle = encodeImageDetails(imageTitle);
+
+const smImageTitleParam = `l_text:futura_20_italic_line_spacing_1:${encodedImageTitle},co_white,g_south_west,x_30,y_-20`;
+const mdImageTitleParam = `l_text:futura_20_italic_line_spacing_1:${encodedImageTitle},co_white,g_south_west,x_30,y_40`;
+const lgImageTitleParam = `l_text:futura_20_italic_line_spacing_1:${encodedImageTitle},co_white,g_south_west,x_30,y_40`;
+
+// Image details variations by breakpoint
+const smImageDetails = `Artist:Dr. Masumi Hayashi%0A${currentYear} Dean Keesey`;
+const mdImageDetails = `${city}, ${state}, ${country}, ${year}%0AArtist:Dr. Masumi Hayashi`;
+const lgImageDetails = `${city}, ${state}, ${country}, ${year}%0AArtist: Dr. Masumi Hayashi%0A${media}`;
+
+const encodedSmImageDetails = encodeImageDetails(smImageDetails);
+const encodedMdImageDetails = encodeImageDetails(mdImageDetails);
+const encodedLgImageDetails = encodeImageDetails(lgImageDetails);
+
+const smImageDetailsParam = `l_text:futura_20_line_spacing_2:${encodedSmImageDetails},co_white,g_south_west,x_30,y_-60`;
+const mdImageDetailsParam = `l_text:futura_20_line_spacing_2:${encodedMdImageDetails},co_white,g_south_west,x_30,y_-20`;
+const lgImageDetailsParam = `l_text:futura_20_line_spacing_2:${encodedLgImageDetails},co_white,g_south_west,x_30,y_-60`;
+
+// Standard responsive image sizes (640w - 1920w)
+const imageURL640 = `${baseURL}/${transformations.join(",")},w_640/${smImageTitleParam}/${smImageDetailsParam}/${cloudinaryId}`;
+const imageURL768 = `${baseURL}/${transformations.join(",")},w_768/${mdCopyParam}/${mdImageTitleParam}/${mdImageDetailsParam}/${cloudinaryId}`;
+const imageURL1024 = `${baseURL}/${transformations.join(",")},w_1024/${mdCopyParam}/${mdImageTitleParam}/${mdImageDetailsParam}/${cloudinaryId}`;
+const imageURL1280 = `${baseURL}/${transformations.join(",")},w_1280/${lgCopyParam}/${lgImageTitleParam}/${lgImageDetailsParam}/${cloudinaryId}`;
+const imageURL1536 = `${baseURL}/${transformations.join(",")},w_1536/${lgCopyParam}/${lgImageTitleParam}/${lgImageDetailsParam}/${cloudinaryId}`;
+const imageURL1920 = `${baseURL}/${transformations.join(",")},w_1920/${lgCopyParam}/${lgImageTitleParam}/${lgImageDetailsParam}/${cloudinaryId}`;
+
+// Ultra-high-res sizes for zoom (2560w - 3840w)
+const imageURL2560 = `${baseURL}/${transformations.join(",")},w_2560/${lgCopyParam}/${lgImageTitleParam}/${lgImageDetailsParam}/${cloudinaryId}`;
+const imageURL3840 = `${baseURL}/${transformations.join(",")},w_3840/${lgCopyParam}/${lgImageTitleParam}/${lgImageDetailsParam}/${cloudinaryId}`;
+
+// Srcset for initial page load (responsive images)
+const srcsetValue = `${imageURL640} 640w, ${imageURL768} 768w, ${imageURL1024} 1024w, ${imageURL1280} 1280w, ${imageURL1536} 1536w, ${imageURL1920} 1920w`;
+
+// Sizes attribute for optimal browser selection
+const sizesValue = "(max-width: 640px) 95vw, (max-width: 1024px) 90vw, 1280px";
+---
+
+<div transition:persist={name} data-artwork-id={cloudinaryId}>
+  <div
+    class={`w-full flex justify-center items-center bg-black pt-16 md:pt-24 ${classNames}`}
+  >
+    <!-- PhotoSwipe anchor wrapper -->
+    <a
+      href={imageURL3840}
+      data-pswp-width="3840"
+      data-pswp-height="2560"
+      data-pswp-srcset={`${imageURL1920} 1920w, ${imageURL2560} 2560w, ${imageURL3840} 3840w`}
+      target="_blank"
+      rel="noopener"
+      class="zoom-trigger"
+      aria-label={`View ${name} in full screen`}
+    >
+      <img
+        src={imageURL1536}
+        srcset={srcsetValue}
+        sizes={sizesValue}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+        class="rounded-md max-w-[95vw] max-h-[95vh] mb-12 md:mb-16 cursor-zoom-in transition-opacity hover:opacity-90"
+        alt={altText}
+      />
+    </a>
+  </div>
+
+  <!-- Figcaption (also used by PhotoSwipe for overlay caption) -->
+  <figcaption
+    class={`text-sm py-2 pb-12 lg:pb-16 sm:px-6 text-center ${figcaptionClasses} text-white bg-black`}
+    data-caption
+  >
+    <em>{name}</em>,<br />
+    {year}, {media}, {size}<br />
+    Artist: Dr. Masumi Hayashi
+  </figcaption>
+</div>
+
+<style>
+  /* Responsive border styling */
+  @media (max-width: 767px) {
+    img {
+      border-bottom: 16px solid #000;
+    }
+  }
+
+  @media (min-width: 768px) {
+    img {
+      border-bottom: 24px solid #000;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    img {
+      border-bottom: 36px solid #000;
+    }
+  }
+
+  /* Zoom cursor styling */
+  .cursor-zoom-in {
+    cursor: zoom-in;
+  }
+
+  .zoom-trigger:focus {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+
+  /* Smooth opacity transition on hover */
+  .transition-opacity {
+    transition: opacity 0.2s ease-in-out;
+  }
+</style>

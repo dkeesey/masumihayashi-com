@@ -1,0 +1,26 @@
+---
+import OverviewHeroLayout from '@layouts/OverviewHeroLayout.astro';
+import OverviewComponent from '@components/pages/Overview';
+import installationImage from '@images/installation.jpg';
+
+const heroData = {
+  image: installationImage,
+  title: "American Concentration Camps: A Collective Memory",
+  media: "Gallery Installation",
+  year: "1997",
+  city: "",
+  state: "",
+  country: "USA",
+  size: "",
+};
+---
+
+<OverviewHeroLayout 
+  title="American Concentration Camps: A Collective Memory"
+  description="A visual representation of the collective memory of Japanese Americans"
+  heroImage={heroData}
+>
+  <div class="container mx-auto px-4 py-8">
+    <OverviewComponent client:load />
+  </div>
+</OverviewHeroLayout>

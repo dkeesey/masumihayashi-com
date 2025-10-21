@@ -1,0 +1,41 @@
+---
+export interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class={`max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden ${className}`}>
+  <figure class="relative">
+    <div class="aspect-[4/3] w-full overflow-hidden">
+      <img
+        src="/images/japanese-american-internment-map.jpg"
+        alt="Map showing Japanese American internment camps from 1942-1946, including the West Coast exclusion area and ten major relocation centers across the United States."
+        class="w-full h-full object-contain"
+        width="800"
+        height="600"
+      />
+    </div>
+    <figcaption class="p-4 text-sm space-y-2">
+      <div class="font-medium">Japanese American Internment Camps, 1942-1946</div>
+      <p>Following Executive Order 9066, approximately 120,000 Japanese Americans were forcibly relocated from the West Coast exclusion area (highlighted) to ten major internment camps across the United States. This mass incarceration during World War II impacted entire communities, with families losing their homes, businesses, and constitutional rights.</p>
+      <div class="text-xs text-gray-500 mt-2">
+        Map adapted from Encyclopedia Britannica, showing major internment camps (red stars) and the West Coast exclusion zone (shaded area).
+      </div>
+    </figcaption>
+  </figure>
+</div>
+
+<!-- Usage in an Astro page -->
+<!-- 
+---
+import HistoricalContextMap from '../components/HistoricalContextMap.astro';
+---
+
+<div class="prose max-w-none">
+  <h2>Historical Context</h2>
+  <p>The artworks in this collection document and reflect upon one of the most challenging periods in American history...</p>
+  <HistoricalContextMap className="my-8" />
+</div>
+-->

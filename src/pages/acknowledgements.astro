@@ -1,0 +1,60 @@
+---
+import HeroLayout from '@layouts/HeroLayout.astro';
+
+const heroData = {
+  cloudinaryId: "sacred-architectures/rameswaram-1_baqkjr",
+  title: "Acknowledgements",
+  media: "Panoramic Photo Collage",
+  year: "1995",
+  city: "Rameswaram",
+  state: "Tamil Nadu",
+  country: "India",
+  size: '41" x 23"',
+};
+
+---
+
+<HeroLayout
+  title="Acknowledgements"
+  description="Recognition and appreciation for those who supported this project"
+  heroImage={heroData}
+>
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="prose prose-lg max-w-none">
+      <p class="text-lg">
+        The following past internees as well as others I have not listed here have given generously of
+        their time and shared photos and stories for this web site and for this project:
+      </p>
+
+      <div class="mt-6 p-6 bg-gray-50 rounded-lg">
+        <p class="font-semibold">
+          Toyo Suyemoto Kawakami, Rakuo Hayashi, Ayako Hayashi, Sachi Shimo-Takahara, Ben Ishisaki,
+          Marjorie Matsushita Sperling, Hank Tanaka, Shin Yamamoto, Lillian Nakano, Grace Akiya, Bert Nakano, Eva
+          Hasheguchi, Mits Koshiyama, Frank Sugimoto, Hid Hasegawa, *Saburo Sugita, Monica Sone, Geary Sone, Yoshiko
+          Uno, Raymond Uno, Miwako Yanamoto, Tsuyako "Sox" Kitashima, Mas Inoshita, Jim Kubota, Hiroshi
+          Kashiwagi, Sadako Kashiwagi, Rosie Kuramoto, Tamotsu Kuramoto, *Sakae Hayashi, Archie Miyatake, Sachi
+          Shimo Takehara, Ken Hibi, Eji Suyama, Tameo Kanbara, Aiko Suzuki, Irene Tsuzuki, Midge Iyakawa, David
+          Fujino, Yuri Kochiyama
+        </p>
+      </div>
+
+      <p class="mt-8 text-lg">
+        I would also like to acknowledge and show appreciation to the countless people who have
+        provided support, advice, and time to this web site and this project.
+      </p>
+
+      <div class="mt-6 p-6 bg-gray-50 rounded-lg">
+        <p class="font-semibold">
+          Karin Higa, Hank Tanaka, Robert Sobiesziek, Brian Niiya, Stephen White, Connie Hayashi,
+          Michiko Kasahara, Amy Hayashi, Margarie Talalay, Ray Langenback, Barbara Tanenbaum, Joan Baker, Penny
+          Rakoff, *Cary Hibo Tanamachi, Helen Liggett, Rakuo Hayashi, Pat Liebove, Karen and Robert Jiobu, Bill
+          Lipson, John Hunter, Elaine Kepner, Nancy Teruyo Hayashi, Sarah Rogers, Dean Akira Keesey, Japanese
+          American National Museum, Ohio Arts Council, Japanese American Citizens League, Cleveland State
+          University, Cleveland Center for Contemporary Art, Jane Beckwith, National Coalition for
+          Redress/Reparations, *Toyo, Fumiko Greenaway, Louise Noguchi, Cheryl Vosburgh, David ShimoTakehara,
+          Garrett Hongo
+        </p>
+      </div>
+    </div>
+  </div>
+</HeroLayout>

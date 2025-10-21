@@ -1,0 +1,219 @@
+---
+import MainHead from "@layouts/MainHead.astro";
+
+const seoConfig = {
+  title: "Masumi Hayashi at SFMOMA - (Re)Constructing History",
+  description: "Masumi Hayashi's pioneering environmental photography now on view at the San Francisco Museum of Modern Art in (Re)Constructing History",
+  keywords: ["Masumi Hayashi", "SFMOMA", "Photography", "Environmental Art", "EPA Superfund Sites"],
+  type: "article" as const,
+  image: "/images/sf-moma-installation.jpg"
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<MainHead
+  title={seoConfig.title}
+  description={seoConfig.description}
+  type={seoConfig.type}
+  image={seoConfig.image}
+  keywords={seoConfig.keywords}
+/>
+<body>
+  <!-- JSON-LD Schema for SEO and AI -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Masumi Hayashi at SFMOMA - (Re)Constructing History",
+    "description": "Masumi Hayashi's EPA Superfund Site, Fields Brook Stream panoramic photo-collage now on view at the San Francisco Museum of Modern Art",
+    "image": "https://masumihayashi.com/images/sf-moma-installation.jpg",
+    "datePublished": "2025-10-14",
+    "dateModified": "2025-10-14",
+    "author": {
+      "@type": "Person",
+      "name": "Masumi Hayashi",
+      "description": "Born 1945, Rivers, Arizona, died 2006, Cleveland"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Masumi Hayashi Foundation",
+      "url": "https://masumihayashi.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://masumihayashi.com/favicon.svg"
+      }
+    },
+    "about": {
+      "@type": "VisualArtwork",
+      "name": "EPA Superfund Site, Fields Brook Stream, Ashtabula, Ohio",
+      "artform": "Photography",
+      "artMedium": "Collaged chromogenic prints",
+      "dateCreated": "1990",
+      "creator": {
+        "@type": "Person",
+        "name": "Masumi Hayashi"
+      },
+      "locationCreated": {
+        "@type": "Place",
+        "name": "Ashtabula, Ohio"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://masumihayashi.com/sfmoma-2025"
+    }
+  }
+  </script>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://masumihayashi.com"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "SFMOMA Exhibition 2025",
+      "item": "https://masumihayashi.com/sfmoma-2025"
+    }]
+  }
+  </script>
+  <main class="min-h-screen bg-white">
+    <!-- Hero Section -->
+    <div class="relative bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <!-- Small logo/byline -->
+        <div class="text-center mb-8">
+          <p class="text-sm text-gray-600 uppercase tracking-wider">Masumi Hayashi Foundation</p>
+        </div>
+
+        <!-- Main headline -->
+        <div class="text-center max-w-3xl mx-auto">
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            Masumi Hayashi at<br />
+            <span class="text-blue-600">SFMOMA</span>
+          </h1>
+          <p class="text-xl sm:text-2xl text-gray-700 mb-4">
+            "(Re)Constructing History"
+          </p>
+          <p class="text-lg text-gray-600">
+            Now on view at the San Francisco Museum of Modern Art
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Artwork Section -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- Installation Photo -->
+      <div class="relative mb-8">
+        <img
+          src="/images/sf-moma-installation.jpg"
+          alt="Masumi Hayashi's EPA Superfund Site, Fields Brook Stream panoramic photo collage on display at SFMOMA"
+          class="w-full rounded-lg shadow-2xl"
+          loading="eager"
+        />
+      </div>
+
+      <!-- Artwork details -->
+      <div class="max-w-3xl mx-auto mb-12">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+            EPA Superfund Site, Fields Brook Stream, Ashtabula, Ohio
+          </h2>
+          <p class="text-lg text-gray-600 mb-2">1990</p>
+          <p class="text-sm text-gray-500">Collaged chromogenic prints</p>
+          <p class="text-sm text-gray-500 italic mt-2">Gift of Dean Keesey, 2018</p>
+        </div>
+
+        <!-- SFMOMA Wall Label Text -->
+        <div class="prose prose-lg mx-auto">
+          <p class="text-sm text-gray-500 uppercase tracking-wider mb-4">From the SFMOMA exhibition wall label:</p>
+          <div class="border-l-4 border-blue-600 pl-6 italic">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Hayashi's panoramic photo-collages of postindustrial landscapes expose places marked by displacement
+              and environmental degradation. This work is part of her series on EPA Superfund sites&mdash;areas contaminated
+              by toxic waste yet often appearing deceptively serene. Her dreamlike, fractured compositions evoke both
+              physical presence and psychic unease.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Born in a Japanese American internment camp, Hayashi brought personal and historical awareness to her
+              practice, combining photography with interviews, family albums, and archival research. These layered
+              works function as visual testimonies, confronting collective amnesia and revealing how environmental
+              harm can hide in plain sight.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
+        <a
+          href="https://www.sfmoma.org/exhibition/reconstructing-history/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
+        >
+          Visit SFMOMA Exhibition
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+
+        <a
+          href="/"
+          class="inline-flex items-center px-8 py-4 bg-gray-100 text-gray-900 font-semibold rounded-lg hover:bg-gray-200 transition-colors duration-200"
+        >
+          Learn More About Masumi Hayashi
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Additional Info Section -->
+    <div class="bg-gray-50 py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- About Masumi Hayashi -->
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">About the Artist</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Masumi Hayashi (1945-2006) was a pioneering photographer whose panoramic photo
+              collages documented sites of environmental and historical significance across America.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Born in a Japanese American internment camp during World War II, Hayashi's
+              work explored themes of displacement, environmental justice, and collective memory.
+            </p>
+          </div>
+
+          <!-- Contact Foundation -->
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Masumi Hayashi Foundation</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              The Foundation preserves and promotes Masumi Hayashi's artistic legacy through
+              exhibitions, publications, and educational programs.
+            </p>
+            <a
+              href="/about"
+              class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Learn more about the Foundation
+              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</html>

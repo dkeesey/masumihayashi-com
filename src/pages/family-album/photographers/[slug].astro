@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import FamilyAlbumLayout from '@layouts/FamilyAlbumLayout.astro';
+
+export async function getStaticPaths() {
+  const photographers = await getCollection('family-album', (entry) => {
+    return entry.id.startsWith('photographers/');
+  });
+  
+  return photographers.map(entry => ({
+    params: { 
+      slug: entry.id.split('/')[1].replace('.mdx', '') 
+    },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<FamilyAlbumLayout title={entry.data.title}>
+  <main class="container mx-auto px-4 py-8">
+    <Content />
+  </main>
+</FamilyAlbumLayout>

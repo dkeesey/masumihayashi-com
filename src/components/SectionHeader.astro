@@ -1,0 +1,12 @@
+---
+// src/components/SectionHeader.astro
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<h2 class="text-4xl font-light text-gray-900 mt-24 mb-12">
+  {title}
+</h2>

@@ -1,0 +1,144 @@
+---
+interface Props {
+  cloudinaryId: string;
+  name?: string;
+  year?: string | number;
+  media?: string;
+  size?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  classNames?: string;
+  figcaptionClasses?: string;
+  altTag?: string;
+}
+
+const {
+  name,
+  cloudinaryId,
+  year,
+  media,
+  size,
+  city,
+  state,
+  country,
+  classNames = "",
+  figcaptionClasses = "",
+  altTag = "",
+} = Astro.props as Props;
+
+// The JavaScript part (place this in the script section at the top of your Astro file)
+const baseURL =
+  "https://res.cloudinary.com/masumi-hayashi-foundation/image/upload";
+
+const imageID = `${cloudinaryId}`;
+
+// ========================================
+// IMAGE OPTIMIZATION TOGGLE
+// ========================================
+// Set to true to enable f_auto and q_auto:best optimizations (40-60% smaller files)
+// Set to false to revert to original quality settings
+const USE_OPTIMIZED_DELIVERY = true;
+
+// ORIGINAL transformations (no optimization)
+// const transformations = ["bo_30px_solid_black", "b_black", "c_scale"];
+
+// OPTIMIZED transformations (f_auto + q_auto:best)
+// - f_auto: Automatic format selection (AVIF → WebP → JPG based on browser)
+// - q_auto:best: Smart quality optimization (95%+ SSIM, museum-quality)
+const transformations = USE_OPTIMIZED_DELIVERY
+  ? ["bo_30px_solid_black", "b_black", "c_scale", "f_auto", "q_auto:best"]
+  : ["bo_30px_solid_black", "b_black", "c_scale"];
+
+const currentYear = new Date().getFullYear();
+
+const altText = altTag || `${name} by Dr. Masumi Hayashi`;
+
+const mdCopy = `${"www.masumihayashi.com"}%0Awww.MasumiHayashiFoundation.org%0A${currentYear} Dean Keesey`;
+const lgCopy = `%0A${"www.masumihayashi.com"}%0Awww.MasumiHayashiFoundation.org%0A${currentYear} Dean Keesey. All rights reserved.`;
+
+const encodedmdCopy = encodeURIComponent(mdCopy);
+const encodedlgCopy = encodeURIComponent(lgCopy);
+
+const mdCopyParam = `l_text:futura_16_line_spacing_12:${encodedmdCopy},co_white,g_south_east,x_50,y_-100`;
+const lgCopyParam = `l_text:futura_16_line_spacing_12:${encodedlgCopy},co_white,g_south_east,x_50,y_-100`;
+
+const encodeImageDetails = (details: string) => {
+  return details
+    .replace(/,/g, "%2C")
+    .split("%0A")
+    .map((part) => encodeURIComponent(part))
+    .join("%0A");
+};
+
+// image details title
+const imageTitle = `${name}`;
+const encodedImageTitle = encodeImageDetails(imageTitle); // eg: Manzanar, Monument
+
+const smImageTitleParam = `l_text:futura_20_italic_line_spacing_1:${encodedImageTitle},co_white,g_south_west,x_30,y_-20`;
+const mdImageTitleParam = `l_text:futura_20_italic_line_spacing_1:${encodedImageTitle},co_white,g_south_west,x_30,y_40`;
+const lgImageTitleParam = `l_text:futura_20_italic_line_spacing_1:${encodedImageTitle},co_white,g_south_west,x_30,y_40`;
+
+// image details
+const smImageDetails = `Artist:Dr. Masumi Hayashi%0A${currentYear} Dean Keesey`;
+const mdImageDetails = `${city}, ${state}, ${country}, ${year}%0AArtist:Dr. Masumi Hayashi`;
+const lgImageDetails = `${city}, ${state}, ${country}, ${year}%0AArtist: Dr. Masumi Hayashi%0A${media}`;
+
+const encodedSmImageDetails = encodeImageDetails(smImageDetails);
+const encodedMdImageDetails = encodeImageDetails(mdImageDetails);
+const encodedLgImageDetails = encodeImageDetails(lgImageDetails);
+
+const smImageDetailsParam = `l_text:futura_20_line_spacing_2:${encodedSmImageDetails},co_white,g_south_west,x_30,y_-60`;
+const mdImageDetailsParam = `l_text:futura_20_line_spacing_2:${encodedMdImageDetails},co_white,g_south_west,x_30,y_-20`;
+const lgImageDetailsParam = `l_text:futura_20_line_spacing_2:${encodedLgImageDetails},co_white,g_south_west,x_30,y_-60`;
+
+const imageURL640 = `${baseURL}/${transformations.join(",")},w_640/${smImageTitleParam}/${smImageDetailsParam}/${imageID}`;
+
+const imageURL768 = `${baseURL}/${transformations.join(",")},w_768/${mdCopyParam}/${mdImageTitleParam}/${mdImageDetailsParam}/${imageID}`;
+
+const imageURL1024 = `${baseURL}/${transformations.join(",")},w_1024/${mdCopyParam}/${mdImageTitleParam}/${mdImageDetailsParam}/${imageID}`;
+
+const imageURL1280 = `${baseURL}/${transformations.join(",")},w_1280/${lgCopyParam}/${lgImageTitleParam}/${lgImageDetailsParam}/${imageID}`;
+
+const imageURL1536 = `${baseURL}/${transformations.join(",")},w_1536/${lgCopyParam}/${lgImageTitleParam}/${lgImageDetailsParam}/${imageID}`;
+
+const imageURL1920 = `${baseURL}/${transformations.join(",")},w_1920/${lgCopyParam}/${lgImageTitleParam}/${lgImageDetailsParam}/${imageID}`;
+
+const srcsetValue = `${imageURL640} 640w, ${imageURL768} 768w, ${imageURL1024} 1024w, ${imageURL1280} 1280w, ${imageURL1536} 1536w, ${imageURL1920} 1920w`;
+---
+
+<div transition:persist={name}>
+  <div
+    class={`w-full flex justify-center items-center bg-black pt-16 md:pt-24 ${classNames}`}
+  >
+    <img
+      src={imageURL1536}
+      srcset={srcsetValue}
+      class="rounded-md max-w-[95vw] max-h-[95vh] mb-12 md:mb-16"
+      alt={altText}
+    />
+  </div>
+  <figcaption class={`text-sm py-2 pb-12 lg:pb-16 sm:px-6 text-center ${figcaptionClasses} text-white bg-black`}>
+    <em>{name}</em>,<br />
+    {year}, {media}, {size}<br />
+    Artist: Dr. Masumi Hayashi
+  </figcaption>
+</div>
+<style>
+  @media (max-width: 767px) {
+    img {
+      border-bottom: 16px solid #000;
+    }
+  }
+
+  @media (min-width: 768px) {
+    img {
+      border-bottom: 24px solid #000;
+    }
+  }
+  @media (min-width: 1280px) {
+    img {
+      border-bottom: 36px solid #000;
+    }
+  }
+</style>

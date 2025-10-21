@@ -1,0 +1,102 @@
+---
+// Get all component preview files
+const components = await Astro.glob('./*Preview.astro');
+const componentNames = components.map(component => {
+  // Extract name from file path and remove 'Preview.astro'
+  const fileName = component.file.split('/').pop() || '';
+  const name = fileName.replace('Preview.astro', '');
+  return {
+    name,
+    path: fileName.replace('.astro', '')
+  };
+});
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component Gallery</title>
+    <style>
+      :root {
+        --primary-color: #2563eb;
+        --background-color: #f8fafc;
+        --text-color: #1e293b;
+        --hover-color: #3b82f6;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.5;
+        margin: 0;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: var(--text-color);
+      }
+
+      .description {
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        color: #64748b;
+      }
+
+      .component-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .component-card {
+        background: white;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .component-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .component-link {
+        text-decoration: none;
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+
+      .component-link:hover {
+        color: var(--hover-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Component Gallery</h1>
+      <p class="description">
+        A collection of components used in the Manzanar History website. Click on any component to view it in isolation.
+      </p>
+
+      <div class="component-grid">
+        {componentNames.map(({ name, path }) => (
+          <div class="component-card">
+            <a href={path} class="component-link">
+              {name}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </body>
+</html>

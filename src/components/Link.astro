@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  href: string;
+  class?: string;
+  underline?: boolean;
+}
+
+const { href, class: className, underline = true, ...props } = Astro.props;
+
+const classes = [
+  className,
+  "text-blue-600 hover:text-blue-800",
+  underline && "underline",
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<a href={href} class={classes} {...props}>
+  <slot />
+</a>

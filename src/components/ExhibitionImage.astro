@@ -1,0 +1,30 @@
+---
+// src/components/ExhibitionImage.astro
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+}
+
+const { src, alt, caption, width, height } = Astro.props;
+---
+
+<figure class="relative inline-block">
+  <Image
+    src={src}
+    alt={alt}
+    width={width || src.width}
+    height={height || src.height}
+    class="rounded-lg shadow-lg"
+    loading="lazy"
+  />
+  {caption && (
+    <figcaption class="mt-2 text-sm text-gray-600 text-center italic">
+      {caption}
+    </figcaption>
+  )}
+</figure>

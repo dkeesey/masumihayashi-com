@@ -1,0 +1,30 @@
+---
+interface Props {
+    campaignSlug?: string;
+    language?: string;
+    height?: string;
+}
+
+const {
+    campaignSlug = "preserve-masumi-hayashi-s-artistic-and-cultural-legacy",
+    language = "en-us",
+    height = "900px"
+} = Astro.props;
+
+const donorboxUrl = `https://donorbox.org/embed/${campaignSlug}?language=${language}`;
+---
+
+<div class="w-full flex justify-center px-4">
+    <script src="https://donorbox.org/widget.js" data-paypalexpress="false" is:inline></script>
+    <div class="rounded-xl  bg-white w-full max-w-[900px] min-w-[425px]">
+        <iframe
+            src={donorboxUrl}
+            name="donorbox"
+            loading="lazy"
+            height={height}
+            style="max-width: none; min-width: 425px; max-height:none; border: 0;"
+            allow="payment"
+            class="rounded-lg mx-auto"
+        />
+    </div>
+</div>
