@@ -1,0 +1,55 @@
+---
+import Layout from "./Layout.astro";
+import HeroImage from "../components/HeroImage.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  classes?: string;
+  heroImage: {
+    cloudinaryId?: string;
+    image?: string;
+    title: string;
+    media: string;
+    year: string;
+    city: string;
+    state: string;
+    country: string;
+    size: string;
+  };
+}
+
+const {
+  title = "Masumi Hayashi",
+  description = "Masumi Hayashi's panoramic photocollage artwork",
+  heroImage,
+  classes = ""
+} = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <slot name="head" slot="head" />
+  <div class={`min-h-screen ${classes}`}>
+    <section class="w-full bg-black py-8 md:py-16">
+      <div class="container mx-auto px-4">
+        {heroImage.cloudinaryId ? (
+          <HeroImage
+            cloudinaryId={heroImage.cloudinaryId}
+            alt={`${heroImage.title} by Dr. Masumi Hayashi`}
+            className="rounded-sm"
+          />
+        ) : (
+          <img src={heroImage.image} alt={heroImage.title} class="w-full h-auto rounded-sm" />
+        )}
+        <figcaption class="text-white text-center mt-6">
+          <p class="text-lg italic">{heroImage.title}</p>
+          <p class="text-sm mt-2">{heroImage.city}, {heroImage.state}, {heroImage.year}</p>
+          <p class="text-sm">{heroImage.media} • {heroImage.size}</p>
+        </figcaption>
+      </div>
+    </section>
+    <article class="text-left bg-museum-white">
+      <slot />
+    </article>
+  </div>
+</Layout>

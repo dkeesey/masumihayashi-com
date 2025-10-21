@@ -1,0 +1,76 @@
+---
+import Layout from "./Layout.astro";
+
+interface Photo {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout
+  title={`${frontmatter.name} - Family Album Project`}
+  description={`${frontmatter.name} was interned at ${frontmatter.camp}`}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <nav class="mb-8">
+      <a href="/family-album-project" class="text-gray-600 hover:text-gray-900">
+        ← Back to Family Album Project
+      </a>
+    </nav>
+
+    <article class="prose max-w-none">
+      <header class="mb-8">
+        <h1 class="text-4xl font-light">{frontmatter.name}</h1>
+        {frontmatter.image && (
+          <img
+            src={frontmatter.image}
+            alt={frontmatter.name}
+            class="mt-6 rounded-lg shadow-md"
+          />
+        )}
+      </header>
+
+      <div class="grid gap-4 mb-8">
+        {frontmatter.birthYear && (
+          <p>
+            <strong>Born:</strong> {frontmatter.birthYear}
+            {frontmatter.birthPlace && ` in ${frontmatter.birthPlace}`}
+          </p>
+        )}
+        {frontmatter.deathYear && (
+          <p>
+            <strong>Died:</strong> {frontmatter.deathYear}
+            {frontmatter.deathPlace && ` in ${frontmatter.deathPlace}`}
+          </p>
+        )}
+        <p>
+          <strong>Interned at:</strong> {frontmatter.camp}
+        </p>
+      </div>
+
+      <slot />
+
+      {frontmatter.photos && frontmatter.photos.length > 0 && (
+        <div class="mt-12">
+          <div class="grid gap-8 md:grid-cols-2">
+            {frontmatter.photos && frontmatter.photos.map((photo: Photo) => (
+              <figure class="relative group overflow-hidden rounded-lg">
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  class="w-full h-auto transition-transform duration-300 group-hover:scale-105"
+                />
+                <figcaption class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white p-2 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+                  {photo.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      )}
+    </article>
+  </div>
+</Layout>

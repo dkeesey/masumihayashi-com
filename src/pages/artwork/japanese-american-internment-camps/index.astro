@@ -1,0 +1,313 @@
+---
+// Import necessary components and utilities
+import { getCollection } from 'astro:content';
+import CloudinaryImage from '@components/CloudinaryImage.astro';
+import GalleryScrollLayout from '@layouts/GalleryScrollLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import type { ArtworkEntry } from '../../../types/artwork';
+
+import { generateSEOTags, type SEOConfig } from "@utils/seo";
+
+// Fetch all entries from the "artwork" collection
+const allEntries: CollectionEntry<'artwork'>[] = await getCollection("artwork");
+
+// Filter artworks by series
+const japaneseAmericanArtworks: ArtworkEntry[] = allEntries.filter(
+  (entry) => entry.data.series === "Japanese-American Internment Camps"
+);
+const japaneseCanadianArtworks: ArtworkEntry[] = allEntries.filter(
+  (entry) => entry.data.series === "Japanese-Canadian Internment Camps"
+);
+
+const seoConfig: SEOConfig = {
+  title: "Japanese American Internment Camps - Panoramic Photo Documentation",
+  description: "Explore Masumi Hayashi's powerful panoramic photo collages documenting Japanese American internment camps, preserving the memory of this important historical period through artistic documentation.",
+  keywords: ["Japanese American internment", "concentration camps", "World War II", "historical photography", "documentary art"],
+  type: "article" as const,
+  image: japaneseAmericanArtworks[0]?.data.cloudinaryId // Use the first camp image as OG image
+};
+
+const seoTags = generateSEOTags(seoConfig);
+
+---
+
+<style>
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    position: relative;
+  }
+
+  .title-section {
+    justify-content: flex-start;
+    padding-top: 0;
+  }
+
+  .title-content {
+    padding-top: 20vh;
+  }
+
+  .gallery-image {
+    max-height: calc(100dvh - 4rem);
+    width: auto;
+    object-fit: contain;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    animation: bounce 1s infinite;
+  }
+
+  .preview-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30vh;
+    opacity: 0.3;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+    pointer-events: none;
+  }
+
+  .mobile-orientation {
+    display: none;
+  }
+
+  .artwork-link {
+    position: relative;
+    display: inline-block;
+    cursor: zoom-in;
+    transition: transform 300ms ease-in-out;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+  }
+
+  .artwork-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .artwork-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 9999px;
+    opacity: 0.7;
+    transition: opacity 300ms ease-in-out;
+  }
+
+  .artwork-indicator svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .artwork-link:hover .artwork-indicator {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .artwork-indicator {
+      opacity: 0.7;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .artwork-indicator {
+      width: 2rem;
+      height: 2rem;
+    }
+    .artwork-indicator svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(-5px);
+    }
+  }
+
+
+  @media (hover: none) {
+    .artwork-indicator {
+      opacity: 0.7;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .artwork-indicator {
+      width: 2rem;
+      height: 2rem;
+    }
+    .artwork-indicator svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(-5px);
+    }
+  }
+</style>
+
+<GalleryScrollLayout 
+    title={seoTags.title}
+    description={seoTags.description}
+    type={seoTags.ogType}
+    image={seoTags.ogImage}
+    keywords={seoConfig.keywords}
+  >
+  <div class="mobile-orientation text-white">
+    📱 Rotate phone for best viewing experience
+  </div>
+
+  <section class="title-section">
+    <div class="title-content">
+      <h1 class="text-museum-white text-center text-4xl md:text-5xl font-bold mb-8">
+        Japanese-American Internment Camps
+      </h1>
+      <p class="text-museum-white text-center text-lg opacity-80 mb-16">
+        {seoConfig.description}
+      </p>
+      <div class="scroll-indicator">
+        <span>Scroll to view artwork</span>
+        <svg class="animate-bounce w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+      {japaneseAmericanArtworks[0] && (
+        <div class="preview-image">
+          <CloudinaryImage
+            cloudinaryId={japaneseAmericanArtworks[0].data.cloudinaryId}
+            name={japaneseAmericanArtworks[0].data.name}
+            classNames="w-full h-full object-cover opacity-30"
+          />
+        </div>
+      )}
+    </div>
+  </section>
+
+  {japaneseAmericanArtworks.map((artwork) => (
+    <section id={artwork.slug}>
+      <a href={`/artwork/japanese-american-internment-camps/${artwork.slug}`} class="artwork-link">
+        <div class="artwork-container">
+          <CloudinaryImage
+            cloudinaryId={artwork.data.cloudinaryId}
+            altTag={artwork.data.name}
+            name={artwork.data.name}
+            city={artwork.data.city}
+            state={artwork.data.state}
+            country={artwork.data.country}
+            media={artwork.data.media}
+            year={artwork.data.year}
+            size={artwork.data.size}
+            figcaptionClasses="text-museum-white bg-black text-center"
+          />
+          <div class="artwork-indicator" aria-label="View artwork details">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </section>
+  ))}
+
+  {/* Japanese-Canadian Section */}
+  <section class="title-section">
+    <div class="title-content">
+      <h1 class="text-museum-white text-center text-4xl md:text-5xl font-bold mb-8">
+        Japanese-Canadian Prison Camps
+      </h1>
+      <p class="text-museum-white text-center text-lg opacity-80 mb-16">
+        A collection of artworks documenting the Japanese-Canadian prison camps of World War II
+      </p>
+      <div class="scroll-indicator">
+        <span>Scroll to view artwork</span>
+        <svg class="animate-bounce w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+      {japaneseCanadianArtworks[0] && (
+        <div class="preview-image">
+          <CloudinaryImage
+            cloudinaryId={japaneseCanadianArtworks[0].data.cloudinaryId}
+            name={japaneseCanadianArtworks[0].data.name}
+            classNames="w-full h-full object-cover opacity-30"
+          />
+        </div>
+      )}
+    </div>
+  </section>
+
+  {japaneseCanadianArtworks.map((artwork) => (
+    <section id={artwork.slug}>
+      <a href={`/artwork/japanese-american-internment-camps/${artwork.slug}`} class="artwork-link">
+        <div class="artwork-container">
+          <CloudinaryImage
+            cloudinaryId={artwork.data.cloudinaryId}
+            altTag={artwork.data.name}
+            name={artwork.data.name}
+            city={artwork.data.city}
+            state={artwork.data.state}
+            country={artwork.data.country}
+            media={artwork.data.media}
+            year={artwork.data.year}
+            size={artwork.data.size}
+            figcaptionClasses="text-museum-white bg-black text-center"
+          />
+          <div class="artwork-indicator" aria-label="View artwork details">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </section>
+  ))}
+</GalleryScrollLayout>
+
+<style>

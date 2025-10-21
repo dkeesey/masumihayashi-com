@@ -1,0 +1,306 @@
+---
+import Layout from './Layout.astro';
+import CloudinaryImage from "../components/CloudinaryImage.astro";
+import { getCollection } from "astro:content";
+import { GridLayout } from '../components/CampGalleriesNav/GridLayout';
+import { HorizontalScroll } from '../components/CampGalleriesNav/HorizontalScroll';
+import { MinimalList } from '../components/CampGalleriesNav/MinimalList';
+import type { Artwork } from '../types/artwork';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'artwork'>;
+  navStyle?: 'grid' | 'scroll' | 'minimal';
+}
+
+const { entry, navStyle = 'grid' } = Astro.props;
+
+// Get all artworks for the navigation
+const allArtworks = await getCollection("artwork");
+
+const mapToArtwork = (entry: CollectionEntry<'artwork'>): Artwork => ({
+  ...entry.data,
+  slug: entry.slug
+});
+
+// Get artworks based on the current entry's series
+const artworks = allArtworks
+  .filter((artwork: CollectionEntry<'artwork'>) => artwork.data.series === entry.data.series)
+  .map(mapToArtwork);
+
+let CampDataComponent;
+if (entry.data['data-file']) {
+  // Dynamically import the camp data component
+  CampDataComponent = await import(`../components/data/${entry.data['data-file']}.jsx`);
+} else {
+  console.warn(`No data-file specified for ${entry.slug}`);
+}
+---
+
+<Layout title={entry.data.title}>
+  <!-- Full-width image section with black background -->
+  <div class="bg-black w-full">
+    <div class="max-w-[90vw] mx-auto py-8 sm:py-12 md:py-16 flex justify-center">
+      <a href={`/artwork/japanese-american-internment-camps/#${entry.slug}`} class="artwork-link">
+        <div class="artwork-container relative">
+          <div class="artwork-indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+          <CloudinaryImage
+            cloudinaryId={entry.data.cloudinaryId}
+            name={entry.data.name}
+            city={entry.data.city}
+            state={entry.data.state}
+            media={entry.data.media}
+            year={entry.data.year}
+            size={entry.data.size}
+            figcaptionClasses="text-museum-white bg-black text-center"
+          />
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Research section with vintage paper background -->
+  <div class="bg-vintage-paper text-vintage-ink w-full py-6 sm:py-8 md:py-12 mt-16 sm:mt-20 md:mt-24">
+    <div class="mx-4 sm:mx-6 md:mx-8">
+      <div class="camp-data-container max-w-6xl mx-auto">
+        {CampDataComponent && <CampDataComponent.default />}
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation to other galleries -->
+  <div class="bg-white w-full py-16">
+    {navStyle === 'grid' && <GridLayout client:load />}
+    {navStyle === 'scroll' && <HorizontalScroll client:load />}
+    {navStyle === 'minimal' && <MinimalList client:load />}
+  </div>
+
+  <style>
+    :global(.camp-data) {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    :global(.camp-data h2) {
+      font-size: 1.25rem;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: var(--vintage-ink);
+      font-family: var(--font-typewriter);
+    }
+
+    @media (min-width: 640px) {
+      :global(.camp-data h2) {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      :global(.camp-data h2) {
+        font-size: 1.875rem;
+        margin-bottom: 2.5rem;
+      }
+    }
+
+    :global(.camp-data dl) {
+      display: grid;
+      row-gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      :global(.camp-data dl) {
+        row-gap: 1.5rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      :global(.camp-data dl) {
+        row-gap: 2rem;
+      }
+    }
+
+    :global(.camp-data dt) {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      color: rgba(var(--vintage-ink-rgb), 0.7);
+      font-family: var(--font-typewriter);
+    }
+
+    @media (min-width: 640px) {
+      :global(.camp-data dt) {
+        font-size: 1rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      :global(.camp-data dt) {
+        font-size: 1.125rem;
+      }
+    }
+
+    :global(.camp-data dd) {
+      font-size: 0.875rem;
+      padding-left: 1rem;
+      border-left: 1px solid rgba(var(--vintage-ink-rgb), 0.2);
+      color: var(--vintage-ink);
+      line-height: 1.5;
+    }
+
+    @media (min-width: 640px) {
+      :global(.camp-data dd) {
+        font-size: 1rem;
+        padding-left: 1.5rem;
+        line-height: 1.625;
+      }
+    }
+
+    @media (min-width: 768px) {
+      :global(.camp-data dd) {
+        font-size: 1.125rem;
+        padding-left: 2rem;
+      }
+    }
+
+    :global(.camp-data p) {
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 640px) {
+      :global(.camp-data p) {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.625;
+      }
+    }
+
+    @media (min-width: 768px) {
+      :global(.camp-data p) {
+        font-size: 1.125rem;
+      }
+    }
+
+    :global(.camp-data ul) {
+      padding-left: 1rem;
+      list-style-type: disc;
+    }
+
+    @media (min-width: 640px) {
+      :global(.camp-data ul) {
+        padding-left: 1.5rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      :global(.camp-data ul) {
+        padding-left: 2rem;
+      }
+    }
+
+    :global(.camp-data li) {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 640px) {
+      :global(.camp-data li) {
+        font-size: 1rem;
+        line-height: 1.625;
+      }
+    }
+
+    @media (min-width: 768px) {
+      :global(.camp-data li) {
+        font-size: 1.125rem;
+      }
+    }
+
+    .camp-data-container {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    @media (min-width: 640px) {
+      .camp-data-container {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    /* Optimize line length for readability */
+    :global(.camp-data dd),
+    :global(.camp-data p) {
+      max-width: 65ch;
+    }
+
+    .artwork-link {
+      position: relative;
+      display: inline-block;
+      cursor: zoom-out;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      width: auto;
+      height: auto;
+    }
+
+    .artwork-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .artwork-indicator {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .artwork-indicator svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .artwork-link:hover .artwork-indicator {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    @media (hover: none) {
+      .artwork-indicator {
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .artwork-indicator {
+        width: 2rem;
+        height: 2rem;
+      }
+      .artwork-indicator svg {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  </style>
+</Layout>

@@ -1,0 +1,58 @@
+---
+import MainHead from './MainHead.astro';
+import Header from '@components/Header.astro';
+import { contentSections } from '@content/family-album/config';
+import TableOfContents from '@components/TableOfContents.astro';
+import ProgressBar from '@components/ProgressBar.astro';
+import ImageGallery from '@components/ImageGallery.astro';
+import MobileNav from '@components/MobileNav.astro';
+import '@styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  images?: {
+    src: string;
+    alt: string;
+    caption?: string;
+  }[];
+}
+
+const { title, description, images } = Astro.props;
+
+const sections = contentSections.map((section) => ({
+  id: section.id,
+  title: section.title,
+}));
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <MainHead title={title} description={description} />
+  </head>
+  <body>
+    <Header />
+    <div class="min-h-screen">
+      <!-- Sticky Progress + Nav on Desktop -->
+      <div class="hidden lg:block fixed top-0 left-0 w-64 h-screen border-r border-gray-200 p-6">
+        <ProgressBar />
+        <TableOfContents sections={sections} />
+      </div>
+
+      <!-- Main Content -->
+      <main class="lg:ml-64">
+        <article class="max-w-prose mx-auto px-4 lg:px-8 py-12 font-inter prose prose-lg">
+          <slot />
+        </article>
+      </main>
+
+      <!-- Mobile Navigation Drawer -->
+      <div class="lg:hidden">
+        <MobileNav sections={sections} />
+      </div>
+
+      {images && <ImageGallery images={images} />}
+    </div>
+  </body>
+</html>

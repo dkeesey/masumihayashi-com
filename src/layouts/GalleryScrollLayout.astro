@@ -1,0 +1,115 @@
+---
+import MainHead from "./MainHead.astro";
+import FontLoader from "@components/FontLoader.astro";
+import Header from "@components/Header.astro";
+import '@styles/global.css';
+---
+
+<html lang="en">
+  <MainHead>
+    <FontLoader />
+  </MainHead>
+  <body class="bg-black text-fa-text-secondary font-inter">
+    <Header />
+    <div class="gallery-scroll-container">
+      <slot />
+      <button 
+        class="back-to-top fixed bottom-8 right-8 flex items-center gap-2 border-2 border-white rounded-full bg-black/80 text-white hover:bg-black/90 hover:text-white hover:border-white/60 hover:-translate-y-1 transition-all duration-300 z-[9999] pointer-events-none invisible px-4 py-2" 
+        aria-label="Back to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+        <span class="text-white">Back to Top</span>
+      </button>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .gallery-scroll-container {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    position: relative;
+  }
+
+  /* Scrollbar styling */
+  .gallery-scroll-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .gallery-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .gallery-scroll-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  .gallery-scroll-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible !important;
+    pointer-events: auto;
+  }
+</style>
+
+<script>
+  function initializeBackToTop() {
+    const backToTop = document.querySelector('.back-to-top');
+    const container = document.querySelector('.gallery-scroll-container');
+
+    if (backToTop && container) {
+      // Show/hide button based on scroll position
+      const updateButtonVisibility = () => {
+        if (container.scrollTop > 100) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      };
+
+      // Initial check
+      updateButtonVisibility();
+
+      // Update on scroll
+      container.addEventListener('scroll', updateButtonVisibility);
+
+      // Scroll to top with smooth behavior
+      backToTop.addEventListener('click', () => {
+        container.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  }
+
+  // Initialize on page load
+  initializeBackToTop();
+
+  // Initialize when navigating back
+  window.addEventListener('popstate', () => {
+    setTimeout(initializeBackToTop, 100);
+  });
+
+  // Also initialize when the page becomes visible again
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      setTimeout(initializeBackToTop, 100);
+    }
+  });
+</script>

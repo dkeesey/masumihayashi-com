@@ -1,0 +1,32 @@
+---
+import MainHead from "./MainHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FontLoader from "../components/FontLoader.astro";
+import '@styles/global.css';
+
+const {
+  title = "Family Album Project",
+  description = "A collection of photographs and stories from Japanese American internment camps",
+  classes = "",
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <MainHead title={title} description={description}>
+      <FontLoader />
+    </MainHead>
+  </head>
+  <body class="bg-fa-bg-primary text-fa-text-secondary font-inter min-h-screen family-album">
+    <div class={`flex flex-col min-h-screen ${classes}`}>
+      <div class="[&_a:not(.family-album-link)]:text-gray-900">
+        <Header />
+      </div>
+      <main class="flex-grow">
+        <slot> Default text for unnamed slot </slot>
+      </main>
+      <Footer class="mt-auto" />
+    </div>
+  </body>
+</html>

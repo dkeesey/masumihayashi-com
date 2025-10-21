@@ -1,0 +1,20 @@
+---
+import Header from "../components/Header.astro";
+import MainHead from "./MainHead.astro";
+import Footer from "../components/Footer.astro";
+import FontLoader from "../components/FontLoader.astro";
+import '@styles/global.css';
+---
+
+<html lang="en" transition:animate="none">
+  <MainHead>
+    <FontLoader />
+  </MainHead>
+  <body class="bg-black text-fa-text-secondary font-inter">
+    <Header />
+    <main class="bg-black">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
