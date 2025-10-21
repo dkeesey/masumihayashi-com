@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  /* Family Album Theme Colors */
+  --color-fa-bg-primary: #000000;
+  --color-fa-bg-secondary: #1a1a1a;
+  --color-fa-text-primary: #ffffff;
+  --color-fa-text-secondary: #b3b3b3;
+  --color-fa-text-accent: #ffd700;
+  --color-fa-interactive-link: #60a5fa;
+  --color-fa-interactive-hover: #93c5fd;
+}
+
 /* WCAG AA Compliance: Line Height Overrides */
 .text-sm {
   line-height: 1.6;
