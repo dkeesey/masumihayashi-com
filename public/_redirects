@@ -1,0 +1,19 @@
+# Cloudflare Pages Redirects Configuration
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Force HTTPS (301 permanent redirect)
+http://:project.pages.dev/* https://:project.pages.dev/:splat 301
+http://masumihayashi.com/* https://masumihayashi.com/:splat 301
+
+# Redirect www to non-www (301 permanent redirect)
+https://www.masumihayashi.com/* https://masumihayashi.com/:splat 301
+
+# Legacy URL redirects (if migrating from old site)
+# Add any old URLs that should redirect to new pages
+# Example:
+# /old-gallery/* /artwork/:splat 301
+# /contact /about 301
+
+# SPA-like routing (200 rewrite, not redirect)
+# Useful for client-side routing if needed
+# /* /index.html 200
