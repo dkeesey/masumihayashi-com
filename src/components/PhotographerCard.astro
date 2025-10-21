@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import butcamIcon from '@images/family-album/contraband/butcam.gif';
 
 interface Props {
@@ -14,13 +13,14 @@ const { name, url } = Astro.props;
 
 <div class="flex flex-col items-center justify-center gap-4 p-4 rounded-lg transition-all duration-300 hover:bg-gray-800/20">
   <a href={url} class="transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-    <Image 
-      src={butcamIcon}
+    <img
+      src={butcamIcon.src}
       alt={`Illustration of a pinhole camera used in internment camps - Click to view ${name}'s photographs`}
-      height={48}
-      width={48}
+      height="48"
+      width="48"
       class="rounded-sm shadow-md hover:opacity-90 active:opacity-75"
       title="Illustration of a pinhole box camera used by internees in the camps"
+      loading="eager"
     />
   </a>
   <a 
