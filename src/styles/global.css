@@ -9,6 +9,15 @@ p {
   line-height: 1.6;
 }
 
+/* Prose Typography - Paragraph Spacing */
+.prose p {
+  margin-bottom: 1.25em;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
 /* WCAG AA Compliance: Ensure custom color classes are generated */
 @layer utilities {
   .text-primary-interactive-link {
