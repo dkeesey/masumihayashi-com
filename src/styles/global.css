@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
 @theme {
+  /* Primary Theme Colors - Global elements (header, footer) */
+  --color-primary-bg-primary: #000000;
+  --color-primary-bg-secondary: rgb(36 36 36);
+  --color-primary-bg-tertiary: rgb(52 52 52);
+  --color-primary-text-primary: #ffffff;
+  --color-primary-text-secondary: #b3b3b3;
+  --color-primary-text-accent: #ffd700;
+  --color-primary-interactive-link: #60a5fa;
+  --color-primary-interactive-hover: #93c5fd;
+
   /* Family Album Theme Colors */
   --color-fa-bg-primary: #000000;
   --color-fa-bg-secondary: #1a1a1a;
