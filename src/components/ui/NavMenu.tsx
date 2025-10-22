@@ -24,7 +24,7 @@ const artworkSeries = [
     name: "Sacred Architectures",
     shortName: "Sacred Architectures",
     path: "/artwork/sacred-architectures/",
-    count: 33,
+    count: 32,
     description: "Asian temples and spiritual sites"
   },
   {

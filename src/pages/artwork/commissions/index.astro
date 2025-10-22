@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import CloudinaryImage from '@components/CloudinaryImage.astro';
+import GalleryScrollLayout from '@layouts/GalleryScrollLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import type { ArtworkEntry } from '../../../types/artwork';
+import { generateSEOTags, type SEOConfig } from "@utils/seo";
+
+const allEntries: CollectionEntry<'artwork'>[] = await getCollection("artwork");
+const artworks: ArtworkEntry[] = allEntries.filter(
+  (entry) => entry.data.series === "Public Commissions"
+);
+
+const seoConfig: SEOConfig = {
+  title: "Public Commissions - Commissioned Artworks",
+  description: "Panoramic photo collages created as commissioned public artworks for institutions and corporations.",
+  keywords: ["commissioned art", "public art", "institutional photography", "corporate commissions", "Cleveland art", "architectural commissions"],
+  type: "article" as const,
+  image: artworks[0]?.data.cloudinaryId
+};
+
+const seoTags = generateSEOTags(seoConfig);
+---
+
+<GalleryScrollLayout title="Public Commissions" seoTags={seoTags}>
+  <section class="title-section">
+    <div class="max-w-4xl mx-auto px-4 title-content">
+      <h1 class="text-5xl md:text-6xl font-bold mb-8">Public Commissions</h1>
+      <p class="text-xl md:text-2xl text-muted-foreground mb-4">
+        Commissioned public artworks
+      </p>
+      <p class="text-lg text-muted-foreground">
+        Panoramic photo collages commissioned by institutions, corporations, and public agencies.
+      </p>
+    </div>
+  </section>
+
+  {artworks.map((artwork) => (
+    <section>
+      <div class="w-full px-4">
+        <a href={`/artwork/${artwork.data.series.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${artwork.data.slug}/`}>
+          <CloudinaryImage
+            cloudinaryId={artwork.data.cloudinaryId}
+            alt={artwork.data.altTag}
+            className="gallery-image mx-auto"
+            loading="eager"
+          />
+        </a>
+      </div>
+    </section>
+  ))}
+</GalleryScrollLayout>
+
+<style>
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .title-section {
+    justify-content: flex-start;
+    padding-top: 0;
+  }
+
+  .title-content {
+    padding-top: 20vh;
+  }
+
+  .gallery-image {
+    max-height: calc(100dvh - 4rem);
+    width: auto;
+    object-fit: contain;
+  }
+</style>
