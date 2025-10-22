@@ -1,0 +1,30 @@
+---
+interface Props {
+  cloudinaryId: string;
+  alt: string;
+  className?: string;
+}
+
+const { cloudinaryId, alt, className = "" } = Astro.props;
+
+const baseURL = "https://res.cloudinary.com/masumi-hayashi-foundation/image/upload";
+
+// Simple transformations for thumbnails - no overlays, just optimization
+const transformations = "f_auto,q_auto:good,c_fill,ar_16:9";
+
+// Generate responsive srcset for thumbnails
+const generateUrl = (width: number) =>
+  `${baseURL}/${transformations},w_${width}${cloudinaryId} ${width}w`;
+
+const srcset = [400, 600, 800].map(generateUrl).join(", ");
+const src = `${baseURL}/${transformations},w_600${cloudinaryId}`;
+---
+
+<img
+  src={src}
+  srcset={srcset}
+  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+  alt={alt}
+  class={className}
+  loading="lazy"
+/>

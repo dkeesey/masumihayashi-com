@@ -1,5 +1,5 @@
 ---
-import CloudinaryImage from './CloudinaryImage.astro';
+import CloudinaryThumbnail from './CloudinaryThumbnail.astro';
 
 interface Artwork {
   slug: string;
@@ -37,11 +37,10 @@ const displayArtworks = artworks.slice(0, maxItems);
           class="group block bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
         >
           <div class="aspect-video overflow-hidden bg-gray-100">
-            <CloudinaryImage
+            <CloudinaryThumbnail
               cloudinaryId={artwork.data.cloudinaryId}
-              altTag={artwork.data.name}
-              name={artwork.data.name}
-              classNames="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              alt={artwork.data.name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           </div>
           <div class="p-4">
