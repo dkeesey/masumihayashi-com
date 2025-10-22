@@ -1,0 +1,12 @@
+# Reference Materials
+
+Add screenshots, mockups, design files, and inspiration images here.
+
+## Suggested Structure
+
+```
+reference/
+├── designs/        # Mockups and design files
+├── inspiration/    # Examples from other sites
+└── research/       # User research, competitive analysis
+```
