@@ -9,7 +9,7 @@ import {
   NavigationMenuTrigger,
 } from "./navigation-menu"
 import { Sheet, SheetContent, SheetTrigger } from "./sheet"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react" // Still needed for mobile accordion
 
 // Artwork series for mega menu
 const artworkSeries = [
@@ -123,10 +123,6 @@ const NavLinks = () => {
                 onFocus={() => setOpenMenu(item.name)}
               >
                 {item.name}
-                <ChevronDown
-                  className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
-                  aria-hidden="true"
-                />
               </NavigationMenuTrigger>
               <NavigationMenuContent
                 onMouseLeave={() => setOpenMenu(null)}

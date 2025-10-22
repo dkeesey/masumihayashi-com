@@ -249,3 +249,34 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]): WithContext<T
     }))
   };
 }
+
+/**
+ * CreativeWorkSeries schema for artwork series
+ * Used on: Series landing pages (e.g., /artwork/japanese-american-internment-camps/)
+ */
+export interface SeriesData {
+  name: string;
+  description: string;
+  url: string;
+  artworkCount: number;
+  dateCreated: string;
+  genre: string[];
+}
+
+export function generateSeriesSchema(series: SeriesData): WithContext<Thing> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWorkSeries",
+    "@id": `${SITE_URL}${series.url}#series`,
+    "name": series.name,
+    "description": series.description,
+    "url": `${SITE_URL}${series.url}`,
+    "creator": {
+      "@id": `${SITE_URL}/#masumi`
+    },
+    "dateCreated": series.dateCreated,
+    "genre": series.genre,
+    "numberOfItems": series.artworkCount,
+    "inLanguage": "en-US"
+  };
+}

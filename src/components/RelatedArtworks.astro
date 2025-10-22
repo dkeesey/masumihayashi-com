@@ -1,0 +1,100 @@
+---
+import CloudinaryImage from './CloudinaryImage.astro';
+
+interface Artwork {
+  slug: string;
+  data: {
+    name: string;
+    cloudinaryId: string;
+    year: string;
+    city?: string;
+    state?: string;
+  };
+}
+
+interface Props {
+  artworks: Artwork[];
+  seriesName: string;
+  seriesPath: string;
+  maxItems?: number;
+}
+
+const { artworks, seriesName, seriesPath, maxItems = 6 } = Astro.props;
+
+// Limit the number of artworks displayed
+const displayArtworks = artworks.slice(0, maxItems);
+---
+
+<section class="related-artworks my-12 px-4">
+  <div class="max-w-7xl mx-auto">
+    <h3 class="text-2xl font-medium text-gray-900 mb-6 font-robotoCondensed">
+      More from {seriesName}
+    </h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {displayArtworks.map((artwork) => (
+        <a
+          href={`${seriesPath}/${artwork.slug}`}
+          class="group block bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+        >
+          <div class="aspect-video overflow-hidden bg-gray-100">
+            <CloudinaryImage
+              cloudinaryId={artwork.data.cloudinaryId}
+              altTag={artwork.data.name}
+              name={artwork.data.name}
+              classNames="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+          <div class="p-4">
+            <h4 class="text-base font-medium text-gray-900 group-hover:text-primary-interactive-link transition-colors line-clamp-2">
+              {artwork.data.name}
+            </h4>
+            <div class="mt-2 flex items-center justify-between text-sm text-gray-600">
+              <span>{artwork.data.year}</span>
+              {artwork.data.city && artwork.data.state && (
+                <span class="text-xs">
+                  {artwork.data.city}, {artwork.data.state}
+                </span>
+              )}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-8 text-center">
+      <a
+        href={seriesPath}
+        class="inline-flex items-center gap-2 text-primary-interactive-link hover:text-primary-interactive-hover font-medium transition-colors"
+      >
+        View All Artworks in {seriesName}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .related-artworks {
+    font-family: var(--font-roboto-condensed, 'Roboto Condensed', sans-serif);
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
