@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import ArtworkWithCampDataLayout from "../../../layouts/ArtworkWithCampDataLayout.astro";
+import RelatedArtworks from "../../../components/RelatedArtworks.astro";
 
 export async function getStaticPaths() {
   const artworkEntries = await getCollection("artwork");
@@ -14,34 +15,26 @@ export async function getStaticPaths() {
 const { entry }: { entry: CollectionEntry<"artwork"> } = Astro.props;
 const { Content } = await entry.render();
 
-// Fetch all entries for the footer links
-const allArtPagesEntries = await getCollection("artwork");
+// Fetch related artworks from same series (excluding current)
+const allArtworks = await getCollection("artwork");
+const relatedWorks = allArtworks
+  .filter((art) =>
+    art.data.series === entry.data.series &&
+    art.slug !== entry.slug
+  )
+  .slice(0, 6);
 ---
 
 <ArtworkWithCampDataLayout entry={entry}>
   <Content />
 
-  <!-- Footer with links to other artworks -->
-  <footer class="bg-museum-white flex flex-col justify-center items-center pt-16 font-robotoCondensed">
-    <h2 class="text-xl py-8">Japanese-American Internment Camps</h2>
-    <ul class="flex flex-col items-center">
-      {allArtPagesEntries
-        .filter((e: CollectionEntry<'artwork'>) => e.data.series === "Japanese-American Internment Camps")
-        .map((e: CollectionEntry<'artwork'>) => (
-          <li class="self-start ml-8">
-            <a href={`/artwork/japanese-american-internment-camps/${e.slug}`}>{e.data.title}</a>
-          </li>
-        ))}
-    </ul>
-    <h2 class="text-xl py-8">Japanese-Canadian Prisoner of War Camps</h2>
-    <ul class="flex flex-col justify-center pb-8">
-      {allArtPagesEntries
-        .filter((e: CollectionEntry<'artwork'>) => e.data.series === "Japanese-Canadian Internment Camps")
-        .map((e: CollectionEntry<'artwork'>) => (
-          <li class="px-2">
-            <a href={`/artwork/japanese-american-internment-camps/${e.slug}`}>{e.data.title}</a>
-          </li>
-        ))}
-    </ul>
-  </footer>
+  <!-- Related Artworks Component -->
+  {relatedWorks.length > 0 && (
+    <RelatedArtworks
+      artworks={relatedWorks}
+      seriesName={entry.data.series}
+      seriesPath={`/artwork/japanese-american-internment-camps`}
+      maxItems={6}
+    />
+  )}
 </ArtworkWithCampDataLayout>

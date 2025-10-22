@@ -74,12 +74,12 @@ const seoTags = generateSEOTags(seoConfig);
 
   .preview-image {
     position: absolute;
-    bottom: 0;
+    bottom: -25vh;
     left: 0;
     right: 0;
-    height: 30vh;
-    opacity: 0.3;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+    height: 50vh;
+    opacity: 0.6;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
     pointer-events: none;
   }
 
@@ -90,7 +90,7 @@ const seoTags = generateSEOTags(seoConfig);
   .artwork-link {
     position: relative;
     display: inline-block;
-    cursor: zoom-in;
+    cursor: pointer;
     transition: transform 300ms ease-in-out;
     overflow: hidden;
     width: auto;
@@ -207,7 +207,7 @@ const seoTags = generateSEOTags(seoConfig);
         {seoConfig.description}
       </p>
       <div class="scroll-indicator">
-        <span>Scroll to view artwork</span>
+        <span>Scroll, use Tab, or Space to view artwork</span>
         <svg class="animate-bounce w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
@@ -242,10 +242,8 @@ const seoTags = generateSEOTags(seoConfig);
           />
           <div class="artwork-indicator" aria-label="View artwork details">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              <line x1="11" y1="8" x2="11" y2="14"></line>
-              <line x1="8" y1="11" x2="14" y2="11"></line>
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
             </svg>
           </div>
         </div>
@@ -263,7 +261,7 @@ const seoTags = generateSEOTags(seoConfig);
         A collection of artworks documenting the Japanese-Canadian prison camps of World War II
       </p>
       <div class="scroll-indicator">
-        <span>Scroll to view artwork</span>
+        <span>Scroll, use Tab, or Space to view artwork</span>
         <svg class="animate-bounce w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
@@ -298,10 +296,8 @@ const seoTags = generateSEOTags(seoConfig);
           />
           <div class="artwork-indicator" aria-label="View artwork details">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              <line x1="11" y1="8" x2="11" y2="14"></line>
-              <line x1="8" y1="11" x2="14" y2="11"></line>
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
             </svg>
           </div>
         </div>
