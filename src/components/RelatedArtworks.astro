@@ -30,7 +30,7 @@ const displayArtworks = artworks.slice(0, maxItems);
     <h3 class="text-2xl font-medium text-gray-900 mb-6 font-robotoCondensed">
       More from {seriesName}
     </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class={`grid gap-6 ${displayArtworks.length === 1 ? 'grid-cols-1 max-w-md mx-auto' : displayArtworks.length === 2 ? 'grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
       {displayArtworks.map((artwork) => (
         <a
           href={`${seriesPath}/${artwork.slug}`}
