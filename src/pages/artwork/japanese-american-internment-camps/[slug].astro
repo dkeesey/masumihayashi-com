@@ -15,11 +15,11 @@ export async function getStaticPaths() {
 const { entry }: { entry: CollectionEntry<"artwork"> } = Astro.props;
 const { Content } = await entry.render();
 
-// Fetch related artworks from same series (excluding current)
+// Fetch related artworks from same camp (using data-file as grouping, excluding current)
 const allArtworks = await getCollection("artwork");
 const relatedWorks = allArtworks
   .filter((art) =>
-    art.data.series === entry.data.series &&
+    art.data['data-file'] === entry.data['data-file'] &&
     art.slug !== entry.slug
   )
   .slice(0, 6);
@@ -32,7 +32,7 @@ const relatedWorks = allArtworks
   {relatedWorks.length > 0 && (
     <RelatedArtworks
       artworks={relatedWorks}
-      seriesName={entry.data.series}
+      seriesName={entry.data['data-file']?.replace(/-data$/, '').replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || entry.data.series}
       seriesPath={`/artwork/japanese-american-internment-camps`}
       maxItems={6}
     />
