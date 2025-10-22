@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import ArtworkDetailLayout from "../../../layouts/ArtworkDetailLayout.astro";
+import RelatedArtworks from "../../../components/RelatedArtworks.astro";
+
+export async function getStaticPaths() {
+  const artworkEntries = await getCollection("artwork");
+  return artworkEntries.map((entry: CollectionEntry<"artwork">) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry }: { entry: CollectionEntry<"artwork"> } = Astro.props;
+
+// Fetch related artworks from Prisons & Penitentiaries series
+const allArtworks = await getCollection("artwork");
+
+// Get artworks from same series (excluding current)
+const sameSeriesWorks = allArtworks
+  .filter((art) =>
+    art.data.series === 'Prisons & Penitentiaries' &&
+    art.slug !== entry.slug
+  );
+
+// If fewer than 4 from same series, fill in with other artworks
+let relatedWorks = [...sameSeriesWorks];
+if (relatedWorks.length < 4) {
+  const otherWorks = allArtworks
+    .filter((art) =>
+      art.data.series !== 'Prisons & Penitentiaries' &&
+      art.slug !== entry.slug
+    );
+  relatedWorks = [...relatedWorks, ...otherWorks].slice(0, 6);
+} else {
+  relatedWorks = relatedWorks.slice(0, 6);
+}
+---
+
+<ArtworkDetailLayout entry={entry} galleryPath="/artwork/prisons/">
+  <!-- Related Artworks Component -->
+  {relatedWorks.length > 0 && (
+    <RelatedArtworks
+      artworks={relatedWorks}
+      seriesName="Prisons & Penitentiaries"
+      seriesPath="/artwork/prisons"
+      maxItems={6}
+    />
+  )}
+</ArtworkDetailLayout>

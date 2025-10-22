@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import ArtworkDetailLayout from "../../../layouts/ArtworkDetailLayout.astro";
+import RelatedArtworks from "../../../components/RelatedArtworks.astro";
+
+export async function getStaticPaths() {
+  const artworkEntries = await getCollection("artwork");
+  return artworkEntries.map((entry: CollectionEntry<"artwork">) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry }: { entry: CollectionEntry<"artwork"> } = Astro.props;
+
+// Fetch related artworks from same series first, then fill with other series if needed
+const allArtworks = await getCollection("artwork");
+
+// Get artworks from same series (excluding current)
+const sameSeriesWorks = allArtworks
+  .filter((art) =>
+    art.data.series === 'EPA Superfund Sites' &&
+    art.slug !== entry.slug
+  );
+
+// If fewer than 4 from same series, fill in with artworks from other series
+let relatedWorks = [...sameSeriesWorks];
+if (relatedWorks.length < 4) {
+  const otherSeriesWorks = allArtworks
+    .filter((art) =>
+      art.data.series !== 'EPA Superfund Sites' &&
+      art.slug !== entry.slug
+    );
+  relatedWorks = [...relatedWorks, ...otherSeriesWorks].slice(0, 6);
+} else {
+  relatedWorks = relatedWorks.slice(0, 6);
+}
+---
+
+<ArtworkDetailLayout entry={entry} galleryPath="/artwork/epa-superfund/">
+  <!-- Related Artworks Component -->
+  {relatedWorks.length > 0 && (
+    <RelatedArtworks
+      artworks={relatedWorks}
+      seriesName={
+        relatedWorks.length === sameSeriesWorks.length && relatedWorks.length > 0
+          ? 'EPA Superfund Sites'
+          : 'More Artworks'
+      }
+      seriesPath="/artwork/epa-superfund/"
+      maxItems={6}
+    />
+  )}
+</ArtworkDetailLayout>
