@@ -6,7 +6,12 @@ import RelatedArtworks from "../../../components/RelatedArtworks.astro";
 
 export async function getStaticPaths() {
   const artworkEntries = await getCollection("artwork");
-  return artworkEntries.map((entry: CollectionEntry<"artwork">) => ({
+  const cityWorksArtworks = artworkEntries.filter(
+    (entry: CollectionEntry<"artwork">) =>
+      entry.data.series === "City Works"
+  );
+
+  return cityWorksArtworks.map((entry: CollectionEntry<"artwork">) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));

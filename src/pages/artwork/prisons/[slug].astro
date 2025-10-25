@@ -6,7 +6,12 @@ import RelatedArtworks from "../../../components/RelatedArtworks.astro";
 
 export async function getStaticPaths() {
   const artworkEntries = await getCollection("artwork");
-  return artworkEntries.map((entry: CollectionEntry<"artwork">) => ({
+  const prisonsArtworks = artworkEntries.filter(
+    (entry: CollectionEntry<"artwork">) =>
+      entry.data.series === "Prisons & Institutions"
+  );
+
+  return prisonsArtworks.map((entry: CollectionEntry<"artwork">) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
@@ -20,7 +25,7 @@ const allArtworks = await getCollection("artwork");
 // Get artworks from same series (excluding current)
 const sameSeriesWorks = allArtworks
   .filter((art) =>
-    art.data.series === 'Prisons & Penitentiaries' &&
+    art.data.series === 'Prisons & Institutions' &&
     art.slug !== entry.slug
   );
 
@@ -29,7 +34,7 @@ let relatedWorks = [...sameSeriesWorks];
 if (relatedWorks.length < 4) {
   const otherWorks = allArtworks
     .filter((art) =>
-      art.data.series !== 'Prisons & Penitentiaries' &&
+      art.data.series !== 'Prisons & Institutions' &&
       art.slug !== entry.slug
     );
   relatedWorks = [...relatedWorks, ...otherWorks].slice(0, 6);
@@ -43,7 +48,7 @@ if (relatedWorks.length < 4) {
   {relatedWorks.length > 0 && (
     <RelatedArtworks
       artworks={relatedWorks}
-      seriesName="Prisons & Penitentiaries"
+      seriesName="Prisons & Institutions"
       seriesPath="/artwork/prisons"
       maxItems={6}
     />

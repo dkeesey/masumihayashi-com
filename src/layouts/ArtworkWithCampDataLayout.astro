@@ -1,6 +1,7 @@
 ---
 import Layout from './Layout.astro';
-import ZoomableCloudinaryImage from "../components/ZoomableCloudinaryImage.astro";
+import ResponsiveImage from "../components/ResponsiveImage.astro";
+import { InstagramShareButton } from "../components/InstagramShareButton";
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -35,18 +36,36 @@ if (entry.data['data-file']) {
   </div>
 
   <!-- Full-width image section with black background -->
-  <ZoomableCloudinaryImage
-    cloudinaryId={entry.data.cloudinaryId}
-    name={entry.data.name}
-    city={entry.data.city}
-    state={entry.data.state}
-    country={entry.data.country}
-    media={entry.data.media}
-    year={entry.data.year}
-    size={entry.data.size}
-    altTag={`Picture of ${entry.data.name} by Dr. Masumi Hayashi`}
-    figcaptionClasses="text-museum-white bg-black text-center"
-  />
+  <div class="bg-black w-full py-16">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+      <ResponsiveImage
+        imageSlug={entry.data.imageSlug || entry.slug}
+        alt={`Picture of ${entry.data.name} by Dr. Masumi Hayashi`}
+        className="rounded-md max-w-[95vw] max-h-[85vh] object-contain"
+        loading="eager"
+      />
+      <figcaption class="text-museum-white bg-black text-center mt-6 space-y-2">
+        <p class="text-xl font-medium italic">{entry.data.name}</p>
+        {(entry.data.city || entry.data.state || entry.data.country) && (
+          <p class="text-base">
+            {[entry.data.city, entry.data.state, entry.data.country].filter(Boolean).join(', ')}
+          </p>
+        )}
+        <p class="text-base">
+          {entry.data.year}, {entry.data.media}
+          {entry.data.size && `, ${entry.data.size}`}
+        </p>
+        <p class="text-sm opacity-70">Artist: Dr. Masumi Hayashi</p>
+      </figcaption>
+    </div>
+  </div>
+
+  <!-- Instagram Share Button -->
+  <div class="bg-black w-full pb-12">
+    <div class="max-w-7xl mx-auto px-4 flex justify-center">
+      <InstagramShareButton artwork={entry} client:load />
+    </div>
+  </div>
 
   <!-- Research section with vintage paper background -->
   <div class="bg-vintage-paper text-vintage-ink w-full py-6 sm:py-8 md:py-12 mt-16 sm:mt-20 md:mt-24">

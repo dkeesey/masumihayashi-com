@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import type { CollectionEntry } from 'astro:content';
+import type { ArtworkEntry } from '../../types/artwork';
+import { generateSEOTags, type SEOConfig } from "@utils/seo";
+
+const allEntries: CollectionEntry<'artwork'>[] = await getCollection("artwork");
+
+// Group artworks by series
+const artworksBySeries = allEntries.reduce((acc, entry) => {
+  const series = entry.data.series;
+  if (!acc[series]) {
+    acc[series] = [];
+  }
+  acc[series].push(entry);
+  return acc;
+}, {} as Record<string, CollectionEntry<'artwork'>[]>);
+
+// Define series order and display names
+const seriesOrder = [
+  { key: 'Japanese-American Internment Camps', display: 'Japanese American Internment Camps', path: '/artwork/japanese-american-internment-camps/' },
+  { key: 'Japanese-Canadian Internment Camps', display: 'Japanese Canadian Internment Camps', path: '/artwork/japanese-american-internment-camps/' },
+  { key: 'Sacred Architectures', display: 'Sacred Architectures', path: '/artwork/sacred-architectures/' },
+  { key: 'Post-Industrial Landscapes', display: 'Post-Industrial Landscapes', path: '/artwork/post-industrial/' },
+  { key: 'Prisons & Institutions', display: 'Prisons & Institutions', path: '/artwork/prisons/' },
+  { key: 'War & Military Sites', display: 'War & Military Sites', path: '/artwork/war-military/' },
+  { key: 'EPA Superfund Sites', display: 'EPA Superfund Sites', path: '/artwork/epa-superfund/' },
+  { key: 'City Works', display: 'City Works', path: '/artwork/city-works/' },
+  { key: 'Public Commissions', display: 'Public Commissions', path: '/artwork/commissions/' },
+];
+
+const seoConfig: SEOConfig = {
+  title: "All Artwork - Panoramic Photo Collages by Masumi Hayashi",
+  description: "Browse all panoramic photo collages by Masumi Hayashi across 8 thematic series documenting American history, sacred spaces, and environmental justice.",
+  keywords: ["panoramic photography", "photo collages", "documentary photography", "social justice art"],
+  type: "website" as const,
+};
+
+const seoTags = generateSEOTags(seoConfig);
+---
+
+<Layout title="All Artwork - Masumi Hayashi" description={seoConfig.description}>
+  <div class="bg-black min-h-screen text-white">
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">All Artwork</h1>
+      <p class="text-xl md:text-2xl text-white/80 max-w-3xl">
+        Panoramic photo collages documenting sites of historical trauma, sacred spaces,
+        and environmental change across America and Asia.
+      </p>
+      <p class="text-lg text-white/60 mt-4">
+        {allEntries.length} artworks across {Object.keys(artworksBySeries).length} series
+      </p>
+    </div>
+
+    <!-- Series Navigation -->
+    <div class="bg-white/5 border-y border-white/10 sticky top-16 z-40 backdrop-blur-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav class="flex flex-wrap gap-3" aria-label="Jump to series">
+          {seriesOrder.map((series) => {
+            const count = artworksBySeries[series.key]?.length || 0;
+            if (count === 0) return null;
+            return (
+              <a
+                href={`#${series.key.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}
+                class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm font-medium whitespace-nowrap"
+              >
+                {series.display} ({count})
+              </a>
+            );
+          })}
+        </nav>
+      </div>
+    </div>
+
+    <!-- Artwork Grid by Series -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {seriesOrder.map((series) => {
+        const artworks = artworksBySeries[series.key];
+        if (!artworks || artworks.length === 0) return null;
+
+        return (
+          <section
+            id={series.key.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}
+            class="mb-20 scroll-mt-32"
+          >
+            <div class="flex items-baseline justify-between mb-8">
+              <h2 class="text-3xl md:text-4xl font-bold">{series.display}</h2>
+              <a
+                href={series.path}
+                class="text-sm font-medium text-white/60 hover:text-white transition-colors"
+              >
+                View Gallery →
+              </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {artworks.map((artwork) => {
+                const artworkPath = `${series.path}${artwork.slug.split('/').pop()}/`;
+                const imageSlug = artwork.data.imageSlug || artwork.data.slug || artwork.slug.split('/').pop();
+                return (
+                  <a
+                    href={artworkPath}
+                    class="group block bg-white/5 rounded-lg overflow-hidden hover:bg-white/10 transition-all duration-300"
+                  >
+                    <div class="aspect-[16/9] bg-black relative overflow-hidden">
+                      <ResponsiveImage
+                        imageSlug={imageSlug}
+                        alt={artwork.data.altTag || `${artwork.data.name} by Dr. Masumi Hayashi`}
+                        className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="font-medium text-white group-hover:text-white/90 mb-1 line-clamp-2">
+                        {artwork.data.name}
+                      </h3>
+                      <p class="text-sm text-white/60">
+                        {artwork.data.year}
+                        {(artwork.data.city || artwork.data.state) && (
+                          <> • {[artwork.data.city, artwork.data.state].filter(Boolean).join(', ')}</>
+                        )}
+                      </p>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </div>
+</Layout>

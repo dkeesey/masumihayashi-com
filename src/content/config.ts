@@ -6,6 +6,8 @@ const artworkCollection = defineCollection({
     // Core identification
     title: z.string(),
     name: z.string(),
+    slug: z.string().optional(), // Artwork slug for URLs and image matching
+    imageSlug: z.string().optional(), // Responsive image slug (falls back to slug if not provided)
     cloudinaryId: z.string(), // Required for CloudinaryImage component
     altTag: z.string().optional(), // Alt text for accessibility
 

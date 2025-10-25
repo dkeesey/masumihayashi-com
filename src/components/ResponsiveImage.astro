@@ -1,0 +1,58 @@
+---
+/**
+ * ResponsiveImage Component
+ *
+ * Displays pre-processed responsive image variants (6 breakpoints)
+ * Images are baked with museum-quality captions
+ * Hosted in /public/images/responsive/
+ */
+
+interface Props {
+  imageSlug: string;        // Short slug for image files (e.g., "angkor-wat-1")
+  alt: string;              // Alt text for accessibility
+  className?: string;       // Additional CSS classes
+  loading?: 'lazy' | 'eager';  // Loading strategy
+}
+
+const {
+  imageSlug,
+  alt,
+  className = "",
+  loading = "lazy"
+} = Astro.props;
+
+// Base path for responsive images
+const basePath = "/images/responsive";
+
+// 6 breakpoints matching the processed variants
+const breakpoints = [
+  { width: 640, descriptor: '640w' },
+  { width: 768, descriptor: '768w' },
+  { width: 1024, descriptor: '1024w' },
+  { width: 1440, descriptor: '1440w' },
+  { width: 1920, descriptor: '1920w' },
+  { width: 2460, descriptor: '2460w' }
+];
+
+// Generate srcset with all 6 breakpoints
+const srcset = breakpoints
+  .map(bp => `${basePath}/${imageSlug}-${bp.width}w.jpg ${bp.descriptor}`)
+  .join(', ');
+
+// Default src (use 1440w as the fallback)
+const src = `${basePath}/${imageSlug}-1440w.jpg`;
+
+// Sizes attribute for optimal image selection
+// Mobile: full viewport, Tablet: full viewport, Desktop: 90vw max
+const sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 90vw";
+---
+
+<img
+  src={src}
+  srcset={srcset}
+  sizes={sizes}
+  alt={alt}
+  loading={loading}
+  class={`max-w-full max-h-[85vh] w-auto h-auto object-contain ${className}`}
+  decoding="async"
+/>

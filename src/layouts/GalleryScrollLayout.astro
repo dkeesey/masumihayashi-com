@@ -10,8 +10,15 @@ import '@styles/global.css';
     <FontLoader />
   </MainHead>
   <body class="bg-black text-fa-text-secondary font-inter">
+    <!-- Skip to Gallery link for accessibility -->
+    <a
+      href="#gallery-start"
+      class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[10000] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded"
+    >
+      Skip to Gallery
+    </a>
     <Header />
-    <div class="gallery-scroll-container">
+    <div class="gallery-scroll-container" id="gallery-start">
       <slot />
       <button 
         class="back-to-top fixed bottom-8 right-8 flex items-center gap-2 border-2 border-white rounded-full bg-black/80 text-white hover:bg-black/90 hover:text-white hover:border-white/60 hover:-translate-y-1 transition-all duration-300 z-[9999] pointer-events-none invisible px-4 py-2" 
@@ -27,6 +34,27 @@ import '@styles/global.css';
 </html>
 
 <style>
+  /* Screen reader only - visible on focus */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .skip-link:focus {
+    position: fixed !important;
+    width: auto;
+    height: auto;
+    clip: auto;
+    clip-path: none;
+  }
+
   body {
     margin: 0;
     padding: 0;

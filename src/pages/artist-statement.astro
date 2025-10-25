@@ -1,25 +1,384 @@
 ---
-import HeroLayout from '@layouts/HeroLayout.astro';
-import ArtistStatementComponent from '@components/pages/ArtistStatement';
+import Layout from '@layouts/Layout.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import PullQuote from '@components/PullQuote.astro';
+import { Card, CardContent } from '@components/ui/card';
 
-const heartMountainData = {
-  cloudinaryId: "internment-camps/heart-mountain-internment-camp-blue-room_mtzpdt",
-  title: "Heart Mountain Relocation Camp, Wyoming",
-  media: "Panoramic Photo Collage",
-  year: "1992",
-  city: "Powell",
-  state: "Wyoming",
-  country: "USA",
-  size: '30" x 40"',
-};
+const pageTitle = "Artist Statement | Masumi Hayashi";
+const metaDescription = "Artist statement by Dr. Masumi Hayashi on her panoramic photo collages documenting Japanese American internment camps and sites of historical trauma.";
 ---
 
-<HeroLayout 
-  title="Artist Statement" 
-  description="Artist Statement by Masumi Hayashi"
-  heroImage={heartMountainData}
->
-  <div class="container mx-auto px-4 py-8">
-    <ArtistStatementComponent client:load />
-  </div>
-</HeroLayout>
+<Layout title={pageTitle} description={metaDescription}>
+
+  <!-- Hero Section with Full-Width Image -->
+  <section class="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] bg-black overflow-hidden">
+    <div class="absolute inset-0">
+      <ResponsiveImage
+        imageSlug="manzanar-internment-camp-guard-gates"
+        alt="Manzanar Relocation Camp, Guard Gates - Panoramic photo collage by Masumi Hayashi"
+        loading="eager"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+
+    <!-- Hero Text Overlay -->
+    <div class="absolute bottom-0 left-0 right-0 px-6 md:px-12 lg:px-24 pb-12 md:pb-20 lg:pb-24">
+      <div class="max-w-5xl">
+        <p class="text-xs md:text-sm uppercase tracking-widest text-white/70 mb-3 font-medium">
+          In Her Own Words
+        </p>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.1] mb-4">
+          Landscape of Place and Memory
+        </h1>
+        <p class="text-xl md:text-2xl lg:text-3xl text-white/95 font-light font-serif italic">
+          American Concentration Camps
+        </p>
+        <div class="mt-6 pt-6 border-t border-white/20">
+          <p class="text-sm text-white/80">
+            Artist Statement by Dr. Masumi Hayashi
+          </p>
+          <p class="text-xs text-white/60 mt-1">
+            January/February 2000
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24 lg:py-32">
+
+    <!-- Opening Pull Quote -->
+    <div class="max-w-4xl mx-auto mb-20">
+      <PullQuote
+        quote="These photographs are about beauty and irony, history and memory. The panoramic photo collages are a reconstruction of space, a remapping of space."
+        size="large"
+      />
+    </div>
+
+    <!-- Intro Statement -->
+    <div class="max-w-3xl mx-auto mb-20 text-center">
+      <p class="text-2xl md:text-3xl font-light leading-relaxed text-muted-foreground">
+        "Art is my life and when I have something to say, all that I'm interested in comes through in my art."
+      </p>
+    </div>
+
+    <!-- Two-Column Magazine Layout -->
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <!-- Main Content Column -->
+      <div class="lg:col-span-8 space-y-16">
+
+        <!-- The Technique Section -->
+        <section class="space-y-6">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold border-l-4 border-primary pl-6">
+            The Panoramic Photo Collage Technique
+          </h2>
+          <div class="prose prose-lg max-w-none leading-relaxed">
+            <p>
+              The photo collages represent the sites of Japanese American internment camps during World War II.
+              Created from multiple exposures shot from a single perspective and rotated 360 degrees, these works
+              aim to preserve both the physical remains and emotional/historical significance of these sites that
+              are rapidly disappearing from the American landscape.
+            </p>
+          </div>
+
+          <!-- Embedded Quote -->
+          <Card className="bg-primary/5 border-l-4 border-primary shadow-none">
+            <CardContent className="p-8">
+              <p class="text-xl md:text-2xl font-serif italic leading-relaxed text-foreground/90">
+                "The camera becomes my eyes... I have become the object. By viewing the collage, my experience
+                and understanding of the place becomes yours."
+              </p>
+            </CardContent>
+          </Card>
+        </section>
+
+        <!-- Image Break: Heart Mountain -->
+        <figure class="my-12">
+          <ResponsiveImage
+            imageSlug="heart-mountain-internment-camp-blue-room"
+            alt="Heart Mountain Relocation Camp, Blue Room Interior - Panoramic photo collage by Masumi Hayashi"
+            className="rounded-lg shadow-2xl"
+          />
+          <figcaption class="text-sm text-muted-foreground mt-4 text-center">
+            Heart Mountain Relocation Camp, Blue Room, Powell, Wyoming, 1995
+          </figcaption>
+        </figure>
+
+        <!-- Remapping Space Section -->
+        <section class="space-y-6">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold border-l-4 border-primary pl-6">
+            Remapping Space
+          </h2>
+          <div class="prose prose-lg max-w-none leading-relaxed">
+            <p>
+              "The concept of two-point perspective is questioned as the sequential, circular image is flattened
+              on a two-dimensional surface and collaged. The normal two-point vanishing point can have three and four.
+              The concept of a straight line connecting two points becomes a curved line connecting two vanishing
+              points (flat walls become curved walls). Two-dimensional space is remapped, reconstructed."
+            </p>
+          </div>
+        </section>
+
+        <!-- Historical Context Section -->
+        <section class="space-y-6">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold border-l-4 border-primary pl-6">
+            Historical Context
+          </h2>
+          <div class="prose prose-lg max-w-none leading-relaxed space-y-4">
+            <p>
+              This body of work reflects on the experience of 120,000 Japanese Americans who were interned during
+              World War II. As a sansei (third-generation Japanese American), I have a personal connection to this
+              work that informs my artistic vision.
+            </p>
+            <p>
+              These landscape photographs reflect history, memory, and archaeology. The photographic project began
+              in 1990 and has grown to include audio interviews of internees, family album snapshots of internees
+              and their stories, and photo collage portraits of the Japanese American survivors.
+            </p>
+          </div>
+        </section>
+
+        <!-- Beauty and Tension Section -->
+        <section class="space-y-6">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold border-l-4 border-primary pl-6">
+            Beauty and Tension
+          </h2>
+          <div class="prose prose-lg max-w-none leading-relaxed space-y-6">
+            <blockquote class="border-l-4 border-primary/30 pl-8 italic text-xl md:text-2xl text-muted-foreground">
+              "I meant these photographs to be appreciated for their beauty on one level yet, on another,
+              to create irony and tension."
+            </blockquote>
+            <p class="mt-6">
+              The visual tension between the landscapes' physical beauty and their dark historical context speaks
+              to themes of memory and justice. The panoramic format allows viewers to experience these sites as I
+              experienced them—not as distant historical artifacts, but as present, palpable spaces that continue
+              to resonate with meaning.
+            </p>
+          </div>
+        </section>
+
+        <!-- Image Break: Gila River -->
+        <figure class="my-12">
+          <ResponsiveImage
+            imageSlug="gila-river-internment-camp-foundations"
+            alt="Gila River Relocation Camp, Foundations - Panoramic photo collage by Masumi Hayashi"
+            className="rounded-lg shadow-2xl"
+          />
+          <figcaption class="text-sm text-muted-foreground mt-4 text-center">
+            Gila River Relocation Camp, Foundations, Arizona, 1990
+          </figcaption>
+        </figure>
+
+      </div>
+
+      <!-- Sidebar Column -->
+      <aside class="lg:col-span-4 space-y-8 lg:sticky lg:top-8 lg:self-start">
+
+        <!-- Key Themes Card -->
+        <Card className="shadow-lg">
+          <CardContent className="p-6 space-y-4">
+            <h3 class="text-xl font-semibold border-b pb-3">Key Themes</h3>
+            <ul class="space-y-4 text-sm">
+              <li class="flex items-start gap-3">
+                <span class="text-primary text-xl mt-0.5 flex-shrink-0">•</span>
+                <div>
+                  <strong class="block text-base mb-1">Memory</strong>
+                  <span class="text-muted-foreground">Preserving disappearing histories</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary text-xl mt-0.5 flex-shrink-0">•</span>
+                <div>
+                  <strong class="block text-base mb-1">Justice</strong>
+                  <span class="text-muted-foreground">Bearing witness to injustice</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary text-xl mt-0.5 flex-shrink-0">•</span>
+                <div>
+                  <strong class="block text-base mb-1">Beauty & Irony</strong>
+                  <span class="text-muted-foreground">Visual seduction meets dark history</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary text-xl mt-0.5 flex-shrink-0">•</span>
+                <div>
+                  <strong class="block text-base mb-1">Space</strong>
+                  <span class="text-muted-foreground">Reconstructing perception</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary text-xl mt-0.5 flex-shrink-0">•</span>
+                <div>
+                  <strong class="block text-base mb-1">Resilience</strong>
+                  <span class="text-muted-foreground">The enduring human spirit</span>
+                </div>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Related Works Gallery -->
+        <div class="space-y-4">
+          <h3 class="text-sm uppercase tracking-wider font-semibold text-muted-foreground">Related Works</h3>
+          <div class="space-y-6">
+            <figure class="group">
+              <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                <ResponsiveImage
+                  imageSlug="heart-mountain-internment-camp-interior"
+                  alt="Heart Mountain Relocation Camp Interior"
+                />
+              </div>
+              <figcaption class="text-xs text-muted-foreground mt-3 leading-relaxed">
+                Heart Mountain Relocation Camp, Interior, Powell, Wyoming
+              </figcaption>
+            </figure>
+            <figure class="group">
+              <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                <ResponsiveImage
+                  imageSlug="manzanar-internment-camp-monument"
+                  alt="Manzanar Relocation Camp Monument"
+                />
+              </div>
+              <figcaption class="text-xs text-muted-foreground mt-3 leading-relaxed">
+                Manzanar Relocation Camp, Monument, California
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <!-- About the Artist -->
+        <Card className="bg-muted shadow-md">
+          <CardContent className="p-6 space-y-3">
+            <h3 class="text-sm uppercase tracking-wider font-semibold">About the Artist</h3>
+            <p class="text-sm leading-relaxed">
+              Masumi Hayashi (1945-2006) was an artist, photographer, and professor at Cleveland State University
+              whose panoramic photo collages documented sites of historical trauma and spiritual significance.
+            </p>
+            <a href="/biography" class="text-sm text-primary hover:underline inline-flex items-center gap-1 mt-3 font-medium">
+              Read full biography
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+      </aside>
+    </div>
+
+    <!-- The Act of Witnessing - Full Width Section -->
+    <div class="max-w-5xl mx-auto mt-24 md:mt-32">
+      <section class="space-y-8 border-t-2 border-b-2 border-primary/20 py-16 md:py-20">
+        <h2 class="text-4xl md:text-5xl font-serif font-semibold text-center">
+          The Act of Witnessing
+        </h2>
+        <div class="prose prose-xl max-w-none text-center">
+          <p class="text-xl md:text-2xl leading-relaxed text-muted-foreground">
+            To photograph these sites is an act of witnessing. To view these photographs is to become a witness.
+            The circular, encompassing view places the viewer within the space, not merely observing from outside.
+            This is intentional—we cannot understand these histories from a distance. We must enter into them,
+            allow ourselves to be encompassed by them.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Legacy Section -->
+    <div class="max-w-5xl mx-auto mt-20">
+      <div class="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-10 md:p-16 rounded-2xl shadow-inner">
+        <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-6">Legacy</h2>
+        <div class="space-y-4 text-lg leading-relaxed">
+          <p class="text-foreground/90">
+            Through her art, Hayashi awakened people "gently but insistently to societal ills," applying
+            "photography's most seductive traits—believability and formal beauty—to explore disturbing subjects."
+          </p>
+          <p class="text-muted-foreground">
+            Her panoramic photo collages stand as permanent visual records of places that represent both trauma
+            and resilience in American and world history, capturing what she called "memory, justice, and the
+            enduring human spirit in the face of adversity."
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- Navigation Footer -->
+  <section class="bg-muted/50 py-16 md:py-20 border-t">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <h2 class="text-2xl font-serif font-semibold mb-8 text-center">Continue Exploring</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Biography</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Learn about Dr. Hayashi's life, education, and artistic evolution from photomosaics to panoramic collages
+            </p>
+            <a href="/biography" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              Read Biography
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Current Exhibitions</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              View current and upcoming exhibitions at SFMOMA, Canton Museum of Art, and other venues
+            </p>
+            <a href="/exhibitions" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              View Exhibitions
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Artworks</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Explore the complete collection of panoramic photo collages across 8 major series
+            </p>
+            <a href="/artworks" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              Browse Artworks
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Smooth scroll for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better text rendering */
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Print styles */
+  @media print {
+    nav, footer, aside {
+      display: none;
+    }
+  }
+</style>

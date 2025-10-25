@@ -1,7 +1,7 @@
 ---
 // Import necessary components and utilities
 import { getCollection } from 'astro:content';
-import CloudinaryImage from '@components/CloudinaryImage.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 import GalleryScrollLayout from '@layouts/GalleryScrollLayout.astro';
 import type { CollectionEntry } from 'astro:content';
 import type { ArtworkEntry } from '../../../types/artwork';
@@ -53,11 +53,6 @@ const seoTags = generateSEOTags(seoConfig);
     padding-top: 20vh;
   }
 
-  .gallery-image {
-    max-height: calc(100dvh - 4rem);
-    width: auto;
-    object-fit: contain;
-  }
 
   .scroll-indicator {
     position: absolute;
@@ -214,10 +209,10 @@ const seoTags = generateSEOTags(seoConfig);
       </div>
       {japaneseAmericanArtworks[0] && (
         <div class="preview-image">
-          <CloudinaryImage
-            cloudinaryId={japaneseAmericanArtworks[0].data.cloudinaryId}
-            name={japaneseAmericanArtworks[0].data.name}
-            classNames="w-full h-full object-cover opacity-30"
+          <ResponsiveImage
+            imageSlug={japaneseAmericanArtworks[0].slug}
+            alt={japaneseAmericanArtworks[0].data.name}
+            className="w-full h-full object-cover opacity-30"
           />
         </div>
       )}
@@ -228,17 +223,11 @@ const seoTags = generateSEOTags(seoConfig);
     <section id={artwork.slug}>
       <a href={`/artwork/japanese-american-internment-camps/${artwork.slug}`} class="artwork-link">
         <div class="artwork-container">
-          <CloudinaryImage
-            cloudinaryId={artwork.data.cloudinaryId}
-            altTag={artwork.data.name}
-            name={artwork.data.name}
-            city={artwork.data.city}
-            state={artwork.data.state}
-            country={artwork.data.country}
-            media={artwork.data.media}
-            year={artwork.data.year}
-            size={artwork.data.size}
-            figcaptionClasses="text-museum-white bg-black text-center"
+          <ResponsiveImage
+            imageSlug={artwork.slug}
+            alt={artwork.data.name}
+            className="max-h-[calc(100vh-8rem)] mx-auto"
+            loading="eager"
           />
           <div class="artwork-indicator" aria-label="View artwork details">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -247,6 +236,27 @@ const seoTags = generateSEOTags(seoConfig);
             </svg>
           </div>
         </div>
+        <figcaption class="text-sm py-2 text-center text-white/80">
+          <em>{artwork.data.name}</em>
+          {artwork.data.year && `, ${artwork.data.year}`}
+          {(artwork.data.city || artwork.data.state || artwork.data.country) && (
+            <br />
+          )}
+          {[artwork.data.city, artwork.data.state, artwork.data.country].filter(Boolean).join(', ')}
+          {artwork.data.media && (
+            <>
+              <br />
+              {artwork.data.media}
+            </>
+          )}
+          {artwork.data.size && (
+            <>
+              , {artwork.data.size}
+            </>
+          )}
+          <br />
+          Artist: Dr. Masumi Hayashi
+        </figcaption>
       </a>
     </section>
   ))}
@@ -268,10 +278,10 @@ const seoTags = generateSEOTags(seoConfig);
       </div>
       {japaneseCanadianArtworks[0] && (
         <div class="preview-image">
-          <CloudinaryImage
-            cloudinaryId={japaneseCanadianArtworks[0].data.cloudinaryId}
-            name={japaneseCanadianArtworks[0].data.name}
-            classNames="w-full h-full object-cover opacity-30"
+          <ResponsiveImage
+            imageSlug={japaneseCanadianArtworks[0].slug}
+            alt={japaneseCanadianArtworks[0].data.name}
+            className="w-full h-full object-cover opacity-30"
           />
         </div>
       )}
@@ -282,17 +292,11 @@ const seoTags = generateSEOTags(seoConfig);
     <section id={artwork.slug}>
       <a href={`/artwork/japanese-american-internment-camps/${artwork.slug}`} class="artwork-link">
         <div class="artwork-container">
-          <CloudinaryImage
-            cloudinaryId={artwork.data.cloudinaryId}
-            altTag={artwork.data.name}
-            name={artwork.data.name}
-            city={artwork.data.city}
-            state={artwork.data.state}
-            country={artwork.data.country}
-            media={artwork.data.media}
-            year={artwork.data.year}
-            size={artwork.data.size}
-            figcaptionClasses="text-museum-white bg-black text-center"
+          <ResponsiveImage
+            imageSlug={artwork.slug}
+            alt={artwork.data.name}
+            className="max-h-[calc(100vh-8rem)] mx-auto"
+            loading="eager"
           />
           <div class="artwork-indicator" aria-label="View artwork details">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -301,6 +305,27 @@ const seoTags = generateSEOTags(seoConfig);
             </svg>
           </div>
         </div>
+        <figcaption class="text-sm py-2 text-center text-white/80">
+          <em>{artwork.data.name}</em>
+          {artwork.data.year && `, ${artwork.data.year}`}
+          {(artwork.data.city || artwork.data.state || artwork.data.country) && (
+            <br />
+          )}
+          {[artwork.data.city, artwork.data.state, artwork.data.country].filter(Boolean).join(', ')}
+          {artwork.data.media && (
+            <>
+              <br />
+              {artwork.data.media}
+            </>
+          )}
+          {artwork.data.size && (
+            <>
+              , {artwork.data.size}
+            </>
+          )}
+          <br />
+          Artist: Dr. Masumi Hayashi
+        </figcaption>
       </a>
     </section>
   ))}

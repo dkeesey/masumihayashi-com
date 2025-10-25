@@ -1,10 +1,29 @@
 ---
-export interface Props {
-  children: string;
+interface Props {
+  quote: string;
+  author?: string;
+  size?: 'medium' | 'large';
+  className?: string;
 }
+
+const { quote, author = "Dr. Masumi Hayashi", size = 'medium', className = '' } = Astro.props;
+
+const sizeClasses = {
+  medium: 'text-2xl md:text-3xl',
+  large: 'text-3xl md:text-4xl lg:text-5xl'
+};
 ---
 
-<blockquote class="pull-quote">
-  <p>{Astro.props.children}</p>
+<blockquote class={`pull-quote relative my-12 md:my-16 ${className}`}>
+  <div class={`quote-mark absolute text-primary/10 font-serif leading-none select-none ${size === 'large' ? 'text-8xl md:text-9xl -top-4 -left-2 md:-left-4' : 'text-6xl md:text-7xl -top-2 -left-2'}`}>"</div>
+  <div class="relative pl-8 md:pl-12">
+    <p class={`${sizeClasses[size]} font-serif italic leading-tight text-balance text-foreground/90`}>
+      {quote}
+    </p>
+    {author && (
+      <footer class="text-sm font-medium text-muted-foreground uppercase tracking-wide mt-4">
+        — {author}
+      </footer>
+    )}
+  </div>
 </blockquote>
-

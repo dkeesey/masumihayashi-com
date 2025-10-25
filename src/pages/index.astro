@@ -1,37 +1,90 @@
 ---
-import HeroLayout from "@layouts/HeroLayout.astro";
+import Layout from "@layouts/Layout.astro";
+import ResponsiveImage from "@components/ResponsiveImage.astro";
 import SchemaScript from "@components/SchemaScript.astro";
+import { getCollection } from 'astro:content';
 import {
   generatePersonSchema,
   generateOrganizationSchema,
   generateWebSiteSchema
 } from "@lib/schema";
 
-const { classNames } = Astro.props;
+// Get artworks for featured series previews
+const allArtworks = await getCollection("artwork");
 
-const manzanarMonument = {
-  cloudinaryId: "internment-camps/manzanar-internment-camp-monument_gue2hh",
-  title: "Manzanar Concentration Camp, Monument",
-  media: "Panoramic photo collage with Fuji Crystal Archive prints",
-  year: "1995",
-  city: "Inyo County",
-  state: "California",
-  country: "USA",
-  size: '20" x 40"',
-};
+// Define series with featured artwork
+const featuredSeries = [
+  {
+    name: "Japanese American Internment Camps",
+    description: "Documenting sites of WWII incarceration where 120,000 Japanese Americans were imprisoned",
+    path: "/artwork/japanese-american-internment-camps/",
+    imageSlug: "manzanar-internment-camp-monument",
+    artworkName: "Manzanar Internment Camp Monument",
+    count: allArtworks.filter(a => a.data.series === "Japanese-American Internment Camps").length
+  },
+  {
+    name: "Sacred Architectures",
+    description: "Temples and spiritual sites across Asia captured in panoramic photo collages",
+    path: "/artwork/sacred-architectures/",
+    imageSlug: "angkor-wat-no-1-angkor-siem-reap-cambodia",
+    artworkName: "Angkor Wat No. 1",
+    count: allArtworks.filter(a => a.data.series === "Sacred Architectures").length
+  },
+  {
+    name: "Post-Industrial Landscapes",
+    description: "Rust Belt sites and urban decay documenting America's industrial decline",
+    path: "/artwork/post-industrial/",
+    imageSlug: "campbell-works-plant-youngstown-ohio",
+    artworkName: "Campbell Works Plant, Youngstown",
+    count: allArtworks.filter(a => a.data.series === "Post-Industrial Landscapes").length
+  },
+  {
+    name: "Prisons & Institutions",
+    description: "Sites of confinement including Alcatraz and Eastern State Penitentiary",
+    path: "/artwork/prisons/",
+    imageSlug: "alcatraz-penitentiary-cellblock-san-francisco-california",
+    artworkName: "Alcatraz Penitentiary Cellblock",
+    count: allArtworks.filter(a => a.data.series === "Prisons & Institutions").length
+  },
+  {
+    name: "War & Military Sites",
+    description: "Cold War installations and military bases documenting America's defense infrastructure",
+    path: "/artwork/war-military/",
+    imageSlug: "b-52s-airplane-graveyard-tucson-arizona",
+    artworkName: "B-52s Airplane Graveyard, Tucson",
+    count: allArtworks.filter(a => a.data.series === "War & Military Sites").length
+  },
+  {
+    name: "EPA Superfund Sites",
+    description: "Environmental cleanup sites documenting toxic contamination across America",
+    path: "/artwork/epa-superfund/",
+    imageSlug: "love-canal-no-1-niagra-falls-new-york",
+    artworkName: "Love Canal No. 1",
+    count: allArtworks.filter(a => a.data.series === "EPA Superfund Sites").length
+  },
+  {
+    name: "City Works",
+    description: "Urban architecture and public spaces in American cities",
+    path: "/artwork/city-works/",
+    imageSlug: "old-arcade-cleveland-ohio",
+    artworkName: "Old Arcade, Cleveland",
+    count: allArtworks.filter(a => a.data.series === "City Works").length
+  },
+  {
+    name: "Public Commissions",
+    description: "Commissioned panoramic photo collages for public institutions",
+    path: "/artwork/commissions/",
+    imageSlug: "union-terminal-cincinnati-ohio",
+    artworkName: "Union Terminal, Cincinnati",
+    count: allArtworks.filter(a => a.data.series === "Public Commissions").length
+  }
+];
 
-const seoConfig: {
-  title: string;
-  description: string;
-  keywords: string[];
-  type: 'website' | 'article';
-  image: string;
-} = {
+const seoConfig = {
   title: "Masumi Hayashi - Panoramic Photography and Social Documentary",
-  description: "Discover the panoramic photo collages of Masumi Hayashi, a pioneering photographer who documented Japanese American internment camps through panoramic photo collage.",
+  description: "Discover the panoramic photo collages of Masumi Hayashi, documenting Japanese American internment camps, sacred architectures, and sites of environmental and social trauma.",
   keywords: ["panoramic photography", "photo collages", "Japanese American history", "social documentary"],
   type: "website",
-  image: `https://res.cloudinary.com/masumi-hayashi-foundation/image/upload/${manzanarMonument.cloudinaryId}.jpg`
 };
 
 // Generate structured data for AI SEO
@@ -42,56 +95,140 @@ const schemas = [
 ];
 ---
 
-<HeroLayout
+<Layout
   title={seoConfig.title}
   description={seoConfig.description}
-  heroImage={manzanarMonument}
-  classes={classNames}
 >
   <SchemaScript schema={schemas} slot="head" />
-  <div class="prose px-6 py-24 sm:px-8 max-w-3xl mx-auto">
-    <h1 class="text-3xl font-bold my-6">American Concentration Camps: A Photographic Legacy</h1>
-    <p>
-      In 1942, the U.S. government forcibly imprisoned over 120,000 Japanese Americans in concentration camps across America. Professor Masumi Hayashi (1945-2006), born in one such camp, returned decades later with her camera to document these sites of historical trauma.
-    </p>
-    <p>
-      Through her innovative panoramic photo collages—each assembled from hundreds of individual exposures—Hayashi transformed these landscapes of confinement into powerful visual testimonies. Her work preserves not just the physical spaces, but the human experiences within them: stories captured through audio interviews with survivors and family photographs taken in defiance of camp regulations.
-    </p>
-    <p>
-      This archive presents three interconnected perspectives on the Japanese American internment:
-    </p>
-    <ul>
-      <li>Hayashi's panoramic photographs of the ten major concentration camps</li>
-      <li>The Family Album Project, featuring forbidden snapshots taken by internees and visitors</li>
-      <li>Oral histories recorded with camp survivors in 1992-1993</li>
-    </ul> 
 
+  <!-- Hero Section -->
+  <section class="relative bg-black text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+      <div class="max-w-4xl">
+        <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+          Masumi Hayashi
+        </h1>
+        <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-8 leading-relaxed">
+          Panoramic photo collages documenting sites of historical trauma, sacred spaces, and environmental change
+        </p>
+        <p class="text-lg md:text-xl text-white/70 mb-10 max-w-3xl">
+          Professor Masumi Hayashi (1945-2006) pioneered a unique form of panoramic photography, creating expansive photo collages that transform landscapes of memory into powerful visual testimonies.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/artwork/"
+            class="px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors text-lg"
+          >
+            Explore All Artwork
+          </a>
+          <a
+            href="/about/"
+            class="px-8 py-4 bg-white/10 text-white rounded-full font-medium hover:bg-white/20 transition-colors text-lg border border-white/20"
+          >
+            About Masumi
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <h2>American Concentration Camps</h2>
-    <p>
-      The <a href="/artwork/japanese-american-internment-camps/" class="hover:underline">American Concentration Camps</a> page exhibits artist/Professor
-      Hayashi's panoramic photo collages of the 10 Japanese American relocation
-      camps. These photographs only cover the relocation centers/camps. They do
-      not address the assembly centers, the U.S. Justice Dept. camps or the
-      prison and other WRA facilities.
-    </p>
-    <h2>The Family Album Project</h2>
-    <p>
-      <a href="/family-album-project/" class="hover:underline">"The Family Album Project"</a> was an exhibition curated by Professor Hayashi for the Cleveland State University Art Gallery and the Ohio Arts Council.
-      Even though cameras were contraband, family album snapshots were taken by
-      internees and visitors to the camps. This part of the camp project defines
-      the use of photography in terms of the Japanese American and Japanese
-      Canadian internment.
-    </p>
+  <!-- Series Grid -->
+  <section class="bg-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Explore by Series
+        </h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          {allArtworks.length} panoramic photo collages across 8 thematic series
+        </p>
+      </div>
 
-    <h2>Internee audio interviews</h2>
-    <p>
-      <a href="/interviews/" class="hover:underline">This is a 9 minute edited interview</a> with Japanese American internees
-      recalling evacuation and the heated climate during internment. Memories,
-      survivors of the U.S. Concentration Camps for the Japanese Americans
-      (Nikei) during WW II, from interviews by Masumi Hayashi, in 1992 and 1993.
-      Audio mastered by James Abbott, produced by Masumi Hayashi, 1994,
-      Cleveland, Ohio.
-    </p>
-  </div>
-</HeroLayout>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {featuredSeries.filter(s => s.count > 0).map((series) => (
+          <a
+            href={series.path}
+            class="group block bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+          >
+            <div class="aspect-[4/3] bg-black relative overflow-hidden">
+              <ResponsiveImage
+                imageSlug={series.imageSlug}
+                alt={series.artworkName}
+                className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+                loading="eager"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-baseline justify-between mb-2">
+                <h3 class="text-xl font-bold text-gray-900 group-hover:text-black">
+                  {series.name}
+                </h3>
+                <span class="text-sm text-gray-500">{series.count}</span>
+              </div>
+              <p class="text-sm text-gray-600 leading-relaxed">
+                {series.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a
+          href="/artwork/"
+          class="inline-block px-8 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+        >
+          View All {allArtworks.length} Artworks →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          A Legacy of Visual Testimony
+        </h2>
+        <div class="prose prose-lg max-w-none">
+          <p>
+            Born in 1945 at the Gila River concentration camp in Arizona, Masumi Hayashi spent her life documenting the landscapes that shaped American history. Her innovative panoramic photo collages—each assembled from hundreds of individual exposures—transformed sites of confinement, environmental degradation, and cultural significance into powerful visual narratives.
+          </p>
+          <p>
+            As a Professor of Art at Cleveland State University for over three decades, Hayashi dedicated her practice to creating visual records of places where trauma and memory intersect: Japanese American internment camps, abandoned industrial sites, toxic Superfund locations, and sacred architectures across Asia.
+          </p>
+          <p>
+            Her work has been exhibited internationally and is held in major museum collections including the Museum of Modern Art, Whitney Museum of American Art, and Smithsonian American Art Museum.
+          </p>
+          <div class="mt-8">
+            <a
+              href="/about/"
+              class="inline-block px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+            >
+              Read Full Biography →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current Exhibitions CTA (if applicable) -->
+  <section class="bg-black text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">
+        Currently on View
+      </h2>
+      <p class="text-lg text-white/80 mb-8">
+        Masumi Hayashi's work is featured in exhibitions across the United States
+      </p>
+      <a
+        href="/exhibitions/"
+        class="inline-block px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors text-lg"
+      >
+        View Current Exhibitions →
+      </a>
+    </div>
+  </section>
+</Layout>

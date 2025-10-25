@@ -1,14 +1,16 @@
 ---
-import CloudinaryThumbnail from './CloudinaryThumbnail.astro';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Artwork {
   slug: string;
   data: {
     name: string;
-    cloudinaryId: string;
+    imageSlug?: string;
+    slug?: string;
     year: string;
     city?: string;
     state?: string;
+    altTag?: string;
   };
 }
 
@@ -31,16 +33,19 @@ const displayArtworks = artworks.slice(0, maxItems);
       More from {seriesName}
     </h3>
     <div class={`grid gap-6 ${displayArtworks.length === 1 ? 'grid-cols-1 max-w-md mx-auto' : displayArtworks.length === 2 ? 'grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
-      {displayArtworks.map((artwork) => (
+      {displayArtworks.map((artwork) => {
+        const imageSlug = artwork.data.imageSlug || artwork.data.slug || artwork.slug.split('/').pop();
+        return (
         <a
           href={`${seriesPath}/${artwork.slug}`}
           class="group block bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
         >
           <div class="aspect-video overflow-hidden bg-gray-100">
-            <CloudinaryThumbnail
-              cloudinaryId={artwork.data.cloudinaryId}
-              alt={artwork.data.name}
+            <ResponsiveImage
+              imageSlug={imageSlug}
+              alt={artwork.data.altTag || `${artwork.data.name} by Dr. Masumi Hayashi`}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
             />
           </div>
           <div class="p-4">
@@ -57,7 +62,8 @@ const displayArtworks = artworks.slice(0, maxItems);
             </div>
           </div>
         </a>
-      ))}
+        );
+      })}
     </div>
 
     <div class="mt-8 text-center">

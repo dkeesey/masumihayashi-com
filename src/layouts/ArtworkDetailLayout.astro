@@ -1,6 +1,6 @@
 ---
 import Layout from './Layout.astro';
-import ZoomableCloudinaryImage from "../components/ZoomableCloudinaryImage.astro";
+import ResponsiveImage from "../components/ResponsiveImage.astro";
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -28,18 +28,32 @@ const { entry, galleryPath } = Astro.props;
   </div>
 
   <!-- Full-width image section with black background -->
-  <ZoomableCloudinaryImage
-    cloudinaryId={entry.data.cloudinaryId}
-    name={entry.data.name}
-    city={entry.data.city}
-    state={entry.data.state}
-    country={entry.data.country}
-    media={entry.data.media}
-    year={entry.data.year}
-    size={entry.data.size}
-    altTag={`Picture of ${entry.data.name} by Dr. Masumi Hayashi`}
-    figcaptionClasses="text-museum-white bg-black text-center"
-  />
+  <section class="w-full bg-black py-8">
+    <div class="max-w-7xl mx-auto px-4">
+      <figure>
+        <!-- Image container with viewport constraints -->
+        <div class="flex items-center justify-center min-h-[60vh]">
+          <ResponsiveImage
+            imageSlug={entry.data.imageSlug || entry.data.slug}
+            alt={`Picture of ${entry.data.name} by Dr. Masumi Hayashi`}
+            className=""
+            loading="eager"
+          />
+        </div>
+        <figcaption class="text-museum-white bg-black text-center mt-6 space-y-2">
+          <p class="text-xl font-medium">{entry.data.name}</p>
+          {(entry.data.city || entry.data.state || entry.data.country) && (
+            <p class="text-base opacity-80">
+              {[entry.data.city, entry.data.state, entry.data.country].filter(Boolean).join(', ')}
+            </p>
+          )}
+          <p class="text-sm opacity-70">{entry.data.media}</p>
+          <p class="text-sm opacity-70">{entry.data.year}</p>
+          {entry.data.size && <p class="text-sm opacity-70">{entry.data.size}</p>}
+        </figcaption>
+      </figure>
+    </div>
+  </section>
 
   <!-- Related artworks from same series -->
   <div class="bg-white w-full py-16">

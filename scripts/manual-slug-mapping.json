@@ -1,0 +1,25 @@
+{
+  "manual_mappings": {
+    "angel island immigration, men's section": "angel-island-immigration-station",
+    "alcatraz penitentiary, cellblock, san francisco, california": "alcatraz-cell-block",
+    "alcatraz penitentiary, hydro therapy room, san francisco, california (version 1)": "alcatraz-hydrotherapy-room",
+    "alcatraz penitentiary, hydro therapy room, san francisco, california (version 2)": "alcatraz-hydrotherapy-room",
+    "banteay srei, angkor, siem reap, cambodia": "banteay-srei",
+    "airavatesvara temple #1, darasuram, tamil nadu, india": "airavatesvara-1",
+    "airavatesvara temple #2, darasuram, tamil nadu, india": "airavatesvara-2",
+    "ta prohm, angkor, siem reap, cambodia": "ta-prohm",
+    "b-52's airplane graveyard, tucson, arizona": "b52s-airplane-graveyard",
+    "fort barry, battery mendell, san francisco, california": "battery-mendel",
+    "f-4's airplane graveyard, tucson, arizona": "f4-phantom-graveyard",
+    "gila river relocation camp, dog grave, gila river, arizona": "gila-river-internment-camp-dog-grave",
+    "gila river relocation camp, foundations, gila river, arizona": "gila-river-internment-camp-foundations",
+    "gila river relocation camp, monument, gila river, arizona": "gila-river-internment-camp-monument",
+    "gila river relocation camp, sewer, gila river, arizona": "gila-river-internment-camp-sewer",
+    "granada (amache) relocation camp, foundations, granada, colorado": "granada-amache-internment-camp-foundations",
+    "granada (amache) relocation camp, water tank, granada, colorado": "granada-amache-internment-camp-water-tank",
+    "heart mt. relocation camp, blue room, park county, wyoming": "heart-mountain-internment-camp-blue-room",
+    "heart mt. relocation camp, hospital, park county, wyoming": "heart-mountain-internment-camp-hospital",
+    "heart mt. relocation camp, interior, park county, wyoming": "heart-mountain-internment-camp-interior"
+  },
+  "note": "Manual mappings for MDX titles that don't match image processing metadata titles"
+}
