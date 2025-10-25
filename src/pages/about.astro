@@ -1,42 +1,105 @@
 ---
-import HeroLayout from '@layouts/HeroLayout.astro';
-import AboutComponent from '@components/pages/About';
-import SchemaScript from '@components/SchemaScript.astro';
-import {
-  generatePersonSchema,
-  generateOrganizationSchema,
-  generateBreadcrumbSchema
-} from '@lib/schema';
-
-const rameswaramData = {
-  cloudinaryId: "sacred-architectures/rameswaram-1_baqkjr",
-  title: "Rameswaram Temple",
-  media: "Panoramic Photo Collage",
-  year: "1995",
-  city: "Rameswaram",
-  state: "Tamil Nadu",
-  country: "India",
-  size: '41" x 23"',
-};
-
-// Generate structured data for AI SEO
-const schemas = [
-  generatePersonSchema(),
-  generateOrganizationSchema(),
-  generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "About", url: "/about" }
-  ])
-];
+import Layout from '@layouts/Layout.astro';
 ---
 
-<HeroLayout
-  title="About Masumi Hayashi"
-  description="Learn about the life and work of Masumi Hayashi"
-  heroImage={rameswaramData}
->
-  <SchemaScript schema={schemas} slot="head" />
-  <div class="container mx-auto px-4 py-8">
-    <AboutComponent client:load />
+<Layout title="About Dr. Masumi Hayashi - Artist Statement">
+  <div class="bg-white min-h-screen">
+    <!-- Header -->
+    <div class="bg-gradient-to-b from-gray-50 to-white py-16 border-b border-gray-200">
+      <div class="max-w-4xl mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-light text-gray-900 mb-4">Artist Statement</h1>
+        <p class="text-xl text-gray-600">Dr. Masumi Hayashi</p>
+        <p class="text-lg text-gray-500 mt-2">1945-2006</p>
+      </div>
+    </div>
+
+    <!-- Artist Statement Content -->
+    <article class="prose prose-lg max-w-4xl mx-auto px-4 py-12">
+      <!-- Opening Quotes -->
+      <blockquote class="text-2xl leading-relaxed border-l-4 border-gray-300 pl-6 italic mb-8">
+        <p>"These photographs are about beauty and irony, history and memory. The panoramic photo collages are a reconstruction of space, a remapping of space."</p>
+      </blockquote>
+
+      <blockquote class="text-xl leading-relaxed border-l-4 border-gray-300 pl-6 italic mb-12">
+        <p>"Art is my life and when I have something to say, all that I'm interested in comes through in my art."</p>
+      </blockquote>
+
+      <!-- Main Content -->
+      <h2>The Panoramic Photo Collage Technique</h2>
+      <p>
+        The photo collages represent the sites of Japanese American internment camps during World War II. Created from multiple exposures shot from a single perspective and rotated 360 degrees, these works aim to preserve both the physical remains and emotional/historical significance of these sites that are rapidly disappearing from the American landscape.
+      </p>
+
+      <blockquote>
+        <p>"The camera becomes my eyes... I have become the object. By viewing the collage, my experience and understanding of the place becomes yours."</p>
+      </blockquote>
+
+      <h2>Remapping Space</h2>
+      <p>
+        The concept of two-point perspective is questioned as the sequential, circular image is flattened on a two-dimensional surface and collaged. The normal two-point vanishing point can have three and four. The concept of a straight line connecting two points becomes a curved line connecting two vanishing points (flat walls become curved walls). Two-dimensional space is remapped, reconstructed.
+      </p>
+
+      <h2>Historical Context</h2>
+      <p>
+        This body of work reflects on the experience of 120,000 Japanese Americans who were interned during World War II. As a sansei (third-generation Japanese American), I have a personal connection to this work that informs my artistic vision.
+      </p>
+      <p>
+        These landscape photographs reflect history, memory, and archaeology. The photographic project began in 1990 and has grown to include audio interviews of internees, family album snapshots of internees and their stories, and photo collage portraits of the Japanese American survivors.
+      </p>
+
+      <h2>Beauty and Tension</h2>
+      <blockquote>
+        <p>"I meant these photographs to be appreciated for their beauty on one level yet, on another, to create irony and tension."</p>
+      </blockquote>
+      <p>
+        The visual tension between the landscapes' physical beauty and their dark historical context speaks to themes of memory and justice. The panoramic format allows viewers to experience these sites as I experienced them—not as distant historical artifacts, but as present, palpable spaces that continue to resonate with meaning.
+      </p>
+
+      <h2>Themes</h2>
+      <p>
+        Through these works, I seek to capture memory, justice, and the enduring human spirit in the face of adversity. The panoramic photo collages create a permanent visual record of sites that represent both trauma and resilience in American history.
+      </p>
+      <p>
+        The technique itself embodies these themes—taking fragmented moments and assembling them into a unified whole mirrors the process of collective memory and historical understanding.
+      </p>
+
+      <h2>The Act of Witnessing</h2>
+      <p>
+        To photograph these sites is an act of witnessing. To view these photographs is to become a witness. The circular, encompassing view places the viewer within the space, not merely observing from outside. This is intentional—we cannot understand these histories from a distance. We must enter into them, allow ourselves to be encompassed by them.
+      </p>
+
+      <!-- Learn More Section -->
+      <div class="not-prose mt-16 p-8 bg-gray-50 rounded-lg border border-gray-200">
+        <h3 class="text-2xl font-light text-gray-900 mb-6">Learn More About Dr. Hayashi</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/about/biography/" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary-interactive-link hover:shadow-md transition-all duration-300">
+            <h4 class="text-lg font-medium text-gray-900 mb-2">Biography</h4>
+            <p class="text-gray-600 text-sm">Life and career of Dr. Masumi Hayashi</p>
+          </a>
+          <a href="/about/cv/" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary-interactive-link hover:shadow-md transition-all duration-300">
+            <h4 class="text-lg font-medium text-gray-900 mb-2">Curriculum Vitae</h4>
+            <p class="text-gray-600 text-sm">Academic credentials and achievements</p>
+          </a>
+          <a href="/exhibitions/" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary-interactive-link hover:shadow-md transition-all duration-300">
+            <h4 class="text-lg font-medium text-gray-900 mb-2">Exhibitions</h4>
+            <p class="text-gray-600 text-sm">Solo and group exhibitions worldwide</p>
+          </a>
+          <a href="/about/bibliography/" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary-interactive-link hover:shadow-md transition-all duration-300">
+            <h4 class="text-lg font-medium text-gray-900 mb-2">Bibliography</h4>
+            <p class="text-gray-600 text-sm">Publications and scholarly works</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- View Artwork CTA -->
+      <div class="not-prose mt-8 text-center">
+        <a
+          href="/artwork/"
+          class="inline-block bg-primary-interactive-link text-white px-8 py-4 rounded-lg hover:bg-primary-interactive-hover transition-colors font-medium text-lg"
+        >
+          View Artwork Galleries →
+        </a>
+      </div>
+    </article>
   </div>
-</HeroLayout>
+</Layout>
