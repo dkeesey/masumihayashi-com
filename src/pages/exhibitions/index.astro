@@ -51,6 +51,16 @@ const formatDateRange = (startDate: Date, endDate?: Date) => {
                 <div class="p-8">
                   <div class="flex items-start justify-between mb-4">
                     <div class="flex-1">
+                      {exhibition.data.venueLogo && (
+                        <div class="mb-4">
+                          <img
+                            src={exhibition.data.venueLogo}
+                            alt={exhibition.data.venue}
+                            class="h-12 w-auto object-contain grayscale opacity-60"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
                       <h3 class="text-2xl font-medium text-gray-900 mb-2">
                         <a href={`/exhibitions/${exhibition.slug}/`} class="hover:text-primary-interactive-link transition-colors">
                           {exhibition.data.title}

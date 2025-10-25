@@ -83,6 +83,7 @@ const exhibitionsCollection = defineCollection({
     // Core information
     title: z.string(),
     venue: z.string(),
+    venueLogo: z.string().optional(), // Path to museum logo image
     location: z.string().optional(), // City, State/Country
 
     // Dates
