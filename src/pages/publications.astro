@@ -1,0 +1,378 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import { Card, CardContent } from '@components/ui/card';
+
+const pageTitle = "Publications & Bibliography | Masumi Hayashi";
+const metaDescription = "Complete bibliography of publications, exhibition catalogs, and scholarly works featuring Dr. Masumi Hayashi's panoramic photo collages. Compiled by Julianne Gavino and Taylor Hoffman.";
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+
+  <!-- Hero Section -->
+  <section class="relative w-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-20 md:py-28">
+      <div class="max-w-4xl">
+        <p class="text-xs md:text-sm uppercase tracking-widest text-white/70 mb-4 font-medium">
+          Scholarly Record
+        </p>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight mb-6">
+          Publications & Bibliography
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 font-light leading-relaxed">
+          A comprehensive bibliography documenting publications, exhibition catalogs, and scholarly works featuring Dr. Masumi Hayashi's photography from 1975 through 2025.
+        </p>
+        <div class="mt-8 pt-6 border-t border-white/20">
+          <p class="text-sm text-white/80">
+            Compiled by Julianne Gavino and Taylor Hoffman
+          </p>
+          <p class="text-xs text-white/60 mt-1">
+            Coverage: 1975–2013 (75+ entries) | Updated 2025
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
+
+    <!-- Introduction -->
+    <div class="max-w-4xl mb-16">
+      <p class="text-lg md:text-xl leading-relaxed text-muted-foreground">
+        This bibliography documents publications, exhibition catalogs, scholarly works, and media coverage of Dr. Masumi Hayashi's work. It reflects her significant impact on contemporary photography, particularly her pioneering documentation of Japanese American internment camps and environmental sites.
+      </p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="grid md:grid-cols-4 gap-6 mb-20">
+      <Card className="bg-primary/5 border-primary/20">
+        <CardContent className="p-6 text-center">
+          <p class="text-4xl font-bold text-primary mb-2">3</p>
+          <p class="text-sm text-muted-foreground">Major Monographs</p>
+        </CardContent>
+      </Card>
+      <Card className="bg-primary/5 border-primary/20">
+        <CardContent className="p-6 text-center">
+          <p class="text-4xl font-bold text-primary mb-2">12+</p>
+          <p class="text-sm text-muted-foreground">Exhibition Catalogs</p>
+        </CardContent>
+      </Card>
+      <Card className="bg-primary/5 border-primary/20">
+        <CardContent className="p-6 text-center">
+          <p class="text-4xl font-bold text-primary mb-2">25+</p>
+          <p class="text-sm text-muted-foreground">Journal Articles</p>
+        </CardContent>
+      </Card>
+      <Card className="bg-primary/5 border-primary/20">
+        <CardContent className="p-6 text-center">
+          <p class="text-4xl font-bold text-primary mb-2">75+</p>
+          <p class="text-sm text-muted-foreground">Total Citations</p>
+        </CardContent>
+      </Card>
+    </div>
+
+    <!-- Key Publications -->
+    <section class="mb-20">
+      <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-8 border-l-4 border-primary pl-6">
+        Key Publications
+      </h2>
+
+      <div class="space-y-8">
+        <!-- Tannenbaum Book -->
+        <Card className="shadow-lg border-l-4 border-primary">
+          <CardContent className="p-8">
+            <div class="flex items-start gap-6">
+              <div class="shrink-0 w-20 h-28 bg-primary/10 rounded flex items-center justify-center">
+                <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+              </div>
+              <div class="flex-grow space-y-3">
+                <p class="text-xs uppercase tracking-wider text-muted-foreground">Definitive Monograph</p>
+                <h3 class="text-xl font-semibold">
+                  Masumi Hayashi: Panoramic Photo Collages 1976-2006
+                </h3>
+                <p class="text-sm text-muted-foreground">
+                  <strong>Barbara Tannenbaum.</strong> Santa Fe, NM: Radius Books, 2006.
+                </p>
+                <p class="text-sm leading-relaxed">
+                  The definitive monograph on Hayashi's work, featuring comprehensive essay by Barbara Tannenbaum, complete chronology, exhibitions list, and bibliography compiled by Julianne Gavino.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Alinder Book -->
+        <Card className="shadow-md border-l-4 border-primary/50">
+          <CardContent className="p-6">
+            <p class="text-xs uppercase tracking-wider text-muted-foreground mb-2">Scholarly Analysis</p>
+            <h3 class="text-lg font-semibold mb-2">
+              Moving Images: Photography and the Japanese American Incarceration
+            </h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              <strong>Jasmine Alinder.</strong> Urbana: University of Illinois Press, 2009.
+            </p>
+            <p class="text-sm leading-relaxed">
+              Scholarly analysis of photographic representations of Japanese American internment, featuring extensive discussion of Hayashi's work.
+            </p>
+          </CardContent>
+        </Card>
+
+        <!-- Gavino Dissertation -->
+        <Card className="shadow-md border-l-4 border-primary/50">
+          <CardContent className="p-6">
+            <p class="text-xs uppercase tracking-wider text-muted-foreground mb-2">Doctoral Dissertation</p>
+            <h3 class="text-lg font-semibold mb-2">
+              Topographies of Race and Public Space: Asian American Artists in California, 1970 to present
+            </h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              <strong>Julianne P. Gavino.</strong> Ph.D. diss., University of California, Santa Barbara, 2015.
+            </p>
+            <p class="text-sm leading-relaxed">
+              Comprehensive scholarly analysis placing Hayashi's work in the broader context of Asian American art and public space.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+
+    <!-- Major Categories -->
+    <section class="mb-20">
+      <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-8 border-l-4 border-primary pl-6">
+        Bibliography by Category
+      </h2>
+
+      <div class="space-y-12">
+
+        <!-- Exhibition Catalogs -->
+        <div>
+          <h3 class="text-2xl font-serif font-semibold mb-6 flex items-center gap-3">
+            <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-bold">12+</span>
+            Exhibition Catalogs & Museum Publications
+          </h3>
+          <div class="space-y-4 pl-11">
+            <div class="pb-4 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Hayashi, Masumi.</strong> <em>Sights Unseen: The Photographic Constructions of Masumi Hayashi: May 31–September 14, 2003.</em> Los Angeles, CA: Japanese American National Museum, 2003.
+              </p>
+            </div>
+            <div class="pb-4 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Hayashi, Masumi, A. D. Coleman, George Mauersberger, et al.</strong> <em>Masumi Hayashi, Meditations.</em> Cleveland, OH: Cleveland State University, 2007. [Memorial exhibition catalog from four Cleveland venues]
+              </p>
+            </div>
+            <div class="pb-4 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Hayashi, Masumi, and Wendy Kendall-Hess.</strong> <em>EPA Superfund Sites.</em> Akron, OH: Akron Art Museum, 1992.
+              </p>
+            </div>
+            <div class="pb-4 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Sparks, Amy Bracken, and Masumi Hayashi.</strong> <em>Cultural Connections: Explorations of Transcultural Identity.</em> Cleveland, OH: SPACES Gallery, 1995.
+              </p>
+            </div>
+            <div class="pb-4 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Williams, Val.</strong> <em>Warworks: Women, Photography and the Iconography of War.</em> London, UK: Virago, 1994. [Featured Hayashi's internment camp series]
+              </p>
+            </div>
+            <div class="pb-4 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Cohen-Or, Beni, Beate Reifenscheid, Claudia Heitmann, and Ludwig Museum im Deutschherrenhaus (Koblenz).</strong> <em>Cultural Identity?: Beni Cohen-Or, Masumi Hayashi, Hengameh Mahvi, Qi Yang.</em> Koblenz, Germany: Ludwig Museum im Deutschherrenhaus, 2002.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Journal Articles -->
+        <div>
+          <h3 class="text-2xl font-serif font-semibold mb-6 flex items-center gap-3">
+            <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-bold">25+</span>
+            Journal Articles & Essays
+          </h3>
+          <div class="grid md:grid-cols-2 gap-4 pl-11">
+            <div class="p-4 bg-muted/30 rounded-lg">
+              <p class="text-sm leading-relaxed">
+                <strong>Goldberg, Vicki.</strong> "A Terrible Beauty," <em>ARTnews</em>, Vol. 90, No. 6 (Summer 1991): 106–113.
+              </p>
+            </div>
+            <div class="p-4 bg-muted/30 rounded-lg">
+              <p class="text-sm leading-relaxed">
+                <strong>Coleman, A. D.</strong> "The East Comes West: Japanese Photography in the U.S. Today," <em>Camera and Darkroom Photography</em>, Vol. 14, No. 6 (June 1992): 18–27.
+              </p>
+            </div>
+            <div class="p-4 bg-muted/30 rounded-lg">
+              <p class="text-sm leading-relaxed">
+                <strong>Hayashi, Masumi.</strong> "American Concentration Camps," <em>See: A Journal of Visual Culture</em>, Vol. 1–2 (Winter 1995): 33–35 and 64.
+              </p>
+            </div>
+            <div class="p-4 bg-muted/30 rounded-lg">
+              <p class="text-sm leading-relaxed">
+                <strong>Coleman, A. D.</strong> "Frames of Reference," <em>Ag: The International Journal of Photographic Art & Practice</em>, Vol. 62 (Winter 2011): 62–71.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Magazine Features -->
+        <div>
+          <h3 class="text-2xl font-serif font-semibold mb-6 flex items-center gap-3">
+            <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-bold">15+</span>
+            Magazine Features
+          </h3>
+          <div class="space-y-4 pl-11">
+            <div class="flex gap-4 p-4 bg-primary/5 rounded-lg">
+              <div class="shrink-0">
+                <span class="inline-block px-2 py-1 bg-primary text-white text-xs rounded">1995</span>
+              </div>
+              <div>
+                <p class="text-sm leading-relaxed">
+                  <strong>Dowie, Mark.</strong> "The Fourth Wave," <em>Mother Jones Magazine</em>, Vol. 20, No. 2 (March/April 1995): 34–36. [Featured Hayashi's EPA Superfund Sites series]
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-4 p-4 bg-primary/5 rounded-lg">
+              <div class="shrink-0">
+                <span class="inline-block px-2 py-1 bg-primary text-white text-xs rounded">1997</span>
+              </div>
+              <div>
+                <p class="text-sm leading-relaxed">
+                  <em>DoubleTake Magazine</em>, Vol. 3, No. 4 (Fall 1997): 98–99. [Lemon Creek Internment Camp panoramic photo collage]
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-4 p-4 bg-primary/5 rounded-lg">
+              <div class="shrink-0">
+                <span class="inline-block px-2 py-1 bg-primary text-white text-xs rounded">1992</span>
+              </div>
+              <div>
+                <p class="text-sm leading-relaxed">
+                  <strong>Solnit, Rebecca.</strong> "The West Revisited," <em>Creative Camera</em>, Vol. 319 (Dec 1992/Jan 1993). [Featured alongside Mark Klett, Linda Connor, Richard Misrach]
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Book Chapters -->
+        <div>
+          <h3 class="text-2xl font-serif font-semibold mb-6 flex items-center gap-3">
+            <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-bold">8+</span>
+            Book Chapters & Anthologies
+          </h3>
+          <div class="space-y-3 pl-11">
+            <div class="pb-3 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Lippard, Lucy R.</strong> "Undertones: Ten Cultural Landscapes," in Neumaier, D., ed., <em>Reframings: New American Feminist Photographies.</em> Philadelphia, PA: Temple University Press, 1995.
+              </p>
+            </div>
+            <div class="pb-3 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Coleman, A. D.</strong> "Shared Memory: Artists' Perspectives and Practices," in Leslie Umberger, ed., <em>Hiding Places: Memory in the Arts.</em> Sheboygan, WI: John Michael Kohler Arts Center, 2011.
+              </p>
+            </div>
+            <div class="pb-3 border-b">
+              <p class="text-sm leading-relaxed">
+                <strong>Solnit, Rebecca.</strong> <em>As Eve Said to the Serpent: On Landscape, Gender, and Art.</em> Athens, GA: University of Georgia Press, 2001.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-2xl p-10 md:p-16">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-serif font-semibold mb-4">Complete Bibliography</h2>
+        <p class="text-lg leading-relaxed mb-6 text-muted-foreground">
+          The complete bibliography compiled by Julianne Gavino and Taylor Hoffman contains 75+ entries spanning publications from 1975 through 2013, with ongoing updates for recent exhibitions and publications.
+        </p>
+        <p class="text-sm text-muted-foreground mb-6">
+          For researchers, scholars, and curators seeking the complete annotated bibliography, please contact the Foundation.
+        </p>
+        <a href="/contact" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          Request Complete Bibliography
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </article>
+
+  <!-- Navigation Footer -->
+  <section class="bg-muted/50 py-16 md:py-20 border-t">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <h2 class="text-2xl font-serif font-semibold mb-8 text-center">Explore More</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Collections</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              View the 20+ major museum collections holding Dr. Hayashi's panoramic photo collages
+            </p>
+            <a href="/collections" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              View Collections
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Biography</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Learn about Dr. Hayashi's life, artistic evolution, and teaching career
+            </p>
+            <a href="/biography" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              Read Biography
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Exhibitions</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Current and upcoming exhibitions at SFMOMA, National Gallery, and more
+            </p>
+            <a href="/exhibitions" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              View Exhibitions
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+</style>

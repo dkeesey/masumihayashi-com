@@ -1,0 +1,162 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all exhibitions and sort by start date (most recent first)
+const exhibitions = await getCollection('exhibitions');
+const sortedExhibitions = exhibitions.sort((a, b) =>
+  b.data.startDate.getTime() - a.data.startDate.getTime()
+);
+
+// Separate by status
+const currentExhibitions = sortedExhibitions.filter(e => e.data.status === 'current');
+const upcomingExhibitions = sortedExhibitions.filter(e => e.data.status === 'upcoming');
+const pastExhibitions = sortedExhibitions.filter(e => e.data.status === 'past');
+
+// Format date helper
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+// Format date range helper
+const formatDateRange = (startDate: Date, endDate?: Date) => {
+  if (!endDate) return `${formatDate(startDate)} – Present`;
+  return `${formatDate(startDate)} – ${formatDate(endDate)}`;
+};
+---
+
+<Layout title="Exhibitions - Dr. Masumi Hayashi">
+  <div class="bg-white min-h-screen">
+    <!-- Header -->
+    <div class="bg-gradient-to-b from-gray-50 to-white py-16 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-light text-gray-900 mb-4">Exhibitions</h1>
+        <p class="text-xl text-gray-600">Solo and group exhibitions featuring the work of Dr. Masumi Hayashi</p>
+      </div>
+    </div>
+
+    <!-- Exhibitions Content -->
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <!-- Current Exhibitions -->
+      {currentExhibitions.length > 0 && (
+        <section class="mb-16">
+          <h2 class="text-3xl font-light text-gray-900 mb-8 border-b border-gray-200 pb-3">Current Exhibitions</h2>
+          <div class="grid gap-8">
+            {currentExhibitions.map((exhibition) => (
+              <article class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="p-8">
+                  <div class="flex items-start justify-between mb-4">
+                    <div class="flex-1">
+                      <h3 class="text-2xl font-medium text-gray-900 mb-2">
+                        <a href={`/exhibitions/${exhibition.slug}/`} class="hover:text-primary-interactive-link transition-colors">
+                          {exhibition.data.title}
+                        </a>
+                      </h3>
+                      <p class="text-lg text-gray-700 font-medium">{exhibition.data.venue}</p>
+                      {exhibition.data.location && (
+                        <p class="text-gray-600">{exhibition.data.location}</p>
+                      )}
+                    </div>
+                    {exhibition.data.featured && (
+                      <span class="bg-amber-100 text-amber-800 text-sm font-medium px-3 py-1 rounded-full">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+
+                  <p class="text-gray-600 mb-4">
+                    {formatDateRange(exhibition.data.startDate, exhibition.data.endDate)}
+                  </p>
+
+                  <p class="text-gray-700 mb-6 leading-relaxed">
+                    {exhibition.data.description}
+                  </p>
+
+                  <div class="flex gap-4">
+                    <a
+                      href={`/exhibitions/${exhibition.slug}/`}
+                      class="text-primary-interactive-link hover:text-primary-interactive-hover font-medium"
+                    >
+                      View Details →
+                    </a>
+                    {exhibition.data.venueWebsite && (
+                      <a
+                        href={exhibition.data.venueWebsite}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-gray-600 hover:text-gray-900 font-medium"
+                      >
+                        Visit Exhibition Website ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Upcoming Exhibitions -->
+      {upcomingExhibitions.length > 0 && (
+        <section class="mb-16">
+          <h2 class="text-3xl font-light text-gray-900 mb-8 border-b border-gray-200 pb-3">Upcoming Exhibitions</h2>
+          <div class="grid gap-6">
+            {upcomingExhibitions.map((exhibition) => (
+              <article class="bg-gray-50 border border-gray-200 rounded-lg p-6 hover:bg-white hover:shadow-md transition-all duration-300">
+                <h3 class="text-xl font-medium text-gray-900 mb-2">
+                  <a href={`/exhibitions/${exhibition.slug}/`} class="hover:text-primary-interactive-link transition-colors">
+                    {exhibition.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-700 font-medium mb-1">{exhibition.data.venue}</p>
+                <p class="text-gray-600 mb-3">
+                  {formatDateRange(exhibition.data.startDate, exhibition.data.endDate)}
+                </p>
+                <p class="text-gray-700 text-sm">
+                  {exhibition.data.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Past Exhibitions -->
+      {pastExhibitions.length > 0 && (
+        <section>
+          <h2 class="text-3xl font-light text-gray-900 mb-8 border-b border-gray-200 pb-3">Past Exhibitions</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            {pastExhibitions.map((exhibition) => (
+              <article class="bg-white border border-gray-100 rounded-lg p-6 hover:border-gray-300 hover:shadow-sm transition-all duration-300">
+                <h3 class="text-lg font-medium text-gray-900 mb-2">
+                  <a href={`/exhibitions/${exhibition.slug}/`} class="hover:text-primary-interactive-link transition-colors">
+                    {exhibition.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-700 text-sm mb-1">{exhibition.data.venue}</p>
+                <p class="text-gray-500 text-sm">
+                  {formatDateRange(exhibition.data.startDate, exhibition.data.endDate)}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Full Exhibition History -->
+      <div class="mt-16 pt-8 border-t border-gray-200">
+        <p class="text-gray-600">
+          For a comprehensive list of Dr. Hayashi's exhibitions throughout her career, please see the
+          <a href="/about/cv/#exhibitions" class="text-primary-interactive-link hover:text-primary-interactive-hover font-medium">
+            Exhibitions section of her Curriculum Vitae
+          </a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

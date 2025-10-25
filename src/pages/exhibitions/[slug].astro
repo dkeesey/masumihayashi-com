@@ -1,0 +1,154 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async () => {
+  const exhibitions = await getCollection('exhibitions');
+  return exhibitions.map((exhibition) => ({
+    params: { slug: exhibition.slug },
+    props: { exhibition },
+  }));
+}) satisfies GetStaticPaths;
+
+const { exhibition } = Astro.props;
+const { Content } = await exhibition.render();
+
+// Format date helper
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+// Format date range helper
+const formatDateRange = (startDate: Date, endDate?: Date) => {
+  if (!endDate) return `${formatDate(startDate)} – Present`;
+  return `${formatDate(startDate)} – ${formatDate(endDate)}`;
+};
+
+// Determine status badge color
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'current':
+      return 'bg-green-100 text-green-800';
+    case 'upcoming':
+      return 'bg-blue-100 text-blue-800';
+    case 'past':
+      return 'bg-gray-100 text-gray-800';
+    default:
+      return 'bg-gray-100 text-gray-800';
+  }
+};
+
+const statusLabel = {
+  current: 'Now Showing',
+  upcoming: 'Upcoming',
+  past: 'Past Exhibition'
+}[exhibition.data.status] || 'Exhibition';
+---
+
+<Layout title={`${exhibition.data.title} - Exhibitions`}>
+  <div class="bg-white min-h-screen">
+    <!-- Header -->
+    <div class="bg-gradient-to-b from-gray-50 to-white py-16 border-b border-gray-200">
+      <div class="max-w-4xl mx-auto px-4">
+        <!-- Breadcrumb -->
+        <nav class="mb-6 text-sm">
+          <a href="/exhibitions/" class="text-gray-600 hover:text-gray-900">Exhibitions</a>
+          <span class="text-gray-400 mx-2">/</span>
+          <span class="text-gray-900">{exhibition.data.title}</span>
+        </nav>
+
+        <!-- Status Badge -->
+        <div class="mb-4">
+          <span class={`inline-block ${getStatusColor(exhibition.data.status)} text-sm font-medium px-3 py-1 rounded-full`}>
+            {statusLabel}
+          </span>
+          {exhibition.data.featured && (
+            <span class="inline-block ml-2 bg-amber-100 text-amber-800 text-sm font-medium px-3 py-1 rounded-full">
+              Featured
+            </span>
+          )}
+        </div>
+
+        <!-- Title and Venue -->
+        <h1 class="text-4xl md:text-5xl font-light text-gray-900 mb-4">{exhibition.data.title}</h1>
+        <p class="text-2xl text-gray-700 mb-2">{exhibition.data.venue}</p>
+        {exhibition.data.location && (
+          <p class="text-lg text-gray-600 mb-4">{exhibition.data.location}</p>
+        )}
+
+        <!-- Dates -->
+        <p class="text-lg text-gray-700 font-medium">
+          {formatDateRange(exhibition.data.startDate, exhibition.data.endDate)}
+        </p>
+
+        <!-- Curator -->
+        {exhibition.data.curatorName && (
+          <p class="text-gray-600 mt-2">
+            Curated by {exhibition.data.curatorName}
+          </p>
+        )}
+      </div>
+    </div>
+
+    <!-- Exhibition Content -->
+    <article class="prose prose-lg max-w-4xl mx-auto px-4 py-12">
+      <!-- Description -->
+      {exhibition.data.description && (
+        <p class="lead">{exhibition.data.description}</p>
+      )}
+
+      <!-- Main Content (from MDX) -->
+      <Content />
+
+      <!-- External Links -->
+      {exhibition.data.externalLinks && exhibition.data.externalLinks.length > 0 && (
+        <div class="not-prose mt-12 p-6 bg-gray-50 rounded-lg border border-gray-200">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Exhibition Resources</h3>
+          <ul class="space-y-2">
+            {exhibition.data.externalLinks.map((link) => (
+              <li>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-primary-interactive-link hover:text-primary-interactive-hover font-medium"
+                >
+                  {link.title} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <!-- Venue Website -->
+      {exhibition.data.venueWebsite && (
+        <div class="not-prose mt-8">
+          <a
+            href={exhibition.data.venueWebsite}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-primary-interactive-link text-white px-6 py-3 rounded-lg hover:bg-primary-interactive-hover transition-colors font-medium"
+          >
+            Visit Exhibition Website ↗
+          </a>
+        </div>
+      )}
+    </article>
+
+    <!-- Back to Exhibitions -->
+    <div class="max-w-4xl mx-auto px-4 pb-12">
+      <a
+        href="/exhibitions/"
+        class="text-gray-600 hover:text-gray-900 font-medium"
+      >
+        ← Back to All Exhibitions
+      </a>
+    </div>
+  </div>
+</Layout>

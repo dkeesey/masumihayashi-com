@@ -1,0 +1,541 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import PullQuote from '@components/PullQuote.astro';
+import { Card, CardContent } from '@components/ui/card';
+
+const pageTitle = "Biography | Masumi Hayashi";
+const metaDescription = "Biography of Dr. Masumi Hayashi (1945-2006), artist, photographer, and educator whose panoramic photo collages documented sites of historical trauma and spiritual significance.";
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+
+  <!-- Hero Section with Portrait/Signature Work -->
+  <section class="relative w-full h-[70vh] md:h-[80vh] bg-black overflow-hidden">
+    <div class="absolute inset-0">
+      <ResponsiveImage
+        imageSlug="old-arcade"
+        alt="Old Arcade, Cleveland, Ohio - Panoramic photo collage by Masumi Hayashi"
+        loading="eager"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent"></div>
+
+    <!-- Hero Text Overlay -->
+    <div class="absolute bottom-0 left-0 right-0 px-6 md:px-12 lg:px-24 pb-12 md:pb-20 lg:pb-24">
+      <div class="max-w-6xl">
+        <p class="text-xs md:text-sm uppercase tracking-widest text-white/70 mb-3 font-medium">
+          1945–2006
+        </p>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-[1.05] mb-6">
+          Dr. Masumi Hayashi
+        </h1>
+        <p class="text-xl md:text-2xl lg:text-3xl text-white/95 font-light leading-relaxed max-w-3xl">
+          Artist, Photographer, and Educator
+        </p>
+        <div class="mt-8 pt-6 border-t border-white/20 max-w-2xl">
+          <p class="text-base md:text-lg text-white/90 leading-relaxed">
+            Pioneering creator of panoramic photo collages documenting sites of historical trauma,
+            environmental degradation, and spiritual significance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24 lg:py-32">
+
+    <!-- Opening Pull Quote -->
+    <div class="max-w-4xl mx-auto mb-20">
+      <PullQuote
+        quote="Art is my life and when I have something to say, all that I'm interested in comes through in my art."
+        size="large"
+      />
+    </div>
+
+    <!-- Two-Column Layout -->
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <!-- Main Content Column -->
+      <div class="lg:col-span-8 space-y-16">
+
+        <!-- Early Life Section -->
+        <section class="space-y-6">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold border-l-4 border-primary pl-6">
+            Early Life and Education
+          </h2>
+          <div class="prose prose-lg max-w-none leading-relaxed space-y-4">
+            <p>
+              Born September 3, 1945, at the <strong>Gila River Relocation Center</strong> in Arizona to Tomio
+              and Sakae Hayashi, both of Japanese descent, Masumi's life and work were deeply influenced by her
+              family's history. She was the fourth of six children, born into the Japanese American internment
+              system that would later become the subject of her most significant artistic work.
+            </p>
+            <p>
+              Her awareness of being a woman, a Japanese American, and a Buddhist in a largely Christian, white,
+              male-dominated land shaped both her artistic vision and her choice of subject matter.
+            </p>
+          </div>
+
+          <!-- Embedded Timeline Card -->
+          <Card className="bg-muted/50 border-l-4 border-primary">
+            <CardContent className="p-8">
+              <h3 class="text-lg font-semibold mb-4">Education</h3>
+              <ul class="space-y-3 text-sm">
+                <li class="flex gap-3">
+                  <span class="text-primary font-bold shrink-0">1976-77</span>
+                  <span><strong>MFA</strong>, Florida State University, Tallahassee<br/>
+                  <span class="text-muted-foreground">Began experimenting with photographic collage techniques</span></span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="text-primary font-bold shrink-0">1985</span>
+                  <span><strong>Post-college Certification</strong>, Sheridan College, Oakville, Ontario, Canada<br/>
+                  <span class="text-muted-foreground">Computer graphics with honors</span></span>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
+
+        <!-- Teaching Career Section -->
+        <section class="space-y-6">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold border-l-4 border-primary pl-6">
+            Teaching Career
+          </h2>
+          <div class="prose prose-lg max-w-none leading-relaxed">
+            <p>
+              In fall 1982, Professor Hayashi joined the faculty at <strong>Cleveland State University</strong>
+              in Cleveland, Ohio, where she taught photography for over twenty-two years. Her dedication to
+              education was matched by her commitment to expanding the field—she continually incorporated new
+              digital technologies into her teaching curriculum while maintaining her own analog artistic practice.
+            </p>
+          </div>
+        </section>
+
+        <!-- Image Break: Gila River -->
+        <figure class="my-16">
+          <ResponsiveImage
+            imageSlug="gila-river-internment-camp-foundations"
+            alt="Gila River Relocation Camp, Foundations - Panoramic photo collage by Masumi Hayashi"
+            className="rounded-lg shadow-2xl"
+          />
+          <figcaption class="text-sm text-muted-foreground mt-4 text-center">
+            Gila River Relocation Camp, Foundations, Arizona, 1990 — Dr. Hayashi's birthplace
+          </figcaption>
+        </figure>
+
+        <!-- Artistic Evolution Section -->
+        <section class="space-y-8">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold border-l-4 border-primary pl-6">
+            Artistic Evolution
+          </h2>
+
+          <!-- Photomosaics Period -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-serif font-semibold text-primary">
+              Early Work: Photomosaics (1980-1985)
+            </h3>
+            <p class="prose prose-lg leading-relaxed">
+              By 1980, Hayashi had turned to electrostatic printing as her principal medium, using color photocopiers
+              to produce still lifes composed of lushly patterned fabrics, found objects, and images from popular
+              culture and art history. These "photomosaics" ranged from 16 x 20 inches to 30 x 40 inches and
+              incorporated airbrushing with acrylic paint.
+            </p>
+            <p class="prose prose-lg leading-relaxed">
+              Her use of grid structures and the practice of imaging on a copier provided "a space for thinking
+              sequentially about the construction of multifaceted pieces," establishing the foundation for her
+              later panoramic works.
+            </p>
+          </div>
+
+          <!-- Breakthrough -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-serif font-semibold text-primary">
+              Breakthrough: Panoramic Photo Collages (1985-2006)
+            </h3>
+            <p class="prose prose-lg leading-relaxed">
+              In <strong>1985</strong>, during a week-long residency at the Kohler Art Center in Sheboygan,
+              Wisconsin, Hayashi photographed a building interior by pivoting her camera through multiple frames—the
+              first time she employed this technique. Returning to Cleveland, she began applying the method to
+              document the city's abandoned factories and steel mills.
+            </p>
+          </div>
+
+          <!-- Technique Card -->
+          <Card className="bg-gradient-to-br from-primary/5 to-transparent border-none shadow-lg">
+            <CardContent className="p-8 space-y-4">
+              <h4 class="text-lg font-semibold">The Panoramic Technique</h4>
+              <p class="text-sm leading-relaxed">
+                Her technique involved setting a 50mm focal length lens on a 35mm Nikon camera at eye level
+                (approximately five feet) and systematically photographing in a 360-degree rotation, moving the
+                camera twenty degrees with each shot. She would capture multiple vertical levels above and below
+                the horizon line, consuming three to five rolls of film (108-180 exposures) per location.
+              </p>
+              <p class="text-sm leading-relaxed">
+                Each final collage comprised around <strong>100 borderless prints</strong> (3.5 x 5 or 4 x 6 inches)
+                assembled into a grid pattern with slight overlaps and spacing variations.
+              </p>
+            </CardContent>
+          </Card>
+        </section>
+
+        <!-- Image Gallery: Evolution of Series -->
+        <section class="space-y-6">
+          <h3 class="text-2xl font-serif font-semibold">A Visual Journey Through Her Major Series</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <figure class="group">
+              <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all">
+                <ResponsiveImage
+                  imageSlug="industrial-excess-landfill-uniontown-ohio"
+                  alt="Industrial Excess Landfill, EPA Superfund Site, Uniontown, Ohio"
+                />
+              </div>
+              <figcaption class="text-sm text-muted-foreground mt-3 leading-relaxed">
+                <strong>EPA Superfund Sites (1990s)</strong><br/>
+                Industrial Excess Landfill, Uniontown, Ohio
+              </figcaption>
+            </figure>
+
+            <figure class="group">
+              <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all">
+                <ResponsiveImage
+                  imageSlug="heart-mountain-internment-camp-blue-room"
+                  alt="Heart Mountain Relocation Camp, Blue Room"
+                />
+              </div>
+              <figcaption class="text-sm text-muted-foreground mt-3 leading-relaxed">
+                <strong>Internment Camps (1990-2006)</strong><br/>
+                Heart Mountain, Blue Room, Wyoming
+              </figcaption>
+            </figure>
+
+            <figure class="group">
+              <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all">
+                <ResponsiveImage
+                  imageSlug="union-terminal-cincinnati-ohio"
+                  alt="Union Terminal, Cincinnati, Ohio"
+                />
+              </div>
+              <figcaption class="text-sm text-muted-foreground mt-3 leading-relaxed">
+                <strong>City Works</strong><br/>
+                Union Terminal, Cincinnati, Ohio
+              </figcaption>
+            </figure>
+
+            <figure class="group">
+              <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all">
+                <ResponsiveImage
+                  imageSlug="golden-temple-kathmandu-nepal"
+                  alt="Golden Temple, Kathmandu, Nepal"
+                />
+              </div>
+              <figcaption class="text-sm text-muted-foreground mt-3 leading-relaxed">
+                <strong>Sacred Architectures (1999-2006)</strong><br/>
+                Golden Temple, Kathmandu, Nepal
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- Major Series Overview -->
+        <section class="space-y-8">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold border-l-4 border-primary pl-6">
+            Major Series
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Post-Industrial -->
+            <div class="border-l-2 border-primary/30 pl-6 space-y-2">
+              <h3 class="text-xl font-semibold">Post-Industrial Landscapes (1986-1990s)</h3>
+              <p class="text-muted-foreground leading-relaxed">
+                Hayashi's first panoramic series documented Cleveland's Powerhouse (an abandoned 1892 power plant),
+                steel mills in Youngstown, and other symbols of economic decline in the Rust Belt. These works meant
+                "to be appreciated for their beauty on one level yet, on another, to create irony and tension."
+              </p>
+            </div>
+
+            <!-- EPA Superfund -->
+            <div class="border-l-2 border-primary/30 pl-6 space-y-2">
+              <h3 class="text-xl font-semibold">EPA Superfund Sites (1990s)</h3>
+              <p class="text-muted-foreground leading-relaxed">
+                Expanding her exploration of environmental and societal issues, Hayashi photographed toxic waste
+                sites across Ohio designated for cleanup by the Environmental Protection Agency.
+              </p>
+            </div>
+
+            <!-- Internment Camps -->
+            <div class="border-l-2 border-primary/30 pl-6 space-y-2">
+              <h3 class="text-xl font-semibold">Japanese American Internment Camps (1990-2006)</h3>
+              <p class="text-muted-foreground leading-relaxed">
+                Hayashi's most significant body of work documented the ruins of relocation camps where 120,000
+                Japanese Americans were interned during World War II. As a sansei (third-generation Japanese American)
+                born at Gila River, she brought personal connection and historical awareness to this project.
+              </p>
+              <p class="text-muted-foreground leading-relaxed">
+                The work began in 1990 and evolved to include audio interviews with internees, family album snapshots,
+                and eventually photo collage portraits of survivors.
+              </p>
+            </div>
+
+            <!-- Sacred Architectures -->
+            <div class="border-l-2 border-primary/30 pl-6 space-y-2">
+              <h3 class="text-xl font-semibold">Sacred Architectures (1999-2006)</h3>
+              <p class="text-muted-foreground leading-relaxed">
+                During the final decade of her life, Hayashi explored a new direction—Asian temples and sites of
+                ancestral worship. Her first photographic journey to India was funded by an Ohio Arts Council fellowship
+                in 1999, followed by a 2003 Fulbright research fellowship. This series raised her work to "a spiritual,
+                healing plane."
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Sidebar Column -->
+      <aside class="lg:col-span-4 space-y-8 lg:sticky lg:top-8 lg:self-start">
+
+        <!-- Quick Facts Card -->
+        <Card className="shadow-lg">
+          <CardContent className="p-6 space-y-4">
+            <h3 class="text-xl font-semibold border-b pb-3">Quick Facts</h3>
+            <dl class="space-y-3 text-sm">
+              <div>
+                <dt class="text-xs uppercase tracking-wider text-muted-foreground mb-1">Born</dt>
+                <dd class="font-medium">September 3, 1945<br/>Gila River, Arizona</dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wider text-muted-foreground mb-1">Died</dt>
+                <dd class="font-medium">October 15, 2006</dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wider text-muted-foreground mb-1">Nationality</dt>
+                <dd class="font-medium">American (Sansei)</dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wider text-muted-foreground mb-1">Education</dt>
+                <dd class="font-medium">MFA, Florida State University</dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wider text-muted-foreground mb-1">Teaching</dt>
+                <dd class="font-medium">Cleveland State University<br/>(1982-2006, 22+ years)</dd>
+              </div>
+            </dl>
+          </CardContent>
+        </Card>
+
+        <!-- Awards Card -->
+        <Card className="shadow-lg">
+          <CardContent className="p-6 space-y-4">
+            <h3 class="text-xl font-semibold border-b pb-3">Awards & Honors</h3>
+            <ul class="space-y-3 text-sm">
+              <li class="flex gap-2">
+                <span class="text-primary font-bold shrink-0">2003</span>
+                <span>Fulbright Research Fellowship</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="text-primary font-bold shrink-0">1999</span>
+                <span>Ohio Arts Council Fellowship</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="text-primary font-bold shrink-0">1997</span>
+                <span>Civil Liberties Educational Fund Research Fellowship</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="text-primary font-bold shrink-0">1994</span>
+                <span><strong>Cleveland Arts Prize for Visual Arts</strong> (First photographer to receive)</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="text-primary font-bold shrink-0">1987</span>
+                <span>Arts Midwest, NEA Fellowship</span>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Collections Teaser -->
+        <Card className="bg-muted shadow-md">
+          <CardContent className="p-6 space-y-3">
+            <h3 class="text-sm uppercase tracking-wider font-semibold">Collections</h3>
+            <p class="text-sm leading-relaxed">
+              Her work is held in over 20 major museum collections including Cleveland Museum of Art,
+              Los Angeles County Museum of Art, and Japanese American National Museum.
+            </p>
+            <a href="/collections" class="text-sm text-primary hover:underline inline-flex items-center gap-1 mt-2 font-medium">
+              View all collections
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <!-- Artist Philosophy -->
+        <Card className="bg-gradient-to-br from-primary/10 to-transparent border-primary/20">
+          <CardContent className="p-6 space-y-3">
+            <h3 class="text-sm uppercase tracking-wider font-semibold">Artist's Philosophy</h3>
+            <blockquote class="text-sm italic leading-relaxed">
+              "Her choice of subject matter always arose from personal concerns, even when not overtly
+              autobiographical. She was keenly aware of her perspective as a woman, a Japanese American,
+              and a Buddhist."
+            </blockquote>
+          </CardContent>
+        </Card>
+
+      </aside>
+    </div>
+
+    <!-- Recognition and Legacy - Full Width -->
+    <div class="max-w-6xl mx-auto mt-24 md:mt-32 space-y-16">
+
+      <!-- Recognition Section -->
+      <section class="space-y-8">
+        <h2 class="text-3xl md:text-4xl font-serif font-semibold text-center border-t-2 border-b-2 border-primary/20 py-8">
+          Recognition and Exhibitions
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold">Major Museum Exhibitions</h3>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              <li>• International Center for Photography, New York</li>
+              <li>• Los Angeles County Museum of Art</li>
+              <li>• Japanese American National Museum, Los Angeles (2003 retrospective)</li>
+              <li>• Tokyo Museum of Photography</li>
+              <li>• Ludwig Museum of Art, Germany</li>
+              <li>• Victoria and Albert Museum of Photography, London</li>
+              <li>• Cleveland Museum of Art</li>
+            </ul>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold">Publications</h3>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              <li>• <em>Doubletake</em> (Fall 1997)</li>
+              <li>• <em>Aperture: Beyond Wilderness</em> (Fall 1990)</li>
+              <li>• <em>Mother Jones</em> (April 1995)</li>
+              <li>• <em>Creative Camera</em> (1993, London)</li>
+              <li>• <em>Die Zeit</em> (1999, Germany)</li>
+            </ul>
+            <a href="/publications" class="text-sm text-primary hover:underline inline-flex items-center gap-1 mt-3 font-medium">
+              View complete bibliography
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legacy Quote -->
+      <div class="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-10 md:p-16 rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-6">Legacy</h2>
+        <div class="space-y-4 text-lg leading-relaxed">
+          <p class="text-foreground/90">
+            Masumi Hayashi died October 15, 2006. Her website, <em>The Masumi Hayashi Museum</em> (masumimuseum.com),
+            includes over 177 images of her work. The Masumi Hayashi Foundation continues to preserve and promote
+            her artistic legacy.
+          </p>
+          <p class="text-muted-foreground">
+            Through her art, Hayashi awakened people "gently but insistently to societal ills," applying "photography's
+            most seductive traits—believability and formal beauty—to explore disturbing subjects." Her panoramic photo
+            collages stand as permanent visual records of places that represent both trauma and resilience in American
+            and world history.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </article>
+
+  <!-- Navigation Footer -->
+  <section class="bg-muted/50 py-16 md:py-20 border-t">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <h2 class="text-2xl font-serif font-semibold mb-8 text-center">Explore More</h2>
+      <div class="grid md:grid-cols-4 gap-6">
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Artist Statement</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Read Dr. Hayashi's own words about her panoramic photo collages
+            </p>
+            <a href="/artist-statement" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              Read Statement
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Timeline</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Complete chronology from 1945-2007 with major life events
+            </p>
+            <a href="/timeline" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              View Timeline
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Exhibitions</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Current and past exhibitions at SFMOMA, National Gallery, and more
+            </p>
+            <a href="/exhibitions" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              View Exhibitions
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Artworks</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Explore 8 major series across 174 panoramic photo collages
+            </p>
+            <a href="/artworks" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              Browse Artworks
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better text rendering */
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Print styles */
+  @media print {
+    nav, footer, aside {
+      display: none;
+    }
+  }
+</style>

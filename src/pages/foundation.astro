@@ -1,0 +1,334 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import { Card, CardContent } from '@components/ui/card';
+
+const pageTitle = "About the Foundation | Masumi Hayashi Foundation";
+const metaDescription = "The Masumi Hayashi Foundation is a 501(c)(3) non-profit organization dedicated to preserving and promoting the artistic legacy of Dr. Masumi Hayashi.";
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+
+  <!-- Hero Section -->
+  <section class="relative w-full h-[60vh] md:h-[70vh] bg-black overflow-hidden">
+    <div class="absolute inset-0">
+      <ResponsiveImage
+        imageSlug="cleveland-stadium-cleveland-ohio"
+        alt="Cleveland Stadium - Panoramic photo collage by Masumi Hayashi"
+        loading="eager"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+
+    <div class="absolute bottom-0 left-0 right-0 px-6 md:px-12 lg:px-24 pb-12 md:pb-20">
+      <div class="max-w-5xl">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs font-medium">
+            501(c)(3) NON-PROFIT
+          </span>
+        </div>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-6">
+          Masumi Hayashi Foundation
+        </h1>
+        <p class="text-xl md:text-2xl text-white/95 font-light leading-relaxed max-w-3xl">
+          Dedicated to preserving and promoting the artistic legacy of Dr. Masumi Hayashi (1945-2006)
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
+
+    <!-- Mission Statement -->
+    <section class="mb-20">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-8 text-center">Our Mission</h2>
+        <p class="text-xl md:text-2xl leading-relaxed text-center text-muted-foreground mb-12">
+          The Masumi Hayashi Foundation ensures that Dr. Hayashi's powerful explorations of history, memory, and place continue to inspire and educate future generations.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <Card className="border-t-4 border-primary">
+            <CardContent className="p-6 space-y-3">
+              <svg class="w-12 h-12 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <h3 class="text-lg font-semibold">Preserve</h3>
+              <p class="text-sm text-muted-foreground">
+                Ensure the long-term preservation and care of Masumi Hayashi's panoramic photo collages for future generations.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-t-4 border-primary">
+            <CardContent className="p-6 space-y-3">
+              <svg class="w-12 h-12 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+              <h3 class="text-lg font-semibold">Share</h3>
+              <p class="text-sm text-muted-foreground">
+                Maintain public-facing websites showcasing Dr. Hayashi's work and providing educational resources.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-t-4 border-primary">
+            <CardContent className="p-6 space-y-3">
+              <svg class="w-12 h-12 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+              <h3 class="text-lg font-semibold">Support</h3>
+              <p class="text-sm text-muted-foreground">
+                Provide access to archival materials and support research and scholarship on Dr. Hayashi's work.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Dr. Hayashi -->
+    <section class="mb-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-6 border-l-4 border-primary pl-6">
+            About Dr. Masumi Hayashi
+          </h2>
+          <div class="space-y-4 text-muted-foreground leading-relaxed">
+            <p>
+              Dr. Masumi Hayashi (1945-2006) was an acclaimed American fine art photographer known internationally for her pioneering panoramic photo collage technique.
+            </p>
+            <ul class="space-y-3 pl-6">
+              <li class="flex gap-3">
+                <span class="text-primary mt-1 shrink-0">•</span>
+                <span><strong>Panoramic photo collage specialist</strong> combining around 100 individual photographs into unified, large-scale works</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary mt-1 shrink-0">•</span>
+                <span><strong>Cleveland State University photography professor</strong> for over 25 years</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary mt-1 shrink-0">•</span>
+                <span><strong>Fulbright Scholar</strong> who documented sacred sites in Asia</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary mt-1 shrink-0">•</span>
+                <span><strong>Cleveland Arts Prize winner</strong> (1994, first photographer to receive the award)</span>
+              </li>
+            </ul>
+          </div>
+          <a href="/biography" class="inline-flex items-center gap-2 mt-6 text-primary hover:underline font-medium">
+            Read Full Biography
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="space-y-4">
+          <div class="rounded-lg overflow-hidden shadow-2xl">
+            <ResponsiveImage
+              imageSlug="dealey-plaza-dallas-texas"
+              alt="Dealey Plaza, Dallas, Texas - Panoramic photo collage by Masumi Hayashi"
+            />
+          </div>
+          <p class="text-sm text-muted-foreground text-center">
+            <em>Dealey Plaza, Dallas, Texas</em> — Documenting sites of historical significance
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 501(c)(3) Information -->
+    <section class="mb-20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-2xl p-10 md:p-16">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-6">501(c)(3) Non-Profit Status</h2>
+        <p class="text-lg leading-relaxed mb-6 text-muted-foreground">
+          The Masumi Hayashi Foundation is an approved 501(c)(3) non-profit organization. Donations to support the Foundation's mission are tax-deductible to the extent allowed by law.
+        </p>
+        <p class="text-sm text-muted-foreground">
+          The Foundation welcomes support through donations, exhibition opportunities, research collaboration, and educational partnerships.
+        </p>
+      </div>
+    </section>
+
+    <!-- Cleveland Museum Archive -->
+    <section class="mb-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="rounded-lg overflow-hidden shadow-2xl">
+            <ResponsiveImage
+              imageSlug="old-arcade-cleveland-ohio"
+              alt="Old Arcade, Cleveland, Ohio - Panoramic photo collage by Masumi Hayashi"
+            />
+          </div>
+          <p class="text-sm text-muted-foreground text-center mt-4">
+            <em>Old Arcade, Cleveland, Ohio</em> — Part of Cleveland Museum of Art Archive
+          </p>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-6 border-l-4 border-primary pl-6">
+            Cleveland Museum of Art Archive
+          </h2>
+          <p class="text-lg leading-relaxed text-muted-foreground mb-6">
+            Materials from Dr. Hayashi's archive have been donated to the Cleveland Museum of Art, where they are preserved and made accessible for research.
+          </p>
+          <p class="leading-relaxed text-muted-foreground">
+            The Foundation works to facilitate access to these materials for scholars, students, curators, and researchers interested in Dr. Hayashi's contributions to photography and contemporary art.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support the Foundation -->
+    <section class="mb-20">
+      <div class="bg-muted/50 rounded-2xl p-10 md:p-16">
+        <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-8 text-center">Support the Foundation</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <Card>
+            <CardContent className="p-6 text-center space-y-3">
+              <svg class="w-10 h-10 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <h3 class="font-semibold">Donations</h3>
+              <p class="text-xs text-muted-foreground">Tax-deductible contributions</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6 text-center space-y-3">
+              <svg class="w-10 h-10 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <h3 class="font-semibold">Exhibitions</h3>
+              <p class="text-xs text-muted-foreground">Museums & galleries</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6 text-center space-y-3">
+              <svg class="w-10 h-10 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+              <h3 class="font-semibold">Research</h3>
+              <p class="text-xs text-muted-foreground">Scholarly collaboration</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6 text-center space-y-3">
+              <svg class="w-10 h-10 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+              <h3 class="font-semibold">Education</h3>
+              <p class="text-xs text-muted-foreground">Partnerships & programming</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div class="text-center">
+          <a href="/contact" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-lg font-medium hover:bg-primary/90 transition-colors text-lg">
+            Contact the Foundation
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connect -->
+    <section class="text-center">
+      <h2 class="text-3xl md:text-4xl font-serif font-semibold mb-8">Connect With Us</h2>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="https://www.masumihayashifoundation.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors font-medium">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+          </svg>
+          Visit Foundation Website
+        </a>
+
+        <a href="http://facebook.com/MasumiHayashiFoundation" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors font-medium">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Follow on Facebook
+        </a>
+      </div>
+      <p class="text-sm text-muted-foreground mt-6">
+        Email: <a href="mailto:info@masumihayashifoundation.org" class="text-primary hover:underline">info@masumihayashifoundation.org</a>
+      </p>
+    </section>
+
+  </article>
+
+  <!-- Navigation Footer -->
+  <section class="bg-muted/50 py-16 md:py-20 border-t">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <h2 class="text-2xl font-serif font-semibold mb-8 text-center">Explore Dr. Hayashi's Work</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Artworks</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Explore 8 major series across 174 panoramic photo collages
+            </p>
+            <a href="/artworks" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              Browse Artworks
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Exhibitions</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Current shows at SFMOMA, National Gallery, Canton Museum, and more
+            </p>
+            <a href="/exhibitions" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              View Exhibitions
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <CardContent className="p-6 h-full flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">Biography</h3>
+            <p class="text-sm text-muted-foreground mb-4 flex-grow">
+              Learn about Dr. Hayashi's life, education, and artistic evolution
+            </p>
+            <a href="/biography" class="text-primary hover:underline text-sm font-medium inline-flex items-center gap-1">
+              Read Biography
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+</style>
