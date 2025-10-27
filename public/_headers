@@ -13,7 +13,7 @@
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
   # Content Security Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://res.cloudinary.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' https://res.cloudinary.com data:; font-src 'self' data:; connect-src 'self' https://res.cloudinary.com; frame-src 'none'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://res.cloudinary.com https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' https://res.cloudinary.com https://www.facebook.com data:; font-src 'self' data:; connect-src 'self' https://res.cloudinary.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.facebook.com; frame-src 'none'; object-src 'none'
 
 # Cache static assets aggressively
 /_astro/*
