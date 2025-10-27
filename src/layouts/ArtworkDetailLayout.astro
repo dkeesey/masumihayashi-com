@@ -31,13 +31,14 @@ const { entry, galleryPath } = Astro.props;
   <section class="w-full bg-black py-8">
     <div class="max-w-7xl mx-auto px-4">
       <figure>
-        <!-- Image container with viewport constraints -->
-        <div class="flex items-center justify-center min-h-[60vh]">
+        <!-- Image container - full artwork display -->
+        <div class="flex items-center justify-center">
           <ResponsiveImage
             imageSlug={entry.data.imageSlug || entry.data.slug}
             alt={`Picture of ${entry.data.name} by Dr. Masumi Hayashi`}
             className=""
             loading="eager"
+            fullSize={true}
           />
         </div>
         <figcaption class="text-museum-white bg-black text-center mt-6 space-y-2">

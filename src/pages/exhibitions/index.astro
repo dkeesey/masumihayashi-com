@@ -118,6 +118,16 @@ const formatDateRange = (startDate: Date, endDate?: Date) => {
           <div class="grid gap-6">
             {upcomingExhibitions.map((exhibition) => (
               <article class="bg-gray-50 border border-gray-200 rounded-lg p-6 hover:bg-white hover:shadow-md transition-all duration-300">
+                {exhibition.data.venueLogo && (
+                  <div class="mb-4">
+                    <img
+                      src={exhibition.data.venueLogo}
+                      alt={exhibition.data.venue}
+                      class="h-10 w-auto object-contain grayscale opacity-60"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                 <h3 class="text-xl font-medium text-gray-900 mb-2">
                   <a href={`/exhibitions/${exhibition.slug}/`} class="hover:text-primary-interactive-link transition-colors">
                     {exhibition.data.title}

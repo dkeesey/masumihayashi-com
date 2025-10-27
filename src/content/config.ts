@@ -7,8 +7,8 @@ const artworkCollection = defineCollection({
     title: z.string(),
     name: z.string(),
     slug: z.string().optional(), // Artwork slug for URLs and image matching
-    imageSlug: z.string().optional(), // Responsive image slug (falls back to slug if not provided)
-    cloudinaryId: z.string(), // Required for CloudinaryImage component
+    imageSlug: z.string().optional(), // R2 responsive image slug (falls back to slug if not provided)
+    cloudinaryId: z.string().optional(), // DEPRECATED: Legacy Cloudinary ID (migration in progress)
     altTag: z.string().optional(), // Alt text for accessibility
 
     // Location information
@@ -102,6 +102,14 @@ const exhibitionsCollection = defineCollection({
     // Media
     featuredImageId: z.string().optional(), // Cloudinary ID
     galleryImageIds: z.array(z.string()).optional(), // Cloudinary IDs
+
+    // Tour venues (for traveling exhibitions)
+    tourVenues: z.array(z.object({
+      name: z.string(),
+      location: z.string(),
+      logo: z.string(),
+      dates: z.string().optional(),
+    })).optional(),
 
     // External links
     venueWebsite: z.string().url().optional(),

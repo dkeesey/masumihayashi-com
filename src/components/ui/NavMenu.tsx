@@ -112,6 +112,10 @@ const topNavData = [
     path: "/exhibitions/",
   },
   {
+    name: "News",
+    path: "/news/",
+  },
+  {
     name: "Videos",
     path: "/videos/",
   },

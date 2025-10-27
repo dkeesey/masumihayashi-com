@@ -5,12 +5,51 @@ import { Card, CardContent } from '@components/ui/card';
 const pageTitle = "News & Announcements | Masumi Hayashi Foundation";
 const metaDescription = "Latest news, exhibitions, and announcements from the Masumi Hayashi Foundation celebrating and preserving Dr. Hayashi's artistic legacy.";
 
+// Helper function to generate R2 responsive image URL
+const getImageUrl = (imagePath: string, width: number = 1440) => {
+  // If it's a local path (starts with /), return as-is (e.g., book cover, museum logos)
+  if (imagePath.startsWith('/')) {
+    return imagePath;
+  }
+  // Otherwise, use R2 hosted responsive images
+  // Extract just the image slug from paths like "masumi-hayashi/bodhi-tree"
+  const imageSlug = imagePath.includes('/') ? imagePath.split('/').pop() : imagePath;
+  // R2 public URL (temporary .r2.dev until custom domain is configured)
+  return `https://masumi-hayashi-artworks.r2.dev/artworks/${imageSlug}-${width}w.jpg`;
+};
+
 const newsItems = [
+  {
+    date: "October 22, 2025",
+    title: "Cleveland Arts Prize Honors Dr. Hayashi",
+    category: "Exhibition",
+    featured: true,
+    heroImage: "/images/responsive/cleveland-builders-supply-cleveland-ohio-1440w.jpg", // Placeholder - need actual 25th Street Station image
+    heroImageAlt: "25th Street Station - Panoramic photo-collage by Dr. Masumi Hayashi",
+    summary: "The Cleveland Arts Prize displays Dr. Hayashi's 25th Street Station to honor her legacy as a past recipient of this prestigious award.",
+    content: `The Masumi Hayashi Foundation is honored to announce that Dr. Masumi Hayashi's <em>25th Street Station</em> is being displayed at the 65th Annual Cleveland Arts Prize Awards Event as a tribute to her legacy as a past Cleveland Arts Prize recipient.
+
+<strong>Event Details:</strong>
+<ul>
+<li><strong>Date:</strong> October 22, 2025</li>
+<li><strong>Location:</strong> Cleveland, Ohio</li>
+<li><strong>Award:</strong> 65th Annual Cleveland Arts Prize</li>
+<li><strong>Featured Work:</strong> <em>25th Street Station</em></li>
+<li><strong>Coordination:</strong> Mike Gentile, M. Gentile Studios</li>
+</ul>
+
+The Cleveland Arts Prize has honored Northeast Ohio's most accomplished artists since 1961. Dr. Hayashi was recognized as a past recipient, and this year's celebration includes a special display of her powerful panoramic work documenting Cleveland's urban landscape.
+
+Mike Gentile of M. Gentile Studios coordinated the inclusion of Dr. Hayashi's work in this year's event, continuing the foundation's mission to keep her innovative and brilliant artwork available to the public.`,
+    link: null
+  },
   {
     date: "October 3, 2025",
     title: "National Gallery Tour: Beneath the Surface",
     category: "Exhibition",
     featured: true,
+    heroImage: "campbell-works-plant-youngstown-ohio", // Using Post-Industrial series image as placeholder
+    heroImageAlt: "Campbell Works Plant, Youngstown, Ohio - Panoramic photo-collage by Dr. Masumi Hayashi",
     museums: [
       { name: "National Gallery of Art", logo: "/images/logos/national-gallery.svg" },
       { name: "Milwaukee Art Museum", logo: "/images/logos/milwaukee-art-museum.png" },
@@ -44,6 +83,8 @@ This important national exhibition examines the visual documentation of America'
     title: "Canton Museum's Shattered Glass Exhibition",
     category: "Exhibition",
     featured: true,
+    heroImage: "manzanar-internment-camp-tree-view",
+    heroImageAlt: "Manzanar Relocation Camp, Tree View - Panoramic photo-collage by Dr. Masumi Hayashi",
     museums: [
       { name: "Canton Museum of Art", logo: "/images/logos/canton-museum.jpg" }
     ],
@@ -76,6 +117,8 @@ This significant exhibition celebrates pioneering women artists who transformed 
     title: "SFMOMA Features Hayashi in (Re)Constructing History",
     category: "Exhibition",
     featured: true,
+    heroImage: "field-brook-stream-ashtabula-county-ohio",
+    heroImageAlt: "EPA Superfund Site, Fields Brook Stream, Ashtabula, Ohio - Panoramic photo-collage by Dr. Masumi Hayashi",
     museums: [
       { name: "San Francisco Museum of Modern Art", logo: "/images/logos/sfmoma.png" }
     ],
@@ -99,6 +142,8 @@ This exhibition examines how photography constructs historical narratives and sh
     date: "September 6, 2018",
     title: "Masumi Hayashi at Tregoning and Co. in Cleveland",
     category: "Exhibition",
+    heroImage: "manzanar-internment-camp-tree-view",
+    heroImageAlt: "Manzanar Relocation Camp, Tree View - Panoramic photo-collage by Dr. Masumi Hayashi",
     summary: "29 original works on display and for sale at Tregoning and Company through October 2, 2018.",
     content: `For a limited time, until Oct 2, works of Masumi Hayashi from the book, <em>Masumi Hayashi: Panoramic Photo Collages (1976-2006)</em> will be on display at Tregoning and Company (1300 W. 78th St.) in Cleveland, Ohio. (216-281-8626).
 
@@ -113,6 +158,8 @@ Featured work: <em>Manzanar Relocation Camp, Tree View, Inyo, California</em>©,
     date: "June 6, 2018",
     title: "Reflect Space Features Work by Dr. Masumi Hayashi",
     category: "Exhibition",
+    heroImage: "manzanar-internment-camp-monument",
+    heroImageAlt: "Manzanar Relocation Camp, Monument - Panoramic photo-collage by Dr. Masumi Hayashi",
     summary: "Exhibition at Glendale Public Library focuses on WWII Japanese American internment, featuring 6 works from JANM collection.",
     content: `Reflect Space Gallery of the Glendale Public Library (just north of downtown Los Angeles) held an exhibition from May 29 to July 8, 2018, that focused on the Japanese-American internment during WWII.
 
@@ -133,6 +180,8 @@ The exhibition was reported to be a big success!`,
     date: "February 21, 2018",
     title: "Masumi Hayashi Murals Installed at CSU",
     category: "Installation",
+    heroImage: "public-square-cleveland-ohio",
+    heroImageAlt: "Public Square, Night - Panoramic photo-collage by Dr. Masumi Hayashi",
     summary: "Two mural-size reproductions installed at Cleveland State University Main Classroom building.",
     content: `The Masumi Hayashi Foundation is proud to announce the successful installation of two mural-size reproductions of Dr. Hayashi's work in the Main Classroom building of Cleveland State University, "Public Square, Night" and "Edgewater Park"!
 
@@ -154,6 +203,8 @@ This project which has been in the works since 2016, is an exciting example of h
     title: "Masumi Hayashi Foundation Receives 501(c)(3) Status",
     category: "Foundation",
     featured: true,
+    heroImage: "in-perspective-cleveland-ohio",
+    heroImageAlt: "In Perspective - Panoramic photo-collage by Dr. Masumi Hayashi",
     summary: "The Masumi Legacy Project formally organizes as the Masumi Hayashi Foundation, a 501(c)(3) non-profit organization.",
     content: `Since Masumi passed in 2006, there are many people who have together spent countless hours working hard to care for the artwork that Dr. Masumi Hayashi created, keeping it safely preserved and stored, to keep it in the public eye, to get it framed, and exhibited, to get it published in magazines and books, to maintain the web properties of Dr. Hayashi, or to have it reproduced and enlarged in public spaces.
 
@@ -167,10 +218,48 @@ This should lay a solid foundation for the ongoing work of serving Dr. Hayashi's
     link: "/foundation"
   },
   {
+    date: "December 17, 2021",
+    title: "Hayashi's Bodhi Tree Featured in Apple TV+ Film Swan Song",
+    category: "Film",
+    featured: true,
+    heroImage: "bodhi-tree-bodh-gaya-bihar-india",
+    heroImageAlt: "Bodhi Tree, Bodh Gaya, Bihar, India - Panoramic photo-collage by Dr. Masumi Hayashi",
+    summary: "Dr. Hayashi's Sacred Architectures photograph appears in the Apple TV+ science fiction drama starring Mahershala Ali.",
+    content: `The Masumi Hayashi Foundation is pleased to announce that Dr. Masumi Hayashi's photograph <em>Bodhi Tree, Bodh Gaya, Bihar, India</em> from her Sacred Architectures series appears in the Apple TV+ film "Swan Song," which premiered December 17, 2021.
+
+<div style="margin: 2rem 0;">
+  <img src="https://i.ytimg.com/vi/RSf05ajfUeA/maxresdefault.jpg" alt="Swan Song Official Trailer - Apple TV+" style="width: 100%; height: auto; border-radius: 8px;" />
+  <p style="text-align: center; margin-top: 0.5rem; font-size: 0.875rem; opacity: 0.7;"><em>Swan Song Official Trailer - The bottom portion of Dr. Hayashi's Bodhi Tree photograph appears on the wall behind the actors</em></p>
+</div>
+
+<strong>Film Details:</strong>
+<ul>
+<li><strong>Title:</strong> Swan Song</li>
+<li><strong>Director:</strong> Benjamin Cleary (Academy Award winner for Best Live Action Short Film, <em>Stutterer</em>, 2016)</li>
+<li><strong>Starring:</strong> Mahershala Ali (two-time Academy Award winner), Naomie Harris, Awkwafina, Glenn Close</li>
+<li><strong>Release Date:</strong> December 17, 2021</li>
+<li><strong>Platform:</strong> Apple TV+</li>
+<li><strong>Genre:</strong> Science Fiction Drama</li>
+</ul>
+
+<strong>Hayashi's Contribution:</strong>
+The foundation worked with the film's production company to make Dr. Hayashi's <em>Bodhi Tree</em> photograph available for use as set decoration. The artwork appears subtly in the background of scenes (visible in the trailer image above), adding to the film's thoughtful visual aesthetic.
+
+The <em>Bodhi Tree</em> is part of Dr. Hayashi's acclaimed Sacred Architectures series, documenting sacred sites across India and Southeast Asia through her innovative panoramic photo-collage technique.
+
+<strong>About the Film:</strong>
+"Swan Song" is a science fiction drama exploring themes of identity, love, and mortality. The film received critical acclaim, with an 80% rating on Rotten Tomatoes, and garnered nominations including Golden Globe for Best Actor (Mahershala Ali) and BAFTA for Best Actor in a Leading Role.
+
+This marks another example of Dr. Hayashi's work reaching new audiences through contemporary media, demonstrating the enduring relevance and visual power of her artistic vision.`,
+    link: "/artwork/sacred-architectures/bodhi-tree-bodh-gaya-bihar-india"
+  },
+  {
     date: "October 30, 2017",
     title: "Masumi Hayashi Book Now Available!",
     category: "Publication",
     featured: true,
+    heroImage: "/images/radius-books-masumi-hayashi-cover.jpg",
+    heroImageAlt: "Masumi Hayashi: Panoramic Photo Collages 1976-2006 book cover",
     summary: "Launch party celebrates the release of 'Masumi Hayashi: Panoramic Photo Collages 1976-2006' published by Radius Books.",
     content: `Celebrating the pending availability of the book <em>Masumi Hayashi: Panoramic Photo Collages 1976 – 2006</em>, the Masumi Legacy Project group (Linda Butler, Eli Becker, Garie Waltzer, Bill Lipscomb, Barbara Tannenbaum, Penny Rakoff, Dean Keesey, and Judith McMillan), toasts the incredibly successful result!
 
@@ -228,56 +317,70 @@ Thank you to David Chickee and the whole staff at Radius Books for the excellent
 
       <div class="grid lg:grid-cols-2 gap-8 mb-12">
         {newsItems.filter(item => item.featured && item.date.includes("2025")).map((item, index) => (
-          <Card className={`shadow-xl border-t-4 ${index === 0 ? 'border-blue-600 lg:col-span-2' : 'border-blue-400'}`}>
-            <CardContent className="p-8">
-              <div class="flex items-start justify-between gap-4 mb-4">
-                <div>
-                  <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium mb-3">
-                    {item.category}
-                  </span>
-                  <p class="text-sm text-muted-foreground">{item.date}</p>
+          <Card className={`shadow-xl border-t-4 ${index === 0 ? 'border-blue-600 lg:col-span-2' : 'border-blue-400'} overflow-hidden`}>
+            <CardContent className="p-0">
+              {item.heroImage && (
+                <div class="relative w-full aspect-video overflow-hidden bg-black">
+                  <img
+                    src={getImageUrl(item.heroImage, 1440)}
+                    alt={item.heroImageAlt || item.title}
+                    class="w-full h-full object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 </div>
-                {index === 0 && (
-                  <span class="inline-flex items-center gap-2 bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">
-                    <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                    NEW
-                  </span>
+              )}
+
+              <div class="p-8">
+                <div class="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium mb-3">
+                      {item.category}
+                    </span>
+                    <p class="text-sm text-muted-foreground">{item.date}</p>
+                  </div>
+                  {index === 0 && (
+                    <span class="inline-flex items-center gap-2 bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">
+                      <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                      NEW
+                    </span>
+                  )}
+                </div>
+
+                <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4">
+                  {item.title}
+                </h3>
+
+                {item.museums && (
+                  <div class="flex flex-wrap items-center gap-4 mb-6 pb-4 border-b border-border">
+                    {item.museums.map(museum => (
+                      <div class="flex items-center gap-3 bg-muted/30 rounded-lg px-4 py-2">
+                        <img
+                          src={museum.logo}
+                          alt={museum.name}
+                          class="h-8 w-auto object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <p class="text-muted-foreground mb-6 leading-relaxed">
+                  {item.summary}
+                </p>
+
+                <div class="prose prose-sm max-w-none mb-6" set:html={item.content} />
+
+                {item.link && (
+                  <a href={item.link} class="inline-flex items-center gap-2 text-blue-600 hover:underline font-medium">
+                    Learn More
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </a>
                 )}
               </div>
-
-              <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4">
-                {item.title}
-              </h3>
-
-              {item.museums && (
-                <div class="flex flex-wrap items-center gap-4 mb-6 pb-4 border-b border-border">
-                  {item.museums.map(museum => (
-                    <div class="flex items-center gap-3 bg-muted/30 rounded-lg px-4 py-2">
-                      <img
-                        src={museum.logo}
-                        alt={museum.name}
-                        class="h-8 w-auto object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <p class="text-muted-foreground mb-6 leading-relaxed">
-                {item.summary}
-              </p>
-
-              <div class="prose prose-sm max-w-none mb-6" set:html={item.content} />
-
-              {item.link && (
-                <a href={item.link} class="inline-flex items-center gap-2 text-blue-600 hover:underline font-medium">
-                  Learn More
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                  </svg>
-                </a>
-              )}
             </CardContent>
           </Card>
         ))}
@@ -293,44 +396,59 @@ Thank you to David Chickee and the whole staff at Radius Books for the excellent
 
       <div class="space-y-6">
         {newsItems.filter(item => !item.date.includes("2025")).map(item => (
-          <Card className="shadow-md hover:shadow-lg transition-shadow">
-            <CardContent className="p-6 md:p-8">
-              <div class="flex flex-col md:flex-row gap-6">
-                <div class="md:w-40 shrink-0">
-                  <span class="inline-block px-3 py-1 bg-muted text-xs rounded-full font-medium mb-2">
-                    {item.category}
-                  </span>
-                  <p class="text-sm text-muted-foreground">{item.date}</p>
-                </div>
+          <Card className="shadow-md hover:shadow-lg transition-shadow overflow-hidden">
+            <CardContent className="p-0">
+              <div class="flex flex-col md:flex-row gap-0">
+                {item.heroImage && (
+                  <div class="md:w-80 shrink-0 relative aspect-video md:aspect-square overflow-hidden bg-black">
+                    <img
+                      src={getImageUrl(item.heroImage, 768)}
+                      alt={item.heroImageAlt || item.title}
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
 
-                <div class="flex-grow">
-                  <h3 class="text-xl md:text-2xl font-serif font-semibold mb-3">
-                    {item.title}
-                  </h3>
+                <div class="flex-grow p-6 md:p-8">
+                  <div class="flex flex-col gap-4">
+                    <div class="flex items-start justify-between gap-4">
+                      <div>
+                        <span class="inline-block px-3 py-1 bg-muted text-xs rounded-full font-medium mb-2">
+                          {item.category}
+                        </span>
+                        <p class="text-sm text-muted-foreground">{item.date}</p>
+                      </div>
+                    </div>
 
-                  <p class="text-muted-foreground mb-4 leading-relaxed">
-                    {item.summary}
-                  </p>
+                    <h3 class="text-xl md:text-2xl font-serif font-semibold">
+                      {item.title}
+                    </h3>
 
-                  <details class="group">
-                    <summary class="cursor-pointer text-sm text-primary hover:underline font-medium list-none flex items-center gap-2">
-                      <span class="group-open:hidden">Read More</span>
-                      <span class="hidden group-open:inline">Read Less</span>
-                      <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                      </svg>
-                    </summary>
-                    <div class="prose prose-sm max-w-none mt-4 pt-4 border-t" set:html={item.content} />
-                  </details>
+                    <p class="text-muted-foreground leading-relaxed">
+                      {item.summary}
+                    </p>
 
-                  {item.link && (
-                    <a href={item.link} class="inline-flex items-center gap-2 text-primary hover:underline font-medium text-sm mt-4">
-                      Related Page
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                      </svg>
-                    </a>
-                  )}
+                    <details class="group">
+                      <summary class="cursor-pointer text-sm text-primary hover:underline font-medium list-none flex items-center gap-2">
+                        <span class="group-open:hidden">Read More</span>
+                        <span class="hidden group-open:inline">Read Less</span>
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                      </summary>
+                      <div class="prose prose-sm max-w-none mt-4 pt-4 border-t" set:html={item.content} />
+                    </details>
+
+                    {item.link && (
+                      <a href={item.link} class="inline-flex items-center gap-2 text-primary hover:underline font-medium text-sm mt-4">
+                        Related Page
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </CardContent>

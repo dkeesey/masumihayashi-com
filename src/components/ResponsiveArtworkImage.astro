@@ -1,0 +1,132 @@
+---
+/**
+ * ResponsiveArtworkImage Component
+ *
+ * Displays pre-processed artwork images from Cloudflare R2 storage.
+ * Images are processed with Python script and include baked captions.
+ *
+ * Features:
+ * - 6 breakpoint variants (640w - 2460w) matching image-config.json
+ * - Museum-quality baked captions (artist, title, copyright)
+ * - PhotoSwipe zoom functionality
+ * - Optimized for Cloudflare CDN delivery
+ * - Free-tier R2 storage (no bandwidth costs)
+ */
+
+interface Props {
+  slug: string;           // Artwork slug matching processed filename
+  name?: string;          // Artwork title (for accessibility)
+  classNames?: string;
+  figcaptionClasses?: string;
+  altTag?: string;
+  width?: number;
+  height?: number;
+}
+
+const {
+  slug,
+  name,
+  classNames = "",
+  figcaptionClasses = "",
+  altTag = "",
+  width = 1536,
+  height = 1024,
+} = Astro.props as Props;
+
+// R2 public URL (will be custom domain after configuration)
+// Temporary: Use R2.dev URL until custom domain is configured
+const baseURL = "https://masumi-hayashi-artworks.r2.dev/artworks";
+
+// Generate URLs for all 6 breakpoints
+const imageURL640 = `${baseURL}/${slug}-640w.jpg`;
+const imageURL768 = `${baseURL}/${slug}-768w.jpg`;
+const imageURL1024 = `${baseURL}/${slug}-1024w.jpg`;
+const imageURL1440 = `${baseURL}/${slug}-1440w.jpg`;
+const imageURL1920 = `${baseURL}/${slug}-1920w.jpg`;
+const imageURL2460 = `${baseURL}/${slug}-2460w.jpg`;
+
+// Srcset for responsive loading
+const srcsetValue = `${imageURL640} 640w, ${imageURL768} 768w, ${imageURL1024} 1024w, ${imageURL1440} 1440w, ${imageURL1920} 1920w, ${imageURL2460} 2460w`;
+
+// Sizes attribute for optimal browser selection
+const sizesValue = "(max-width: 640px) 95vw, (max-width: 1024px) 90vw, 1280px";
+
+const altText = altTag || `${name} by Dr. Masumi Hayashi`;
+---
+
+<div transition:persist={name} data-artwork-id={slug}>
+  <div
+    class={`w-full flex justify-center items-center bg-black pt-16 md:pt-24 ${classNames}`}
+  >
+    <!-- PhotoSwipe anchor wrapper -->
+    <a
+      href={imageURL2460}
+      data-pswp-width="2460"
+      data-pswp-height="1640"
+      data-pswp-srcset={`${imageURL1920} 1920w, ${imageURL2460} 2460w`}
+      target="_blank"
+      rel="noopener"
+      class="zoom-trigger"
+      aria-label={`View ${name} in full screen`}
+    >
+      <img
+        src={imageURL1440}
+        srcset={srcsetValue}
+        sizes={sizesValue}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+        class="rounded-md max-w-[95vw] max-h-[95vh] mb-12 md:mb-16 cursor-zoom-in transition-opacity hover:opacity-90"
+        alt={altText}
+      />
+    </a>
+  </div>
+
+  <!-- Figcaption (captions are baked into images, this is for SEO/accessibility) -->
+  {name && (
+    <figcaption
+      class={`text-sm py-2 pb-12 lg:pb-16 sm:px-6 text-center ${figcaptionClasses} text-white bg-black`}
+      data-caption
+    >
+      <em>{name}</em><br />
+      Artist: Dr. Masumi Hayashi
+    </figcaption>
+  )}
+</div>
+
+<style>
+  /* Responsive border styling */
+  @media (max-width: 767px) {
+    img {
+      border-bottom: 16px solid #000;
+    }
+  }
+
+  @media (min-width: 768px) {
+    img {
+      border-bottom: 24px solid #000;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    img {
+      border-bottom: 36px solid #000;
+    }
+  }
+
+  /* Zoom cursor styling */
+  .cursor-zoom-in {
+    cursor: zoom-in;
+  }
+
+  .zoom-trigger:focus {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+
+  /* Smooth opacity transition on hover */
+  .transition-opacity {
+    transition: opacity 0.2s ease-in-out;
+  }
+</style>
