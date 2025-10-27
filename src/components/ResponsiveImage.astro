@@ -3,8 +3,8 @@
  * ResponsiveImage Component
  *
  * Displays pre-processed responsive image variants (6 breakpoints)
- * Images are baked with museum-quality captions
- * Hosted in /public/images/responsive/
+ * Images are baked with museum-quality captions via Python processing
+ * Hosted on Cloudflare R2 (free tier, unlimited bandwidth)
  */
 
 interface Props {
@@ -12,17 +12,21 @@ interface Props {
   alt: string;              // Alt text for accessibility
   className?: string;       // Additional CSS classes
   loading?: 'lazy' | 'eager';  // Loading strategy
+  fullSize?: boolean;       // If true, removes height constraints for full artwork display
 }
 
 const {
   imageSlug,
   alt,
   className = "",
-  loading = "lazy"
+  loading = "lazy",
+  fullSize = false
 } = Astro.props;
 
-// Base path for responsive images
-const basePath = "/images/responsive";
+// Cloudflare R2 bucket - public URL for globally distributed image hosting
+// Bucket: masumi-hayashi-artworks
+// Free tier: Unlimited bandwidth, zero egress fees
+const basePath = "https://pub-3e1db27a71654e90b601053ceddb8b8f.r2.dev/artworks";
 
 // 6 breakpoints matching the processed variants
 const breakpoints = [
@@ -53,6 +57,6 @@ const sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 90vw";
   sizes={sizes}
   alt={alt}
   loading={loading}
-  class={`max-w-full max-h-[85vh] w-auto h-auto object-contain ${className}`}
+  class={`max-w-full ${fullSize ? '' : 'max-h-[85vh]'} w-auto h-auto object-contain ${className}`}
   decoding="async"
 />
