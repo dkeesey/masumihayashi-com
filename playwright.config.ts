@@ -5,6 +5,27 @@ import { defineConfig, devices } from '@playwright/test';
  *
  * Runs tests against local dev server on http://localhost:4321
  * Tests across Chromium, Firefox, and WebKit browsers
+ *
+ * SOP: Browser Testing Strategy
+ * =============================
+ *
+ * DEBUGGING (when tests fail):
+ * - Use Chromium-only (fast, cheap, easier to debug)
+ * - Run: npm run test:critical
+ * - ALWAYS review screenshots/videos in test-results/ for failures
+ * - Screenshots show actual visual state at failure moment
+ * - Videos show full interaction leading to failure
+ *
+ * VERIFICATION (before deploy):
+ * - Uncomment all 5 browsers (Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari)
+ * - Run: npm run test (full suite)
+ * - Ensures cross-browser compatibility
+ * - Only needed when tests are passing on Chromium
+ *
+ * CI/CD:
+ * - Keep all 5 browsers enabled on main branch
+ * - Catches browser-specific regressions
+ * - Run on every PR to production
  */
 export default defineConfig({
   testDir: './tests',

@@ -8,6 +8,15 @@ import { test, expect } from '@playwright/test';
  *   npm run test          # Headless mode
  *   npm run test:headed   # See browser
  *   npm run test:ui       # Interactive mode
+ *
+ * When tests fail:
+ *   1. Check test output for error details
+ *   2. ALWAYS review screenshots: test-results/*/test-failed-*.png
+ *   3. Watch videos for interaction context: test-results/*/video.webm
+ *   4. Read error-context.md for page state snapshot
+ *
+ * View HTML report:
+ *   npm run test:report   # Opens last test run in browser
  */
 
 // TEST 1: Homepage Loads
