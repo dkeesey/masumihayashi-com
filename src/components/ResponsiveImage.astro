@@ -5,6 +5,12 @@
  * Displays pre-processed responsive image variants (6 breakpoints)
  * Images are baked with museum-quality captions via Python processing
  * Hosted on Cloudflare R2 (free tier, unlimited bandwidth)
+ *
+ * Features:
+ * - Native browser zoom functionality (pinch on mobile, browser zoom on desktop)
+ * - Hardware-accelerated GPU rendering
+ * - Progressive loading via srcset
+ * - No JavaScript libraries - pure HTML
  */
 
 interface Props {
@@ -13,6 +19,7 @@ interface Props {
   className?: string;       // Additional CSS classes
   loading?: 'lazy' | 'eager';  // Loading strategy
   fullSize?: boolean;       // If true, removes height constraints for full artwork display
+  enableZoom?: boolean;     // Deprecated - kept for backwards compatibility, ignored
 }
 
 const {
@@ -26,7 +33,7 @@ const {
 // Cloudflare R2 bucket - public URL for globally distributed image hosting
 // Bucket: masumi-hayashi-artworks
 // Free tier: Unlimited bandwidth, zero egress fees
-const basePath = "https://pub-3e1db27a71654e90b601053ceddb8b8f.r2.dev/artworks";
+const basePath = "https://images.masumihayashi.com/artworks";
 
 // 6 breakpoints matching the processed variants
 const breakpoints = [
@@ -51,12 +58,13 @@ const src = `${basePath}/${imageSlug}-1440w.jpg`;
 const sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 90vw";
 ---
 
+<!-- Pure image with native browser zoom -->
 <img
   src={src}
   srcset={srcset}
   sizes={sizes}
   alt={alt}
   loading={loading}
-  class={`max-w-full ${fullSize ? '' : 'max-h-[85vh]'} w-auto h-auto object-contain ${className}`}
+  class={`max-w-full ${fullSize ? '' : 'max-h-[85vh]'} w-auto h-auto object-contain mx-auto ${className}`}
   decoding="async"
 />

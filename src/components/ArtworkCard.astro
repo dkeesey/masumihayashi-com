@@ -1,0 +1,145 @@
+---
+/**
+ * Individual artwork card for gallery display
+ * Handles image display, caption, and interactions
+ */
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import type { ArtworkEntry } from '../types/artwork';
+
+interface Props {
+  artwork: ArtworkEntry;
+  index: number;
+  total: number;
+  seriesName: string;
+  isFirst?: boolean;
+}
+
+const { artwork, index, total, seriesName, isFirst = false } = Astro.props;
+
+// Build location string
+const locationParts = [artwork.data.city, artwork.data.state, artwork.data.country].filter(Boolean);
+const hasLocation = locationParts.length > 0;
+---
+
+<section
+  class="artwork-section"
+  data-artwork-index={index}
+  data-artwork-slug={artwork.slug}
+  data-series-name={seriesName}
+  id={isFirst ? "first-artwork" : undefined}
+>
+  <div class="w-full px-4 flex justify-center">
+    <button
+      class="artwork-trigger focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-16 focus:ring-offset-black"
+      aria-label={`View ${artwork.data.name}, artwork ${index + 1} of ${total}`}
+      tabindex="0"
+      id={isFirst ? "first-artwork-trigger" : undefined}
+    >
+      <ResponsiveImage
+        imageSlug={artwork.slug}
+        alt={artwork.data.altTag}
+        className="max-h-[calc(100vh-8rem)] mx-auto"
+        loading={isFirst ? "eager" : "lazy"}
+        enableZoom={false}
+        fullSize={false}
+      />
+      <figcaption class="text-sm py-2 text-center text-white/80">
+        <em>{artwork.data.name}</em>
+        {artwork.data.year && `, ${artwork.data.year}`}
+        {hasLocation && <br />}
+        {hasLocation && locationParts.join(', ')}
+        {artwork.data.media && (
+          <>
+            <br />
+            {artwork.data.media}
+          </>
+        )}
+        {artwork.data.size && `, ${artwork.data.size}`}
+        <br />
+        Artist: Dr. Masumi Hayashi
+      </figcaption>
+    </button>
+  </div>
+</section>
+
+<style>
+  .artwork-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .artwork-trigger {
+    outline: none;
+  }
+
+  /* Remove all focus rings for clean keyboard navigation */
+  .artwork-trigger:focus,
+  .artwork-trigger:focus-visible {
+    outline: none;
+  }
+
+  /* Override any nested focus rings */
+  .artwork-trigger *:focus,
+  .artwork-trigger *:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+</style>
+
+<script>
+  // Client-side interactions for this artwork card
+  document.addEventListener('DOMContentLoaded', () => {
+    const artworkTriggers = document.querySelectorAll('.artwork-trigger');
+
+    artworkTriggers.forEach(trigger => {
+      // Smooth scroll on focus
+      trigger.addEventListener('focus', (e) => {
+        const section = trigger.closest('.artwork-section');
+        if (section) {
+          section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }
+      });
+
+      // Click to enter gallery mode
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        trigger.focus();
+
+        const galleryModeButton = document.querySelector('.gallery-mode-button');
+        if (galleryModeButton && !galleryModeButton.classList.contains('hidden')) {
+          galleryModeButton.click();
+        }
+      });
+    });
+  });
+
+  // Space key navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === ' ' || e.key === 'Spacebar') {
+      const focused = document.activeElement;
+      if (focused && focused.classList.contains('artwork-trigger')) {
+        e.preventDefault();
+
+        const currentSection = focused.closest('.artwork-section');
+        const nextSection = currentSection?.nextElementSibling;
+
+        if (nextSection && nextSection.classList.contains('artwork-section')) {
+          nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(() => {
+            const nextLink = nextSection.querySelector('.artwork-trigger');
+            nextLink?.focus();
+          }, 500);
+        }
+      }
+    }
+  });
+</script>

@@ -2,7 +2,17 @@
 import MainHead from "./MainHead.astro";
 import FontLoader from "@components/FontLoader.astro";
 import Header from "@components/Header.astro";
+import GalleryModeHint from "@components/GalleryModeHint.astro";
 import '@styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  artworkCount?: number;
+  seoTags?: any;
+}
+
+const { title, description, artworkCount, seoTags } = Astro.props;
 ---
 
 <html lang="en">
@@ -12,28 +22,90 @@ import '@styles/global.css';
   <body class="bg-black text-fa-text-secondary font-inter">
     <!-- Skip to Gallery link for accessibility -->
     <a
-      href="#gallery-start"
+      href="#first-artwork-trigger"
       class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[10000] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded"
+      id="skip-to-gallery"
     >
       Skip to Gallery
     </a>
-    <Header />
+    <Header
+      classes="gallery-header"
+      galleryTitle={title}
+      galleryDescription={description}
+      galleryArtworkCount={artworkCount}
+    />
+
     <div class="gallery-scroll-container" id="gallery-start">
       <slot />
-      <button 
-        class="back-to-top fixed bottom-8 right-8 flex items-center gap-2 border-2 border-white rounded-full bg-black/80 text-white hover:bg-black/90 hover:text-white hover:border-white/60 hover:-translate-y-1 transition-all duration-300 z-[9999] pointer-events-none invisible px-4 py-2" 
-        aria-label="Back to top"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 15l-6-6-6 6"/>
-        </svg>
-        <span class="text-white">Back to Top</span>
-      </button>
+
+      <!-- Bottom UI controls -->
+      <div class="fixed bottom-4 left-0 right-0 px-4 flex justify-between items-end gap-3 z-[9999]">
+        <!-- Left side: Artwork Details button -->
+        <a
+          href="#"
+          id="detail-toggle"
+          class="artwork-detail-toggle flex items-center gap-2 border-2 border-white rounded-full bg-black/80 text-white hover:bg-black/90 hover:border-white/60 hover:-translate-y-1 transition-all duration-300 px-4 py-2"
+          aria-label="View artwork details"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          <span>Artwork Details</span>
+        </a>
+
+        <!-- Right side: Mode controls and hints -->
+        <div class="flex flex-col items-end gap-3">
+          <!-- Keyboard hint (shows when IN gallery mode) -->
+          <div class="keyboard-hint-bottom opacity-0 pointer-events-none">
+            <GalleryModeHint mode="exit" />
+          </div>
+
+          <!-- Button row -->
+          <div class="flex items-center gap-3">
+          <!-- Gallery Mode button (visible in navigation mode) -->
+          <button
+            class="gallery-mode-button flex items-center gap-2 border-2 border-white rounded-full bg-black/80 text-white hover:bg-black/90 hover:border-white/60 hover:-translate-y-1 transition-all duration-300 px-4 py-2"
+            aria-label="Enter gallery mode"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            <span>Gallery Mode</span>
+          </button>
+
+          <!-- Navigation Mode button (visible in gallery mode, initially hidden) -->
+          <button
+            class="navigation-mode-button flex items-center gap-2 border-2 border-white rounded-full bg-black/80 text-white hover:bg-black/90 hover:border-white/60 hover:-translate-y-1 transition-all duration-300 px-4 py-2 hidden"
+            aria-label="Exit gallery mode"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+            <span>Navigation Mode</span>
+          </button>
+
+          <!-- Back to top button -->
+          <button
+            class="back-to-top flex items-center gap-2 border-2 border-white rounded-full bg-black/80 text-white hover:bg-black/90 hover:border-white/60 hover:-translate-y-1 transition-all duration-300 pointer-events-none invisible px-4 py-2 opacity-0"
+            aria-label="Back to top"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 15l-6-6-6 6"/>
+            </svg>
+            <span class="text-white">Back to Top</span>
+          </button>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
 
-<style>
+<style is:global>
   /* Screen reader only - visible on focus */
   .sr-only {
     position: absolute;
@@ -66,6 +138,7 @@ import '@styles/global.css';
     height: 100vh;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
     position: relative;
   }
 
@@ -89,45 +162,311 @@ import '@styles/global.css';
   }
 
   .back-to-top.visible {
-    opacity: 1;
+    opacity: 1 !important;
     visibility: visible !important;
-    pointer-events: auto;
+    pointer-events: auto !important;
+  }
+
+  /* Gallery header - scrolls naturally as part of document flow */
+  .gallery-header {
+    position: relative;
+    z-index: 9999;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+
+  /* Gallery mode button */
+  .gallery-mode-toggle {
+    transition: all 0.3s ease;
+  }
+
+  .gallery-mode-toggle.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Keyboard hint wrapper styling */
+  .keyboard-hint-bottom {
+    transition: opacity 0.3s ease;
+  }
+
+  .keyboard-hint-bottom.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 </style>
 
 <script>
+  // Track if already initialized to prevent duplicate listeners
+  let isInitialized = false;
+  let detailScrollListener = null;
+
   function initializeBackToTop() {
     const backToTop = document.querySelector('.back-to-top');
+    const header = document.querySelector('.gallery-header');
+    const galleryModeButton = document.querySelector('.gallery-mode-button');
+    const navigationModeButton = document.querySelector('.navigation-mode-button');
+    const hintBottom = document.querySelector('.keyboard-hint-bottom');
     const container = document.querySelector('.gallery-scroll-container');
+    const detailToggle = document.getElementById('detail-toggle');
 
-    if (backToTop && container) {
-      // Show/hide button based on scroll position
-      const updateButtonVisibility = () => {
-        if (container.scrollTop > 100) {
-          backToTop.classList.add('visible');
-        } else {
-          backToTop.classList.remove('visible');
+    // Ensure header starts visible (remove any gallery-mode class that might be there)
+    if (header) {
+      header.classList.remove('gallery-mode');
+    }
+
+    // Initialize Artwork Details button functionality
+    if (detailToggle && container) {
+      const basePath = window.location.pathname;
+      let currentTargetSlug = null;
+
+      function findMostVisibleArtwork() {
+        const sections = document.querySelectorAll('.artwork-section');
+        if (sections.length === 0) return null;
+
+        let mostVisibleSection = null;
+        let maxVisibleHeight = 0;
+
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          const visibleTop = Math.max(0, rect.top);
+          const visibleBottom = Math.min(viewportHeight, rect.bottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+          if (visibleHeight > maxVisibleHeight) {
+            maxVisibleHeight = visibleHeight;
+            mostVisibleSection = section;
+          }
+        });
+
+        return mostVisibleSection ? mostVisibleSection.getAttribute('data-artwork-slug') : null;
+      }
+
+      function updateDetailToggle() {
+        const slug = findMostVisibleArtwork();
+        if (slug && slug !== currentTargetSlug) {
+          detailToggle.setAttribute('href', `${basePath}${slug}/`);
+          currentTargetSlug = slug;
         }
+      }
+
+      // Set initial href
+      updateDetailToggle();
+
+      // Remove old listener if exists
+      if (detailScrollListener) {
+        container.removeEventListener('scroll', detailScrollListener);
+      }
+
+      // Create new scroll listener (throttled)
+      let scrollTimeout;
+      detailScrollListener = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateDetailToggle, 150);
+      };
+
+      container.addEventListener('scroll', detailScrollListener, { passive: true });
+    }
+
+    if (container) {
+      // Gallery Mode button - just scrolls to first artwork to hide header
+      if (galleryModeButton) {
+        galleryModeButton.addEventListener('click', () => {
+          const firstArtwork = document.querySelector('.artwork-section');
+          if (firstArtwork) {
+            firstArtwork.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      }
+
+      // Navigation Mode button - scrolls to top to reveal header
+      if (navigationModeButton) {
+        navigationModeButton.addEventListener('click', () => {
+          container.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      // Show/hide button based on scroll position (header controlled only by gallery mode toggle)
+      const updateUIVisibility = () => {
+        const scrollTop = container.scrollTop;
+
+        // Back to top button
+        if (backToTop) {
+          if (scrollTop > 100) {
+            backToTop.classList.add('visible');
+          } else {
+            backToTop.classList.remove('visible');
+          }
+        }
+
+        // REMOVED: Auto-hide behavior - header/title only controlled by gallery mode toggle
       };
 
       // Initial check
-      updateButtonVisibility();
+      updateUIVisibility();
 
       // Update on scroll
-      container.addEventListener('scroll', updateButtonVisibility);
+      container.addEventListener('scroll', updateUIVisibility);
 
       // Scroll to top with smooth behavior
-      backToTop.addEventListener('click', () => {
-        container.scrollTo({
-          top: 0,
-          behavior: 'smooth'
+      if (backToTop) {
+        backToTop.addEventListener('click', () => {
+          container.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+
+          // Blur the button and focus first artwork
+          if (backToTop instanceof HTMLElement) {
+            backToTop.blur();
+          }
+          setTimeout(() => {
+            const firstArtwork = document.querySelector('.artwork-trigger');
+            if (firstArtwork instanceof HTMLElement) {
+              firstArtwork.focus();
+            }
+          }, 500); // Wait for smooth scroll to complete
         });
+      }
+
+      // Keyboard shortcuts for gallery navigation
+      document.addEventListener('keydown', (e) => {
+        // Only trigger if not focused on input/textarea/button
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+          return;
+        }
+
+        switch(e.key) {
+          case 'Escape':
+            // Escape: Scroll to top to reveal nav
+            e.preventDefault();
+            container?.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+
+            // Refocus first artwork after scroll to top
+            setTimeout(() => {
+              const firstArtwork = document.querySelector('.artwork-trigger');
+              if (firstArtwork instanceof HTMLElement) {
+                firstArtwork.focus();
+              }
+            }, 500);
+            break;
+
+          case '/':
+          case '?':
+            // Escape hatch: Always scroll to top to reveal nav
+            e.preventDefault();
+
+            container?.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+
+            // Focus first artwork after scroll
+            setTimeout(() => {
+              const firstArtwork = document.querySelector('.artwork-trigger');
+              if (firstArtwork instanceof HTMLElement) {
+                firstArtwork.focus();
+              }
+            }, 500);
+            break;
+
+          case 'g':
+            // Go to top (like vim)
+            e.preventDefault();
+            if (container) {
+              container.scrollTo({ top: 0, behavior: 'smooth' });
+              // Refocus first artwork after scroll completes
+              setTimeout(() => {
+                const firstArtwork = document.querySelector('.artwork-trigger');
+                if (firstArtwork instanceof HTMLElement) {
+                  firstArtwork.focus();
+                }
+              }, 500);
+            }
+            break;
+
+          case 'G':
+            // Go to bottom (like vim, shift+g)
+            e.preventDefault();
+            if (container) {
+              container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+              // Refocus last artwork after scroll completes
+              setTimeout(() => {
+                const artworks = document.querySelectorAll('.artwork-trigger');
+                const lastArtwork = artworks[artworks.length - 1];
+                if (lastArtwork instanceof HTMLElement) {
+                  lastArtwork.focus();
+                }
+              }, 500);
+            }
+            break;
+        }
       });
     }
   }
 
   // Initialize on page load
   initializeBackToTop();
+
+  // Skip to Gallery link focuses first artwork
+  const skipToGallery = document.getElementById('skip-to-gallery');
+  if (skipToGallery) {
+    skipToGallery.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Scroll to first artwork
+      const firstArtwork = document.querySelector('.artwork-trigger');
+      if (firstArtwork instanceof HTMLElement) {
+        firstArtwork.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Focus after scroll
+        setTimeout(() => {
+          firstArtwork.focus();
+        }, 500);
+      }
+    });
+  }
+
+  // Swipe gesture detection for gallery <-> detail navigation
+  document.addEventListener('DOMContentLoaded', () => {
+    const detailToggle = document.getElementById('detail-toggle');
+    if (!detailToggle) return; // Only on gallery pages
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 100; // Minimum distance for swipe
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+
+      // Swipe left = go to detail page
+      if (swipeDistance < -swipeThreshold) {
+        const href = detailToggle.getAttribute('href');
+        if (href) {
+          window.location.href = href;
+        }
+      }
+      // Swipe right on gallery does nothing (no previous page)
+    }
+  });
 
   // Initialize when navigating back
   window.addEventListener('popstate', () => {
@@ -140,4 +479,96 @@ import '@styles/global.css';
       setTimeout(initializeBackToTop, 100);
     }
   });
+
+  // Initialize sticky title updater
+  function initializeStickyTitleUpdater() {
+    const container = document.querySelector('.gallery-scroll-container');
+    if (!container) return;
+
+    // Update sticky title based on currently visible series
+    function updateStickyTitle() {
+      const sections = document.querySelectorAll('.artwork-section');
+      if (sections.length === 0) return;
+
+      // Find the most visible section
+      let mostVisibleSection = null;
+      let maxVisibleHeight = 0;
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const visibleTop = Math.max(0, rect.top);
+        const visibleBottom = Math.min(viewportHeight, rect.bottom);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+        if (visibleHeight > maxVisibleHeight) {
+          maxVisibleHeight = visibleHeight;
+          mostVisibleSection = section;
+        }
+      });
+
+      if (!mostVisibleSection) return;
+
+      const seriesName = mostVisibleSection.dataset.seriesName;
+      if (!seriesName) return;
+
+      // Update header title elements
+      const titleElement = document.querySelector('.gallery-title-text');
+      const descriptionElement = document.querySelector('.gallery-description-text');
+      const countElement = document.querySelector('.gallery-artwork-count');
+
+      // Get series descriptions mapping
+      const seriesDescriptions = {
+        'Japanese-American Internment Camps': 'Panoramic photo collages documenting WWII Japanese-American incarceration sites',
+        'Prisons': 'Exploring architecture of confinement and incarceration spaces',
+        'Post-Industrial': 'Documenting landscapes of industrial decline and transformation',
+        'War/Military': 'Sites of military conflict and their lasting impact',
+        'City Works': 'Urban landscapes and architectural interventions',
+        'Sacred Architectures': 'Religious and spiritual spaces across cultures',
+        'EPA Superfund': 'Environmental contamination and remediation sites',
+        'Commissions': 'Commissioned works and special projects'
+      };
+
+      if (titleElement && titleElement.textContent !== seriesName) {
+        // Fade out
+        titleElement.style.opacity = '0';
+        if (descriptionElement) descriptionElement.style.opacity = '0';
+        if (countElement) countElement.style.opacity = '0';
+
+        setTimeout(() => {
+          // Update content
+          titleElement.textContent = seriesName;
+          if (descriptionElement && seriesDescriptions[seriesName]) {
+            descriptionElement.textContent = seriesDescriptions[seriesName];
+          }
+
+          // Count artworks in this series
+          if (countElement) {
+            const seriesArtworks = document.querySelectorAll(`[data-series-name="${seriesName}"]`);
+            countElement.textContent = `${seriesArtworks.length} large-scale works • Each assembled from 80-150 individual prints`;
+          }
+
+          // Fade in
+          titleElement.style.opacity = '1';
+          if (descriptionElement) descriptionElement.style.opacity = '1';
+          if (countElement) countElement.style.opacity = '1';
+        }, 150);
+      }
+    }
+
+    // Throttled scroll handler for title updates
+    let titleUpdateTimeout;
+    const throttledTitleUpdate = () => {
+      clearTimeout(titleUpdateTimeout);
+      titleUpdateTimeout = setTimeout(updateStickyTitle, 200);
+    };
+
+    container.addEventListener('scroll', throttledTitleUpdate, { passive: true });
+
+    // Don't run initial update - let the page load with its default title
+    // Only update when user scrolls into a new series
+  }
+
+  // Initialize title updater
+  initializeStickyTitleUpdater();
 </script>

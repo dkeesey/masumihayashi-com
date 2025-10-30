@@ -1,0 +1,74 @@
+---
+/**
+ * Simple 2-column thumbnail navigation for series artworks
+ * Shows large thumbnails with artwork name below
+ */
+import ResponsiveImage from './ResponsiveImage.astro';
+
+interface Artwork {
+  slug: string;
+  data: {
+    name: string;
+    imageSlug?: string;
+    year?: string;
+    altTag?: string;
+  };
+}
+
+interface Props {
+  artworks: Artwork[];
+  seriesPath: string;
+  currentSlug: string;
+}
+
+const { artworks, seriesPath, currentSlug } = Astro.props;
+
+// Filter out current artwork (slug includes subdirectory)
+const otherArtworks = artworks.filter(art => art.slug !== currentSlug);
+
+console.log('SeriesThumbnailNav - currentSlug:', currentSlug);
+console.log('SeriesThumbnailNav - artworks count:', artworks.length);
+console.log('SeriesThumbnailNav - other artworks count:', otherArtworks.length);
+---
+
+{otherArtworks.length > 0 && (
+  <section class="series-nav bg-black w-full py-16">
+    <div class="w-full px-16">
+      <h3 class="text-2xl font-medium text-white mb-8 text-center">
+        Other works in this series
+      </h3>
+      <div class="flex flex-wrap justify-around gap-y-12 gap-x-8">
+        {otherArtworks.map((artwork) => {
+          const imageSlug = artwork.data.imageSlug || artwork.slug;
+          return (
+            <a
+              href={`${seriesPath}/${artwork.slug}`}
+              class="group block flex-shrink-0"
+              style="width: calc(50% - 4rem); max-width: 800px;"
+            >
+              <div class="overflow-hidden bg-gray-900">
+                <ResponsiveImage
+                  imageSlug={imageSlug}
+                  alt={artwork.data.altTag || `${artwork.data.name} by Dr. Masumi Hayashi`}
+                  className="w-full h-auto object-contain group-hover:opacity-90 transition-opacity"
+                  loading="lazy"
+                  enableZoom={false}
+                />
+              </div>
+              <p class="text-white/90 text-center mt-4 group-hover:text-white transition-colors">
+                <em>{artwork.data.name}</em>
+                {artwork.data.year && `, ${artwork.data.year}`}
+              </p>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .series-nav {
+    font-family: var(--font-inter, sans-serif);
+  }
+</style>

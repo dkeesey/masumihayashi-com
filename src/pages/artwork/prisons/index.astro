@@ -1,20 +1,25 @@
 ---
 import { getCollection } from 'astro:content';
-import ResponsiveImage from '@components/ResponsiveImage.astro';
+import ArtworkCard from '@components/ArtworkCard.astro';
 import GalleryScrollLayout from '@layouts/GalleryScrollLayout.astro';
+import GalleryNavigation from '@components/GalleryNavigation.astro';
+import GalleryKeyboardHints from '@components/GalleryKeyboardHints.astro';
 import type { CollectionEntry } from 'astro:content';
 import type { ArtworkEntry } from '../../../types/artwork';
 import { generateSEOTags, type SEOConfig } from "@utils/seo";
 
+const CURRENT_SERIES_SLUG = 'prisons';
+const CURRENT_SERIES_NAME = 'Prisons';
+
 const allEntries: CollectionEntry<'artwork'>[] = await getCollection("artwork");
 const artworks: ArtworkEntry[] = allEntries.filter(
-  (entry) => entry.data.series === "Prisons & Institutions"
+  (entry) => entry.data.series === CURRENT_SERIES_NAME
 );
 
 const seoConfig: SEOConfig = {
-  title: "Prisons & Institutions - Sites of Confinement",
-  description: "Panoramic photo collages documenting abandoned prisons and institutions, exploring themes of incarceration and confinement.",
-  keywords: ["prisons", "Alcatraz", "Eastern State Penitentiary", "abandoned prisons", "incarceration", "institutional photography"],
+  title: "Abandoned Prisons",
+  description: "Panoramic photo collages of American prisons and reformatories",
+  keywords: [],
   type: "article" as const,
   image: artworks[0]?.data.cloudinaryId
 };
@@ -22,75 +27,25 @@ const seoConfig: SEOConfig = {
 const seoTags = generateSEOTags(seoConfig);
 ---
 
-<GalleryScrollLayout title="Prisons & Institutions" seoTags={seoTags}>
-  <section class="title-section">
-    <div class="max-w-4xl mx-auto px-4 title-content">
-      <h1 class="text-5xl md:text-6xl font-bold mb-8">Prisons & Institutions</h1>
-      <p class="text-xl md:text-2xl text-muted-foreground mb-4">
-        Sites of confinement and institutional control
-      </p>
-      <p class="text-lg text-muted-foreground">
-        Documenting abandoned prisons, reformatories, and institutions, exploring America's history of incarceration.
-      </p>
-    </div>
-  </section>
+<GalleryScrollLayout title="Prisons" description="Panoramic photo collages of American prisons and reformatories" artworkCount={artworks.length} seoTags={seoTags}>
+  <GalleryKeyboardHints />
 
-  {artworks.map((artwork) => (
-    <section>
-      <div class="w-full px-4">
-        <a href={`/artwork/${artwork.data.series.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/${artwork.slug}/`}>
-          <ResponsiveImage
-            imageSlug={artwork.slug}
-            alt={artwork.data.altTag}
-            className="max-h-[calc(100vh-8rem)] mx-auto"
-            loading="eager"
-          />
-          <figcaption class="text-sm py-2 text-center text-white/80">
-            <em>{artwork.data.name}</em>
-            {artwork.data.year && `, ${artwork.data.year}`}
-            {(artwork.data.city || artwork.data.state || artwork.data.country) && (
-              <br />
-            )}
-            {[artwork.data.city, artwork.data.state, artwork.data.country].filter(Boolean).join(', ')}
-            {artwork.data.media && (
-              <>
-                <br />
-                {artwork.data.media}
-              </>
-            )}
-            {artwork.data.size && (
-              <>
-                , {artwork.data.size}
-              </>
-            )}
-            <br />
-            Artist: Dr. Masumi Hayashi
-          </figcaption>
-        </a>
-      </div>
-    </section>
+  {artworks.map((artwork, index) => (
+    <ArtworkCard
+      artwork={artwork}
+      index={index}
+      total={artworks.length}
+      seriesName={CURRENT_SERIES_NAME}
+      isFirst={index === 0}
+    />
   ))}
+  <!-- Gallery Navigation - Next/Previous Series -->
+  <GalleryNavigation currentSeries="Abandoned Prisons" />
 </GalleryScrollLayout>
 
-<style>
-  section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    scroll-snap-align: start;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
+<script>
+  // Infinite scroll: Load next series when approaching bottom
+  import { initInfiniteScroll } from '../../../scripts/gallery-infinite-scroll';
 
-  .title-section {
-    justify-content: flex-start;
-    padding-top: 0;
-  }
-
-  .title-content {
-    padding-top: 20vh;
-  }
-
-</style>
+  initInfiniteScroll('prisons');
+</script>
